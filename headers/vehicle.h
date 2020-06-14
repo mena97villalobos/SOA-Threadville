@@ -3,6 +3,7 @@
 
 #include "linked_list.h"
 #include "threadville_map.h"
+#include "linked_list_cars.h"
 
 typedef enum VehicleType {
     RED_BUS,
@@ -23,14 +24,23 @@ typedef enum VehicleType {
     YELLOW_CAR
 } VehicleType;
 
+typedef enum VehicleDir {
+    NORTH,
+    SOUTH,
+    WEST,
+    EAST
+} VehicleDir;
+
 typedef struct Vehicle {
     VehicleType vehicleType;
+    VehicleDir  vehicleDir;
     // Vehicle speed
     double speed;
     // Route to get current destination
     LinkedList *current_route;
     // Vehicle must have 2 destinations
-    int destinations[2];
+    int* destinations;
+    node_t* ui_info;
 } Vehicle;
 
 typedef struct VehicleThreadInfo {
@@ -38,7 +48,7 @@ typedef struct VehicleThreadInfo {
     ThreadvilleMap *map;
 } VehicleThreadInfo;
 
-Vehicle *create_vehicle(VehicleType);
+Vehicle *create_vehicle(VehicleType, VehicleDir);
 
 VehicleThreadInfo *create_vehicle_thread_info(Vehicle *, ThreadvilleMap *);
 

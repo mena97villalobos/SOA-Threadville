@@ -3,8 +3,20 @@
 #include <unistd.h>
 #include "utils.h"
 #include "hash_table.h"
+#include "interface.h"
 
 #define AF_DISTANCE 36.0 // distance from A1 to F2
+
+LinkedList *createHardwireRoute() {
+    LinkedList *l = create_linked_list();
+    push(l, create_node(B019P));
+    push(l, create_node(B020P));
+    push(l, create_node(B021P));
+    push(l, create_node(B022P));
+    push(l, create_node(B023P));
+    push(l, create_node(B023P));
+    push(l, create_node(B024P));
+}
 
 float getVehiculeSpeed(VehicleType type) {
     // Speed given in "spots" per second
@@ -49,15 +61,29 @@ float getVehiculeSpeed(VehicleType type) {
     return speed;
 }
 
-Vehicle *create_vehicle(VehicleType type) {
+Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
     Vehicle *v = malloc(sizeof(Vehicle));
     float speed = getVehiculeSpeed(type);
     if (speed < 0) {
         return NULL;
     }
+
+    node_t* ui_info = create_object(
+            v,
+            from_vehicle_type(type, dir),
+            0.223f, 0.223f,
+            "B1"
+    );
+
+    v->ui_info = ui_info;
     v->vehicleType = type;
+    v->vehicleDir = dir;
     v->speed = speed;
-    v->current_route = NULL;
+    v->current_route = createHardwireRoute();
+    int* destinations = calloc(2, sizeof(int));
+    destinations[0] = B008S;
+    destinations[1] = B008S;
+    v->destinations = destinations;
     return v;
 }
 
@@ -83,7 +109,19 @@ void *handle_vehicle(void *arg) {
             pthread_mutex_lock(currentStreet);
             // TODO PASAR DE SEGUNDOS A MILISEGUNDOS PARA QUE SIRVA BIEN EL SLEEP
             usleep(vehicle->speed);
+            sleep(2);
             // TODO CRITICAL SECTION, LOCK SLEEP UNLOCK
+            // TODO CAMBIAR DIRECCI'ON
+
+            float y = vehicle->ui_info->data->height - 0.027f;
+            float x = vehicle->ui_info->data->width;
+
+            edit_object_with_node(
+                    vehicle->ui_info,
+                    from_vehicle_type(vehicle->vehicleType, vehicle->vehicleDir),
+                    x, y, "Z1"
+            );
+
             if (vehicle->current_route->first_node->next_node == NULL) {
                 startDestination = vehicle->current_route->first_node->destination_id;
             }
@@ -95,7 +133,7 @@ void *handle_vehicle(void *arg) {
         sleep(3);
         pthread_mutex_unlock(currentStop);
         // TODO UPDATE CURRENT ROUTE TO SHOW THE NEXT DESTINATION FROM startDestinatio to vehicle->destinations[++nextDestination]
+        vehicle->current_route = createHardwireRoute();
         nextDestination++;
     }
-
 }

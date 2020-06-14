@@ -13,6 +13,8 @@ pthread_mutexattr_t get_mutex_attributes();
 
 pthread_mutex_t *get_mutex(pthread_mutexattr_t *);
 
+// TODO AÑADIR DIRECCIÓN Y POSICIÓN X Y
+
 typedef enum HighwayIds {
     // FROM Z TO Y 1
     H001H = 1,
