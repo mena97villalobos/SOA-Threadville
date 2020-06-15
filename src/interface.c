@@ -39,15 +39,15 @@ void generate_semaphores();
 //Funtions code
 void load_interface(){
     //MAP load
-    insertDict(MAP, create_item("images/Map.PNG", MAP, 1.0, 1.0), hashImages, SIZE);
+    insertDict(MAP, create_item("images/MAP.PNG", MAP, 1.0, 1.0), hashImages, SIZE);
     //SEMAPHORE load
     insertDict(SEMAPHORED, create_item("images/SD.png", SEMAPHORED, 0.16, 0.020), hashImages, SIZE);
     insertDict(SEMAPHOREU, create_item("images/SU.png", SEMAPHOREU, 0.16, 0.020), hashImages, SIZE);
     //Blue car load
-    insertDict(BLUECARL, create_item("images/BLUECARL.jpg", BLUECARL, 0.027, 0.015), hashImages, SIZE);
-    insertDict(BLUECARR, create_item("images/BLUECARR.jpg", BLUECARR, 0.027, 0.015), hashImages, SIZE);
-    insertDict(BLUECARB, create_item("images/BLUECARB.jpg", BLUECARB, 0.027, 0.019), hashImages, SIZE);
-    insertDict(BLUECARF, create_item("images/BLUECARF.jpg", BLUECARF, 0.027, 0.019), hashImages, SIZE);
+    insertDict(BLUECARL, create_item("images/BLUECARL.jpg", BLUECARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARR, create_item("images/BLUECARR.jpg", BLUECARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARB, create_item("images/BLUECARB.jpg", BLUECARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARF, create_item("images/BLUECARF.jpg", BLUECARF, 0.025, 0.015), hashImages, SIZE);
 
 
 
