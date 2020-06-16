@@ -2,6 +2,9 @@
 #define PROYECTO3_UTILS_H
 
 #include <stdlib.h>
+#include "linked_list.h"
+#include "threadville_map.h"
+#include "linked_list_cars.h"
 
 #define MAX_ID_NUMBER 858
 
@@ -12,8 +15,6 @@ pthread_condattr_t get_conditional_attribute();
 pthread_mutexattr_t get_mutex_attributes();
 
 pthread_mutex_t *get_mutex(pthread_mutexattr_t *);
-
-// TODO AÑADIR DIRECCIÓN Y POSICIÓN X Y
 
 typedef enum HighwayIds {
     // FROM Z TO Y 1
@@ -896,5 +897,104 @@ typedef enum StreetIds {
     R017P = 857,
     R018P = 858,
 } StreetIds;
+
+typedef enum CornersIds {
+    A001C = 859,
+    A002C = 860,
+    A003C = 861,
+    A004C = 862,
+    B001C = 863,
+    B002C = 864,
+    B003C = 865,
+    B004C = 866,
+    C001C = 867,
+    C002C = 868,
+    C003C = 869,
+    C004C = 870,
+    D001C = 871,
+    D002C = 872,
+    D003C = 873,
+    D004C = 874,
+    E001C = 875,
+    E002C = 876,
+    E003C = 877,
+    E004C = 878,
+    F001C = 879,
+    F002C = 880,
+    F003C = 881,
+    F004C = 882,
+    G001C = 862,
+    G002C = 861,
+    G003C = 885,
+    G004C = 886,
+    H001C = 866,
+    H002C = 865,
+    H003C = 889,
+    H004C = 890,
+    I001C = 870,
+    I002C = 869,
+    I003C = 893,
+    I004C = 894,
+    J001C = 874,
+    J002C = 873,
+    J003C = 897,
+    J004C = 898,
+    K001C = 878,
+    K002C = 877,
+    K003C = 901,
+    K004C = 902,
+    L001C = 882,
+    L002C = 881,
+    L003C = 905,
+    L004C = 906,
+    M001C = 907,
+    M002C = 908,
+    M003C = 909,
+    M004C = 910,
+    N001C = 911,
+    N002C = 912,
+    N003C = 913,
+    N004C = 914,
+    O001C = 915,
+    O002C = 916,
+    O003C = 917,
+    O004C = 918,
+    P001C = 919,
+    P002C = 920,
+    P003C = 921,
+    P004C = 922,
+    Q001C = 923,
+    Q002C = 924,
+    Q003C = 925,
+    Q004C = 926,
+    R001C = 927,
+    R002C = 928,
+    R003C = 929,
+    R004C = 930,
+    S001C = 910,
+    S002C = 911,
+    S003C = 933,
+    S004C = 934,
+    T001C = 914,
+    T002C = 913,
+    T003C = 937,
+    T004C = 938,
+    U001C = 918,
+    U002C = 917,
+    U003C = 941,
+    U004C = 942,
+    V001C = 922,
+    V002C = 921,
+    V003C = 945,
+    V004C = 946,
+    W001C = 926,
+    W002C = 925,
+    W003C = 949,
+    W004C = 950,
+    X001C = 930,
+    X002C = 931,
+    X003C = 953,
+    X004C = 954
+} CornersIds;
 
 #endif //PROYECTO3_UTILS_H

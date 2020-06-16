@@ -1,6 +1,7 @@
 #ifndef PROYECTO3_VEHICLE_H
 #define PROYECTO3_VEHICLE_H
 
+#include "utils.h"
 #include "linked_list.h"
 #include "threadville_map.h"
 #include "linked_list_cars.h"

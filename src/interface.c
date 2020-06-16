@@ -6,6 +6,7 @@
 #include<string.h>
 #include"dict.h"
 #include"linked_list_cars.h"
+#include "utils.h"
 
 
 #define SIZE 62 //Number is the same of the len in the enum in interface.h

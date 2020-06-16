@@ -3,7 +3,8 @@
 
 ThreadvilleMap *create_threadville_map() {
     ThreadvilleMap *threadvilleMap = create_shared_memory(sizeof(ThreadvilleMap));
-    threadvilleMap->map = create_table(860);
+    threadvilleMap->map = create_table(954);
+    threadvilleMap->streetInfoTable = create_table_street_info(954);
 
     pthread_mutexattr_t mattr = get_mutex_attributes();
     insert_highways(threadvilleMap->map, &mattr);
@@ -11,6 +12,7 @@ ThreadvilleMap *create_threadville_map() {
     insert_roundabouts(threadvilleMap->map, &mattr);
     insert_stops(threadvilleMap->map, &mattr);
     insert_streets(threadvilleMap->map, &mattr);
+    insert_corners(threadvilleMap->map, &mattr);
     return threadvilleMap;
 }
 
@@ -40,6 +42,12 @@ void insert_stops(Table *table, pthread_mutexattr_t *mattr) {
 
 void insert_streets(Table *table, pthread_mutexattr_t *mattr) {
     for (int i = A001P; i <= R018P; ++i) {
+        insert(table, i, get_mutex(mattr));
+    }
+}
+
+void insert_corners(Table *table, pthread_mutexattr_t *mattr) {
+    for (int i = A001C; i <= X004C; ++i) {
         insert(table, i, get_mutex(mattr));
     }
 }

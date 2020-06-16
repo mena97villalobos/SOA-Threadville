@@ -17,6 +17,7 @@ add_executable(proyecto3
         headers/utils.h
         headers/vehicle.h
         headers/threadville_maintenance.h
+        headers/hash_table_street_info.h
         src/main.c
         src/hash_table.c
         src/threadville_map.c
@@ -28,6 +29,7 @@ add_executable(proyecto3
         src/dict.c
         src/interface.c
         src/linked_lists_cars.c
+        src/hash_table_street_info.c
     )
 
 find_package(PkgConfig REQUIRED)
