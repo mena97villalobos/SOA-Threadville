@@ -11,7 +11,7 @@ TableStreetInfo *create_table_street_info(int size) {
     return t;
 }
 
-StreetInfo *create_street_info(int x, int y, StreetDir dir) {
+StreetInfo *create_street_info(float x, float y, StreetDir dir) {
     StreetInfo *i = (StreetInfo *) malloc(sizeof(StreetInfo));
     i->x = x;
     i->y = y;
