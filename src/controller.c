@@ -862,6 +862,222 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     create_object(++contador, BLUECARF, 0.806, 0.907,"P7"); 
     create_object(++contador, BLUECARF, 0.806, 0.842,"P8"); 
 
+//Autopista
+    //++Fila0
+    //Segmento 0
+    create_object(++contador, BLUECARL, 0.133,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.149,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.165,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.181,0.426,"B1");
+    create_object(++contador, BLUECARF, 0.200,0.426,"B1");
+    //Segmento 1
+    create_object(++contador, BLUECARF, 0.2235,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.2425,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.2585,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.2745,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.2905,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.3065,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.3225,0.426,"B1");
+    create_object(++contador, BLUECARF, 0.3415,0.426,"B1");
+    //Segmento 2
+    create_object(++contador, BLUECARF, 0.365,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.384,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.400,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.416,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.432,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.448,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.464,0.426,"B1");
+    create_object(++contador, BLUECARF, 0.483,0.426,"B1");
+    //Segmento 3
+    create_object(++contador, BLUECARF, 0.5035,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.5225,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.5385,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.5545,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.5705,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.5865,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.6025,0.426,"B1");
+    create_object(++contador, BLUECARF, 0.6215,0.426,"B1");
+    //Segmento 4
+    create_object(++contador, BLUECARF, 0.644,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.663,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.679,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.695,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.711,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.727,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.743,0.426,"B1");
+    create_object(++contador, BLUECARF, 0.762,0.426,"B1");
+    //Segmento 5
+    create_object(++contador, BLUECARF, 0.785,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.803,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.819,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.834,0.426,"B1");
+    create_object(++contador, BLUECARL, 0.851,0.426,"B1");
+
+    //++Fila1
+    //Segmento 0
+    create_object(++contador, BLUECARL, 0.133,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.149,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.165,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.181,0.465,"B1");
+    create_object(++contador, BLUECARF, 0.200,0.465,"B1");
+    //Segmento 1
+    create_object(++contador, BLUECARF, 0.2235,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.2425,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.2585,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.2745,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.2905,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.3065,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.3225,0.465,"B1");
+    create_object(++contador, BLUECARF, 0.3415,0.465,"B1");
+    //Segmento 2
+    create_object(++contador, BLUECARF, 0.365,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.384,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.400,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.416,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.432,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.448,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.464,0.465,"B1");
+    create_object(++contador, BLUECARF, 0.483,0.465,"B1");
+    //Segmento 3
+    create_object(++contador, BLUECARF, 0.5035,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.5225,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.5385,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.5545,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.5705,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.5865,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.6025,0.465,"B1");
+    create_object(++contador, BLUECARF, 0.6215,0.465,"B1");
+    //Segmento 4
+    create_object(++contador, BLUECARF, 0.644,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.663,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.679,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.695,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.711,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.727,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.743,0.465,"B1");
+    create_object(++contador, BLUECARF, 0.762,0.465,"B1");
+    //Segmento 5
+    create_object(++contador, BLUECARF, 0.785,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.803,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.819,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.834,0.465,"B1");
+    create_object(++contador, BLUECARL, 0.851,0.465,"B1");
+    //++Fila2
+    //Segmento 0
+    create_object(++contador, BLUECARL, 0.133,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.149,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.165,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.181,0.512,"B1");
+    create_object(++contador, BLUECARF, 0.200,0.512,"B1");
+    //Segmento 1
+    create_object(++contador, BLUECARF, 0.2235,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.2425,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.2585,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.2745,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.2905,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.3065,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.3225,0.512,"B1");
+    create_object(++contador, BLUECARF, 0.3415,0.512,"B1");
+    //Segmento 2
+    create_object(++contador, BLUECARF, 0.365,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.384,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.400,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.416,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.432,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.448,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.464,0.512,"B1");
+    create_object(++contador, BLUECARF, 0.483,0.512,"B1");
+    //Segmento 3
+    create_object(++contador, BLUECARF, 0.5035,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.5225,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.5385,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.5545,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.5705,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.5865,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.6025,0.512,"B1");
+    create_object(++contador, BLUECARF, 0.6215,0.512,"B1");
+    //Segmento 4
+    create_object(++contador, BLUECARF, 0.644,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.663,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.679,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.695,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.711,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.727,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.743,0.512,"B1");
+    create_object(++contador, BLUECARF, 0.762,0.512,"B1");
+    //Segmento 5
+    create_object(++contador, BLUECARF, 0.785,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.803,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.819,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.834,0.512,"B1");
+    create_object(++contador, BLUECARL, 0.851,0.512,"B1");
+    //++Fila3
+    //Segmento 0
+    create_object(++contador, BLUECARL, 0.133,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.149,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.165,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.181,0.55,"B1");
+    create_object(++contador, BLUECARF, 0.200,0.55,"B1");
+    //Segmento 1
+    create_object(++contador, BLUECARF, 0.2235,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.2425,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.2585,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.2745,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.2905,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.3065,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.3225,0.55,"B1");
+    create_object(++contador, BLUECARF, 0.3415,0.55,"B1");
+    //Segmento 2
+    create_object(++contador, BLUECARF, 0.365,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.384,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.400,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.416,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.432,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.448,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.464,0.55,"B1");
+    create_object(++contador, BLUECARF, 0.483,0.55,"B1");
+    //Segmento 3
+    create_object(++contador, BLUECARF, 0.5035,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.5225,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.5385,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.5545,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.5705,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.5865,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.6025,0.55,"B1");
+    create_object(++contador, BLUECARF, 0.6215,0.55,"B1");
+    //Segmento 4
+    create_object(++contador, BLUECARF, 0.644,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.663,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.679,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.695,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.711,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.727,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.743,0.55,"B1");
+    create_object(++contador, BLUECARF, 0.762,0.55,"B1");
+    //Segmento 5
+    create_object(++contador, BLUECARF, 0.785,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.803,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.819,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.834,0.55,"B1");
+    create_object(++contador, BLUECARL, 0.851,0.55,"B1");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
