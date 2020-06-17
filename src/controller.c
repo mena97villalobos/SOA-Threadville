@@ -7,6 +7,7 @@
 #include"interface.h"
 #include"linked_list_cars.h"
 #include "vehicle.h"
+#include "floyd.h"
 
 static node_t *node = NULL;
 static int contador = 0;
@@ -18,6 +19,17 @@ void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     printf("%s\n", "Carro aleatorio creado");
+    floyd(); //Esto solo hay que ejecutarlo una vez
+    printf("%s\n", "floyd termino");
+    int* salida =  floyd_path(1, 10);
+    int len = sizeof(salida)/sizeof(int);
+    for (int i = 0; i < salida[0]+1; ++i)
+    {
+        printf("%d\n", salida[i]);
+    }
+    free(salida);
+
+
     // TODO CREATE CAR
 //    ThreadvilleMap *map = create_threadville_map();
 //    Vehicle* v = create_vehicle(BLUE_CAR, NORTH);
@@ -43,7 +55,7 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
 //    node = create_object(contador, BLUECARF, 0.223, 0.007,"Z1");
 //    edit_semaphore(1, SEMAPHOREU);
 //    edit_semaphore(2, SEMAPHORED);
-
+/*
 //++Fila0
     //Segmento 0
     create_object(++contador, BLUECARF, 0.085, 0.007,"B1");
@@ -1036,26 +1048,7 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     create_object(++contador, BLUECARF, 0.795,0.55,"B1");
     create_object(++contador, BLUECARL, 0.813,0.55,"B1");
     create_object(++contador, BLUECARL, 0.829,0.55,"B1");
-    create_object(++contador, BLUECARL, 0.844,0.55,"B1");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    create_object(++contador, BLUECARL, 0.844,0.55,"B1");*/
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
