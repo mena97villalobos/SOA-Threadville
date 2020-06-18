@@ -156,8 +156,12 @@
                             <property name="margin_top">2</property>
                             <property name="margin_bottom">2</property>
                             <items>
-                              <item translatable="yes">Blue</item>
                               <item translatable="yes">Red</item>
+                              <item translatable="yes">Blue</item>
+                              <item translatable="yes">Green</item>
+                              <item translatable="yes">Black</item>
+                              <item translatable="yes">White</item>
+                              <item translatable="yes">Yellow</item>
                             </items>
                           </object>
                           <packing>
