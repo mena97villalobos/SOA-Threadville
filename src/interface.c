@@ -128,7 +128,6 @@ void load_interface(){
     insertDict(YELLOWCARF, create_item("images/YELLOWF.jpg", YELLOWCARF, 0.025, 0.015), hashImages, SIZE);
 
 
-
 	if (pthread_mutex_init(&lock_vehicle, NULL) != 0){
         printf("\n Mutex of vehicle init failed\n");
     }
@@ -256,11 +255,22 @@ GdkPixbuf * transform_image_relation(GdkPixbuf *image, float real_h, float real_
     w = gdk_pixbuf_get_width(image);
     h = gdk_pixbuf_get_height(image);
 
+    int tentatibe_width = real_w*actual_width;
+    int tentatibe_height = real_w*(int)((((float)h/(float)w)*(float)actual_width)*(float)real_w);
 
-    GdkPixbuf * final_image =  gdk_pixbuf_scale_simple (image,
-                         real_w*actual_width,
-                         (int)((((float)h/(float)w)*(float)actual_width)*(float)real_w),
-                         GDK_INTERP_BILINEAR);
+    GdkPixbuf * final_image  = NULL;
+
+    if (tentatibe_height<= actual_height){
+        final_image =  gdk_pixbuf_scale_simple (image,
+                             tentatibe_width,
+                             (int)((((float)h/(float)w)*(float)actual_width)*(float)real_w),
+                             GDK_INTERP_BILINEAR);
+    }else{
+        final_image =  gdk_pixbuf_scale_simple (image,
+                             (int)((((float)w/(float)h)*(float)actual_height)*(float)real_h),
+                             real_h*actual_height,
+                             GDK_INTERP_BILINEAR);
+    }
 
     return final_image;
 }
