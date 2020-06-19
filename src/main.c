@@ -34,10 +34,7 @@ int main(int argc, char *argv[]) {
     drA_maps_images = GTK_WIDGET(gtk_builder_get_object(builder, "drA_maps_images"));
     g_signal_connect(drA_maps_images, "draw", G_CALLBACK(on_window_draw), NULL);
 
-
     gtk_builder_connect_signals(builder, NULL);
-
-    g_object_unref(builder);
 
     gtk_widget_show(window);
     g_timeout_add(1000 / 60 / 2, (GSourceFunc) on_tick, drA_maps_images);  //60 is the fps

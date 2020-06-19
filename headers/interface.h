@@ -15,6 +15,7 @@ typedef enum {
     MAP,
     SEMAPHOREU,
     SEMAPHORED,
+    REPAIR,
     REDBUSL,
     REDBUSR,
     REDBUSB,

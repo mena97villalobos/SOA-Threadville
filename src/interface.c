@@ -9,7 +9,7 @@
 #include "utils.h"
 
 
-#define SIZE 62 //Number is the same of the len in the enum in interface.h
+#define SIZE 68 //Number is the same of the len in the enum in interface.h
 #define min(a,b) \
    ({ __typeof__ (a) _a = (a); \
        __typeof__ (b) _b = (b); \
@@ -44,12 +44,88 @@ void load_interface(){
     //SEMAPHORE load
     insertDict(SEMAPHORED, create_item("images/SD.png", SEMAPHORED, 0.16, 0.020), hashImages, SIZE);
     insertDict(SEMAPHOREU, create_item("images/SU.png", SEMAPHOREU, 0.16, 0.020), hashImages, SIZE);
+    //REPAIR load
+    insertDict(REPAIR, create_item("images/REPAIR.jpg", REPAIR, 0.025, 0.015), hashImages, SIZE);
+    //Red bus load
+    insertDict(REDBUSL, create_item("images/RED_BL.png", REDBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(REDBUSR, create_item("images/RED_BR.png", REDBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(REDBUSB, create_item("images/RED_BB.png", REDBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(REDBUSF, create_item("images/RED_BF.png", REDBUSF, 0.050, 0.015), hashImages, SIZE);
+    //Grenn bus load
+    insertDict(GREENBUSL, create_item("images/GREEN_BL.png", GREENBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(GREENBUSR, create_item("images/GREEN_BR.png", GREENBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(GREENBUSB, create_item("images/GREEN_BB.png", GREENBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(GREENBUSF, create_item("images/GREEN_BF.png", GREENBUSF, 0.050, 0.015), hashImages, SIZE);
+    //Blue bus load
+    insertDict(BLUEBUSL, create_item("images/BLUE_BL.png", BLUEBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(BLUEBUSR, create_item("images/BLUE_BR.png", BLUEBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(BLUEBUSB, create_item("images/BLUE_BB.png", BLUEBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(BLUEBUSF, create_item("images/BLUE_BF.png", BLUEBUSF, 0.050, 0.015), hashImages, SIZE);
+    //White busload    
+    insertDict(WHITEBUSL, create_item("images/WHITE_BL.png", WHITEBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(WHITEBUSR, create_item("images/WHITE_BR.png", WHITEBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(WHITEBUSB, create_item("images/WHITE_BB.png", WHITEBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(WHITEBUSF, create_item("images/WHITE_BF.png", WHITEBUSF, 0.050, 0.015), hashImages, SIZE);
+     //Gray bus load   
+    insertDict(GRAYBUSL, create_item("images/GRAY_BL.png", GRAYBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(GRAYBUSR, create_item("images/GRAY_BR.png", GRAYBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(GRAYBUSB, create_item("images/GRAY_BB.png", GRAYBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(GRAYBUSF, create_item("images/GRAY_BF.png", GRAYBUSF, 0.050, 0.015), hashImages, SIZE);
+     //Black bus load   
+    insertDict(BLACKBUSL, create_item("images/BLACK_BL.png", BLACKBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(BLACKBUSR, create_item("images/BLACK_BR.png", BLACKBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(BLACKBUSB, create_item("images/BLACK_BB.png", BLACKBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(BLACKBUSF, create_item("images/BLACK_BF.png", BLACKBUSF, 0.050, 0.015), hashImages, SIZE);
+     //Pink bus load   
+    insertDict(PINKBUSL, create_item("images/PINK_BL.png", PINKBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(PINKBUSR, create_item("images/PINK_BR.png", PINKBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(PINKBUSB, create_item("images/PINK_BB.png", PINKBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(PINKBUSF, create_item("images/PINK_BF.png", PINKBUSF, 0.050, 0.015), hashImages, SIZE);
+     //Ligth blue bus load   
+    insertDict(LIGHTBLUEBUSL, create_item("images/LBLUE_BL.png", LIGHTBLUEBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(LIGHTBLUEBUSR, create_item("images/LBLUE_BR.png", LIGHTBLUEBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(LIGHTBLUEBUSB, create_item("images/LBLUE_BB.png", LIGHTBLUEBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(LIGHTBLUEBUSF, create_item("images/LBLUE_BF.png", LIGHTBLUEBUSF, 0.050, 0.015), hashImages, SIZE);
+    //Orange bus load  
+    insertDict(ORANGEBUSL, create_item("images/ORANGE_BL.png", ORANGEBUSL, 0.025, 0.030), hashImages, SIZE);
+    insertDict(ORANGEBUSR, create_item("images/ORANGE_BR.png", ORANGEBUSR, 0.025, 0.030), hashImages, SIZE);
+    insertDict(ORANGEBUSB, create_item("images/ORANGE_BB.png", ORANGEBUSB, 0.050, 0.015), hashImages, SIZE);
+    insertDict(ORANGEBUSF, create_item("images/ORANGE_BF.png", ORANGEBUSF, 0.050, 0.015), hashImages, SIZE);
+     //Ambulance load   
+    insertDict(AMBULANCEL, create_item("images/AMBULANCEL.jpg", AMBULANCEL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(AMBULANCER, create_item("images/AMBULANCER.jpg", AMBULANCER, 0.025, 0.015), hashImages, SIZE);
+    insertDict(AMBULANCEB, create_item("images/AMBULANCEB.jpg", AMBULANCEB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(AMBULANCEF, create_item("images/AMBULANCEF.jpg", AMBULANCEF, 0.025, 0.015), hashImages, SIZE);
+    //Red car load  
+    insertDict(REDCARL, create_item("images/REDL.jpg", REDCARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(REDCARR, create_item("images/REDR.jpg", REDCARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(REDCARB, create_item("images/REDB.jpg", REDCARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(REDCARF, create_item("images/REDF.jpg", REDCARF, 0.025, 0.015), hashImages, SIZE);
+    //Green car load    
+    insertDict(GREENCARL, create_item("images/GREENL.jpg", GREENCARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(GREENCARR, create_item("images/GREENR.jpg", GREENCARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(GREENCARB, create_item("images/GREENB.jpg", GREENCARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(GREENCARF, create_item("images/GREENF.jpg", GREENCARF, 0.025, 0.015), hashImages, SIZE);
     //Blue car load
-    insertDict(BLUECARL, create_item("images/BLUECARL.jpg", BLUECARL, 0.025, 0.015), hashImages, SIZE);
-    insertDict(BLUECARR, create_item("images/BLUECARR.jpg", BLUECARR, 0.025, 0.015), hashImages, SIZE);
-    insertDict(BLUECARB, create_item("images/BLUECARB.jpg", BLUECARB, 0.025, 0.015), hashImages, SIZE);
-    insertDict(BLUECARF, create_item("images/BLUECARF.jpg", BLUECARF, 0.025, 0.015), hashImages, SIZE);
-
+    insertDict(BLUECARL, create_item("images/BLUEL.jpg", BLUECARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARR, create_item("images/BLUER.jpg", BLUECARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARB, create_item("images/BLUEB.jpg", BLUECARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLUECARF, create_item("images/BLUEF.jpg", BLUECARF, 0.025, 0.015), hashImages, SIZE);
+    //White car load
+    insertDict(WHITECARL, create_item("images/WHITEL.jpg", WHITECARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(WHITECARR, create_item("images/WHITER.jpg", WHITECARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(WHITECARB, create_item("images/WHITEB.jpg", WHITECARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(WHITECARF, create_item("images/WHITEF.jpg", WHITECARF, 0.025, 0.015), hashImages, SIZE);
+    //Black car load    
+    insertDict(BLACKCARL, create_item("images/BLACKL.jpg", BLACKCARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLACKCARR, create_item("images/BLACKR.jpg", BLACKCARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLACKCARB, create_item("images/BLACKB.jpg", BLACKCARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(BLACKCARF, create_item("images/BLACKF.jpg", BLACKCARF, 0.025, 0.015), hashImages, SIZE);
+     //Yellow car load   
+    insertDict(YELLOWCARL, create_item("images/YELLOWL.jpg", YELLOWCARL, 0.025, 0.015), hashImages, SIZE);
+    insertDict(YELLOWCARR, create_item("images/YELLOWR.jpg", YELLOWCARR, 0.025, 0.015), hashImages, SIZE);
+    insertDict(YELLOWCARB, create_item("images/YELLOWB.jpg", YELLOWCARB, 0.025, 0.015), hashImages, SIZE);
+    insertDict(YELLOWCARF, create_item("images/YELLOWF.jpg", YELLOWCARF, 0.025, 0.015), hashImages, SIZE);
 
 
 	if (pthread_mutex_init(&lock_vehicle, NULL) != 0){
@@ -179,11 +255,22 @@ GdkPixbuf * transform_image_relation(GdkPixbuf *image, float real_h, float real_
     w = gdk_pixbuf_get_width(image);
     h = gdk_pixbuf_get_height(image);
 
+    int tentatibe_width = real_w*actual_width;
+    int tentatibe_height = real_w*(int)((((float)h/(float)w)*(float)actual_width)*(float)real_w);
 
-    GdkPixbuf * final_image =  gdk_pixbuf_scale_simple (image,
-                         real_w*actual_width,
-                         (int)((((float)h/(float)w)*(float)actual_width)*(float)real_w),
-                         GDK_INTERP_BILINEAR);
+    GdkPixbuf * final_image  = NULL;
+
+    if (tentatibe_height<= actual_height){
+        final_image =  gdk_pixbuf_scale_simple (image,
+                             tentatibe_width,
+                             (int)((((float)h/(float)w)*(float)actual_width)*(float)real_w),
+                             GDK_INTERP_BILINEAR);
+    }else{
+        final_image =  gdk_pixbuf_scale_simple (image,
+                             (int)((((float)w/(float)h)*(float)actual_height)*(float)real_h),
+                             real_h*actual_height,
+                             GDK_INTERP_BILINEAR);
+    }
 
     return final_image;
 }
@@ -261,7 +348,6 @@ node_t * create_object(int num, images_enum type_image_p, float x, float y, char
 
 	}
     pthread_mutex_unlock(&lock_vehicle);
-	printf("Carro pintado\n");
 	fflush(stdout);
     return new_node;
 
@@ -276,7 +362,7 @@ void detele_object(int num){
 	}
 
 	int result = remove_by_val(&vehicle_list, num);
-	if (result == -1){
+	if (result == -2){
 		if(vehicle_list->data!=NULL){
 			free(vehicle_list->data);
 		}
@@ -284,9 +370,6 @@ void detele_object(int num){
 		vehicle_list = NULL;
 	}
 	pthread_mutex_unlock(&lock_vehicle);
-
-	printf("%d\n", result);
-	print_list(vehicle_list);
 }
 
 void edit_object(int num, images_enum type_image_p, float x_p, float y_p, char * next_stop_p){
