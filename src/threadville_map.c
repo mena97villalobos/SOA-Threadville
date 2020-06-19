@@ -1406,118 +1406,118 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
 
 //++Fila2
 //Segmento 0
-        case M007P: // && S001P
+        case M012P: // && S001P
             insert_street_info(t, id, create_street_info(0.101, 0.778, EAST_DIR));
             break;
-        case M008P: // && S002P
+        case M011P: // && S002P
             insert_street_info(t, id, create_street_info(0.117, 0.778, EAST_DIR));
             break;
-        case M009P: // && S003P
+        case M010P: // && S003P
             insert_street_info(t, id, create_street_info(0.133, 0.778, EAST_DIR));
             break;
-        case M010P: // && S004P
+        case M009P: // && S004P
             insert_street_info(t, id, create_street_info(0.149, 0.778, EAST_DIR));
             break;
-        case M011P: // && S005P
+        case M008P: // && S005P
             insert_street_info(t, id, create_street_info(0.165, 0.778, EAST_DIR));
             break;
-        case M012P: // && S006P
+        case M007P: // && S006P
             insert_street_info(t, id, create_street_info(0.181, 0.778, EAST_DIR));
             break;
 //Segmento 1
-        case N007P: // && T001P
+        case N012P: // && T001P
             insert_street_info(t, id, create_street_info(0.2425, 0.778, EAST_DIR));
             break;
-        case N008P: // && T002P
+        case N011P: // && T002P
             insert_street_info(t, id, create_street_info(0.2585, 0.778, EAST_DIR));
             break;
-        case N009P: // && T003P
+        case N010P: // && T003P
             insert_street_info(t, id, create_street_info(0.2745, 0.778, EAST_DIR));
             break;
-        case N010P: // && T004P
+        case N009P: // && T004P
             insert_street_info(t, id, create_street_info(0.2905, 0.778, EAST_DIR));
             break;
-        case N011P: // && T005P
+        case N008P: // && T005P
             insert_street_info(t, id, create_street_info(0.3065, 0.778, EAST_DIR));
             break;
-        case N012P: // && T006P
+        case N007P: // && T006P
             insert_street_info(t, id, create_street_info(0.3225, 0.778, EAST_DIR));
             break;
 //Segmento 2
-        case O007P: // && U001P
+        case O012P: // && U001P
             insert_street_info(t, id, create_street_info(0.384, 0.778, EAST_DIR));
             break;
-        case O008P: // && U002P
+        case O011P: // && U002P
             insert_street_info(t, id, create_street_info(0.400, 0.778, EAST_DIR));
             break;
-        case O009P: // && U003P
+        case O010P: // && U003P
             insert_street_info(t, id, create_street_info(0.416, 0.778, EAST_DIR));
             break;
-        case O010P: // && U004P
+        case O009P: // && U004P
             insert_street_info(t, id, create_street_info(0.432, 0.778, EAST_DIR));
             break;
-        case O011P: // && U005P
+        case O008P: // && U005P
             insert_street_info(t, id, create_street_info(0.448, 0.778, EAST_DIR));
             break;
-        case O012P: // && U006P
+        case O007P: // && U006P
             insert_street_info(t, id, create_street_info(0.464, 0.778, EAST_DIR));
             break;
 
 //Segmento 3
-        case P007P: // && P007P
+        case P012P: // && P007P
             insert_street_info(t, id, create_street_info(0.5225, 0.778, EAST_DIR));
             break;
-        case P008P: // && P008P
+        case P011P: // && P008P
             insert_street_info(t, id, create_street_info(0.5385, 0.778, EAST_DIR));
             break;
-        case P009P: // && P009P
+        case P010P: // && P009P
             insert_street_info(t, id, create_street_info(0.5545, 0.778, EAST_DIR));
             break;
-        case P010P: // && P010P
+        case P009P: // && P010P
             insert_street_info(t, id, create_street_info(0.5705, 0.778, EAST_DIR));
             break;
-        case P011P: // && P011P
+        case P008P: // && P011P
             insert_street_info(t, id, create_street_info(0.5865, 0.778, EAST_DIR));
             break;
-        case P012P: // && P012P
+        case P007P: // && P012P
             insert_street_info(t, id, create_street_info(0.6025, 0.778, EAST_DIR));
             break;
 //Segmento 4
-        case Q007P: // && W001P
+        case Q012P: // && W001P
             insert_street_info(t, id, create_street_info(0.663, 0.778, EAST_DIR));
             break;
-        case Q008P: // && W002P
+        case Q011P: // && W002P
             insert_street_info(t, id, create_street_info(0.679, 0.778, EAST_DIR));
             break;
-        case Q009P: // && W003P
+        case Q010P: // && W003P
             insert_street_info(t, id, create_street_info(0.695, 0.778, EAST_DIR));
             break;
-        case Q010P: // && W004P
+        case Q009P: // && W004P
             insert_street_info(t, id, create_street_info(0.711, 0.778, EAST_DIR));
             break;
-        case Q011P: // && W005P
+        case Q008P: // && W005P
             insert_street_info(t, id, create_street_info(0.727, 0.778, EAST_DIR));
             break;
-        case Q012P: // && W006P
+        case Q007P: // && W006P
             insert_street_info(t, id, create_street_info(0.743, 0.778, EAST_DIR));
             break;
 //Segmento 5
-        case R007P: // && X001P
+        case R012P: // && X001P
             insert_street_info(t, id, create_street_info(0.803, 0.778, EAST_DIR));
             break;
-        case R008P: // && X002P
+        case R011P: // && X002P
             insert_street_info(t, id, create_street_info(0.819, 0.778, EAST_DIR));
             break;
-        case R009P: // && X003P
+        case R010P: // && X003P
             insert_street_info(t, id, create_street_info(0.834, 0.778, EAST_DIR));
             break;
-        case R010P: // && X004P
+        case R009P: // && X004P
             insert_street_info(t, id, create_street_info(0.851, 0.778, EAST_DIR));
             break;
-        case R011P: // && X005P
+        case R008P: // && X005P
             insert_street_info(t, id, create_street_info(0.867, 0.778, EAST_DIR));
             break;
-        case R012P: // && X006P
+        case R007P: // && X006P
             insert_street_info(t, id, create_street_info(0.883, 0.778, EAST_DIR));
             break;
 //++Fila3
@@ -1617,7 +1617,6 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
             insert_street_info(t, id, create_street_info(0.743, 0.965, WEST_DIR));
             break;
 //Segmento 5
-
         case X018P:
             insert_street_info(t, id, create_street_info(0.803, 0.965, WEST_DIR));
             break;
@@ -1636,7 +1635,6 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
         case X013P:
             insert_street_info(t, id, create_street_info(0.883, 0.965, WEST_DIR));
             break;
-// TODO
 //Parte superior
 //Columna 0
         case A024P:
@@ -2343,7 +2341,6 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
         case V019P:
             insert_street_info(t, id, create_street_info(0.5035, 0.933, NORTH_DIR));
             break;
-        // TODO
 //Columna 7
         case P001P:
             insert_street_info(t, id, create_street_info(0.6215, 0.629, SOUTH_DIR));
@@ -2584,13 +2581,13 @@ void insert_street_info_corners(TableStreetInfo *t, CornersIds id) {
         case S003C:
             insert_street_info(t, id, create_street_info(0.200, 0.965, SOUTH_DIR));
             break;
-        case T002C: // && N001C
+        case T001C: // && N002C
             insert_street_info(t, id, create_street_info(0.2235, 0.778, NORTH_DIR));
             break;
         case T004C:
             insert_street_info(t, id, create_street_info(0.2235, 0.965, NORTH_DIR));
             break;
-        case T001C: // && N002C
+        case T002C: // && N001C
             insert_street_info(t, id, create_street_info(0.3415, 0.778, SOUTH_DIR));
             break;
         case T003C:

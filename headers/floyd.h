@@ -6,5 +6,11 @@
 // floyd es idempotente, no importa si se llama varias veces
 // HAY QUE HACER FREE DE LA LISTA RETORNADA POR FLOYD PATH!!!
 
+#ifndef PROYECTO3_FLOYD_H
+#define PROYECTO3_FLOYD_H
+
 void floyd();
-int* floyd_path(int i, int j);
+
+int *floyd_path(int i, int j);
+
+#endif //PROYECTO3_FLOYD_H

@@ -4,18 +4,128 @@
 #include "utils.h"
 #include "hash_table.h"
 #include "interface.h"
+#include "floyd.h"
+#include "globals.h"
 
-#define AF_DISTANCE 36.0 // distance from A1 to F2
+// #define AF_DISTANCE 36.0 // distance from A1 to F2
+#define AF_DISTANCE 6.0
 
-LinkedList *createHardwireRoute() {
+LinkedList *createRoute() {
     LinkedList *l = create_linked_list();
-    push(l, create_node(B019P));
-    push(l, create_node(B020P));
-    push(l, create_node(B021P));
-    push(l, create_node(B022P));
-    push(l, create_node(B023P));
-    push(l, create_node(B023P));
-    push(l, create_node(B024P));
+//    int *path = floyd_path(S001C, X002C);
+//    for (int i = path[0]; i >= 1; --i) {
+//        push(l, create_node(path[i]));
+//        printf("%d ", path[i]);
+//        fflush(stdout);
+//    }
+//    free(path);
+//    append(l, create_node(M002C));
+//    append(l, create_node(M012P));
+//    append(l, create_node(M011P));
+//    append(l, create_node(M010P));
+//    append(l, create_node(M009P));
+//    append(l, create_node(M008P));
+//    append(l, create_node(M007P));
+//    append(l, create_node(M001C));
+//
+//    append(l, create_node(N002C));
+//    append(l, create_node(N012P));
+//    append(l, create_node(N011P));
+//    append(l, create_node(N010P));
+//    append(l, create_node(N009P));
+//    append(l, create_node(N008P));
+//    append(l, create_node(N007P));
+//    append(l, create_node(N001C));
+//
+//    append(l, create_node(O002C));
+//    append(l, create_node(O012P));
+//    append(l, create_node(O011P));
+//    append(l, create_node(O010P));
+//    append(l, create_node(O009P));
+//    append(l, create_node(O008P));
+//    append(l, create_node(O007P));
+//    append(l, create_node(O001C));
+//
+//    append(l, create_node(P002C));
+//    append(l, create_node(P012P));
+//    append(l, create_node(P011P));
+//    append(l, create_node(P010P));
+//    append(l, create_node(P009P));
+//    append(l, create_node(P008P));
+//    append(l, create_node(P007P));
+//    append(l, create_node(P001C));
+//
+//    append(l, create_node(Q002C));
+//    append(l, create_node(Q012P));
+//    append(l, create_node(Q011P));
+//    append(l, create_node(Q010P));
+//    append(l, create_node(Q009P));
+//    append(l, create_node(Q008P));
+//    append(l, create_node(Q007P));
+//    append(l, create_node(Q001C));
+//
+//    append(l, create_node(R002C));
+//    append(l, create_node(R012P));
+//    append(l, create_node(R011P));
+//    append(l, create_node(R010P));
+//    append(l, create_node(R009P));
+//    append(l, create_node(R008P));
+//    append(l, create_node(R007P));
+//    append(l, create_node(R001C));
+    append(l, create_node(S002C));
+    append(l, create_node(S001P));
+    append(l, create_node(S002P));
+    append(l, create_node(S003P));
+    append(l, create_node(S004P));
+    append(l, create_node(S005P));
+    append(l, create_node(S006P));
+    append(l, create_node(S001C));
+
+    append(l, create_node(T002C));
+    append(l, create_node(T001P));
+    append(l, create_node(T002P));
+    append(l, create_node(T003P));
+    append(l, create_node(T004P));
+    append(l, create_node(T005P));
+    append(l, create_node(T006P));
+    append(l, create_node(T001C));
+
+    append(l, create_node(U002C));
+    append(l, create_node(U001P));
+    append(l, create_node(U002P));
+    append(l, create_node(U003P));
+    append(l, create_node(U004P));
+    append(l, create_node(U005P));
+    append(l, create_node(U006P));
+    append(l, create_node(U001C));
+
+    append(l, create_node(V002C));
+    append(l, create_node(V001P));
+    append(l, create_node(V002P));
+    append(l, create_node(V003P));
+    append(l, create_node(V004P));
+    append(l, create_node(V005P));
+    append(l, create_node(V006P));
+    append(l, create_node(V001C));
+
+    append(l, create_node(W002C));
+    append(l, create_node(W001P));
+    append(l, create_node(W002P));
+    append(l, create_node(W003P));
+    append(l, create_node(W004P));
+    append(l, create_node(W005P));
+    append(l, create_node(W006P));
+    append(l, create_node(W001C));
+
+    append(l, create_node(X002C));
+    append(l, create_node(X001P));
+    append(l, create_node(X002P));
+    append(l, create_node(X003P));
+    append(l, create_node(X004P));
+    append(l, create_node(X005P));
+    append(l, create_node(X006P));
+    append(l, create_node(X001C));
+    return l;
 }
 
 float getVehiculeSpeed(VehicleType type) {
@@ -68,7 +178,7 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
         return NULL;
     }
 
-    node_t* ui_info = create_object(
+    node_t *ui_info = create_object(
             v,
             from_vehicle_type(type, dir),
             0.223f, 0.223f,
@@ -79,8 +189,8 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
     v->vehicleType = type;
     v->vehicleDir = dir;
     v->speed = speed;
-    v->current_route = createHardwireRoute();
-    int* destinations = calloc(2, sizeof(int));
+    v->current_route = createRoute();
+    int *destinations = calloc(2, sizeof(int));
     destinations[0] = B008S;
     destinations[1] = B008S;
     v->destinations = destinations;
@@ -108,18 +218,18 @@ void *handle_vehicle(void *arg) {
 
             pthread_mutex_lock(currentStreet);
             // TODO PASAR DE SEGUNDOS A MILISEGUNDOS PARA QUE SIRVA BIEN EL SLEEP
-            usleep(vehicle->speed);
-            sleep(2);
+            //usleep(vehicle->speed * 1500);
+            sleep(1);
             // TODO CRITICAL SECTION, LOCK SLEEP UNLOCK
             // TODO CAMBIAR DIRECCI'ON
 
-            float y = vehicle->ui_info->data->height - 0.027f;
-            float x = vehicle->ui_info->data->width;
-
+            StreetInfo *streetInfo = lookup_street_info(threadvilleMap->streetInfoTable, currentNode->destination_id);
+            printf("X: %f, Y: %f, ID: %d\n", streetInfo->x, streetInfo->y, currentNode->destination_id);
+            fflush(stdout);
             edit_object_with_node(
                     vehicle->ui_info,
                     from_vehicle_type(vehicle->vehicleType, vehicle->vehicleDir),
-                    x, y, "Z1"
+                    streetInfo->x, streetInfo->y, "Z1"
             );
 
             if (vehicle->current_route->first_node->next_node == NULL) {
@@ -133,7 +243,7 @@ void *handle_vehicle(void *arg) {
         sleep(3);
         pthread_mutex_unlock(currentStop);
         // TODO UPDATE CURRENT ROUTE TO SHOW THE NEXT DESTINATION FROM startDestinatio to vehicle->destinations[++nextDestination]
-        vehicle->current_route = createHardwireRoute();
+        vehicle->current_route = createRoute();
         nextDestination++;
     }
 }

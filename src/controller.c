@@ -8,9 +8,7 @@
 #include"interface.h"
 #include"linked_list_cars.h"
 #include"vehicle.h"
-#include"floyd.h"
-
-extern GtkBuilder *builder;
+#include "globals.h"
 
 static node_t *node = NULL;
 static int contador = 0;
@@ -25,16 +23,12 @@ void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
-    if (contador>66){
-        return;
-    }
-    detele_object(contador-1);
-    printf("%s\n", "Carro aleatorio creado");
-    create_object(contador, cartype, 0.0,0.0,"B1");
-    printf("%d\n", cartype);
-    cartype++;
-    contador++;
+    Vehicle* v = create_vehicle(BLUE_CAR, NORTH);
+    VehicleThreadInfo* vi = create_vehicle_thread_info(v, map);
 
+    pthread_t maintenance_thread;
+    pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
+    pthread_detach(maintenance_thread);
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {

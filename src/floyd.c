@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<graph.h>
+#include"graph.h"
 #include<stdbool.h>
-#include"floyd.h"
+#include "floyd.h"
+
 #define NODES_COUNT 955
 
 int threadville_floyd_matrix[NODES_COUNT][NODES_COUNT];
@@ -19,8 +20,8 @@ void print_matrix(int matrix[NODES_COUNT][NODES_COUNT]) {
 
 void initialize_reconstruction_matrix() {
     int i, j;
-    for (i = 0; i < NODES_COUNT; i ++) {
-        for (j = 0; j < NODES_COUNT; j ++) {
+    for (i = 0; i < NODES_COUNT; i++) {
+        for (j = 0; j < NODES_COUNT; j++) {
             threadville_floyd_matrix[i][j] = i;
         }
     }
@@ -50,7 +51,7 @@ void floyd() {
     }
 }
 
-int* floyd_path_aux(int i, int j, int* floyd_path) {
+int *floyd_path_aux(int i, int j, int *floyd_path) {
     floyd_path[0]++;
     floyd_path[floyd_path[0]] = j;
     if (i != j) {
@@ -59,8 +60,8 @@ int* floyd_path_aux(int i, int j, int* floyd_path) {
     return floyd_path;
 }
 
-int* floyd_path(int i, int j) {
-    int path_buffer[31];
+int *floyd_path(int i, int j) {
+    int path_buffer[NODES_COUNT + 3];
     path_buffer[0] = 0;
     floyd_path_aux(i, j, path_buffer);
     int path_length = path_buffer[0];

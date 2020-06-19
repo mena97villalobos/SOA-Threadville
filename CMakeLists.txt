@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(proyecto3 C)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_EXE_LINKER_FLAGS "-rdynamic")
 
 include_directories(src headers)
@@ -9,28 +9,32 @@ include_directories(src headers)
 add_executable(proyecto3
         headers/controller.h
         headers/dict.h
-        headers/interface.h
-        headers/linked_list_cars.h
-        headers/linked_list.h
+        headers/floyd.h
+        headers/globals.h
+        headers/graph.h
         headers/hash_table.h
+        headers/hash_table_street_info.h
+        headers/interface.h
+        headers/linked_list.h
+        headers/linked_list_cars.h
+        headers/threadville_maintenance.h
         headers/threadville_map.h
         headers/utils.h
         headers/vehicle.h
-        headers/threadville_maintenance.h
-        headers/hash_table_street_info.h
-        src/main.c
-        src/hash_table.c
-        src/threadville_map.c
-        src/utils.c
-        src/linked_list.c
-        src/vehicle.c
-        src/threadville_maintenance.c
         src/controller.c
         src/dict.c
-        src/interface.c
-        src/linked_lists_cars.c
+        src/floyd.c
+        src/hash_table.c
         src/hash_table_street_info.c
-    )
+        src/interface.c
+        src/linked_list.c
+        src/linked_lists_cars.c
+        src/main.c
+        src/threadville_maintenance.c
+        src/threadville_map.c
+        src/utils.c
+        src/vehicle.c
+        headers/globals.h)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0)

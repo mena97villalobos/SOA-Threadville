@@ -326,7 +326,7 @@ gboolean on_window_draw (GtkWidget *widget, cairo_t *cr, gpointer user_data){
     return TRUE;
 }
 
-node_t * create_object(int num, images_enum type_image_p, float x, float y, char * next_stop_p){
+node_t * create_object(int num, images_enum type_image_p, double x, double y, char * next_stop_p){
 	struct data_node *data_add = (struct data_node*) malloc(sizeof(struct data_node));
 	
 	//Data to draw images

@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include "threadville_maintenance.h"
 #include "threadville_map.h"
 #include "interface.h"
+#include "floyd.h"
 
 //Interface variables
 GtkWidget *window;
 GtkWidget *drA_maps_images;
 
-//Interface builder
-GtkBuilder *builder;
+extern ThreadvilleMap *map;
+extern GtkBuilder *builder;
 
 int main(int argc, char *argv[]) {
-    ThreadvilleMap *map = create_threadville_map();
-    MaintenanceInfo *maintenanceInfo = create_maintenance_info(map);
+    floyd();
+    map = create_threadville_map();
+//    MaintenanceInfo *maintenanceInfo = create_maintenance_info(map);
 
 //    pthread_t maintenance_thread;
 //    pthread_create(&maintenance_thread, NULL, &run_maintenance, maintenanceInfo);

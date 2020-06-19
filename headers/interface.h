@@ -88,7 +88,7 @@ gboolean on_window_draw(GtkWidget *widget, cairo_t *cr, gpointer user_data);
 
 gboolean on_tick(gpointer *parameters);
 
-node_t *create_object(int num, images_enum type_image_p, float x, float y, char *next_stop_p);
+node_t *create_object(int num, images_enum type_image_p, double x, double y, char *next_stop_p);
 
 void detele_object(int num);
 
