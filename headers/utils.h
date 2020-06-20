@@ -5,7 +5,7 @@
 #include "linked_list.h"
 #include "linked_list_cars.h"
 
-#define MAX_ID_NUMBER 858
+#define MAX_ID_NUMBER 984
 
 void *create_shared_memory(size_t);
 

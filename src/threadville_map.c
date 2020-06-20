@@ -3,7 +3,7 @@
 
 ThreadvilleMap *create_threadville_map() {
     ThreadvilleMap *threadvilleMap = create_shared_memory(sizeof(ThreadvilleMap));
-    threadvilleMap->map = create_table(954);
+    threadvilleMap->map = create_table(984);
     threadvilleMap->streetInfoTable = create_table_street_info(954);
 
     pthread_mutexattr_t mattr = get_mutex_attributes();

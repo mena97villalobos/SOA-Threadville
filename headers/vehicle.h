@@ -39,7 +39,7 @@ typedef struct Vehicle {
     double speed;
     // Route to get current destination
     LinkedList *current_route;
-    // Vehicle must have 2 destinations
+    // Vehicle must have 2 destinations and thrid one for the exit point
     int* destinations;
     node_t* ui_info;
 } Vehicle;
@@ -49,10 +49,22 @@ typedef struct VehicleThreadInfo {
     ThreadvilleMap *map;
 } VehicleThreadInfo;
 
+int random_stop_id();
+
+char *get_stop_id(int, int);
+
+LinkedList *createRoute(int start_point, int end_point);
+
+float getVehicleSpeed(VehicleType);
+
 Vehicle *create_vehicle(VehicleType, VehicleDir);
 
 VehicleThreadInfo *create_vehicle_thread_info(Vehicle *, ThreadvilleMap *);
 
 void *handle_vehicle(void *arg);
+
+int highway_multiplier(int);
+
+int is_bus(VehicleType)
 
 #endif //PROYECTO3_VEHICLE_H
