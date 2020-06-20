@@ -12,13 +12,13 @@
 
 LinkedList *createRoute() {
     LinkedList *l = create_linked_list();
-//    int *path = floyd_path(S001C, X002C);
-//    for (int i = path[0]; i >= 1; --i) {
-//        push(l, create_node(path[i]));
-//        printf("%d ", path[i]);
-//        fflush(stdout);
-//    }
-//    free(path);
+    int *path = floyd_path(S001C, X002C);
+    for (int i = path[0]; i >= 1; --i) {
+        push(l, create_node(path[i]));
+        printf("%d ", path[i]);
+        fflush(stdout);
+    }
+    free(path);
 //    append(l, create_node(M002C));
 //    append(l, create_node(M012P));
 //    append(l, create_node(M011P));
@@ -72,59 +72,59 @@ LinkedList *createRoute() {
 //    append(l, create_node(R008P));
 //    append(l, create_node(R007P));
 //    append(l, create_node(R001C));
-    append(l, create_node(S002C));
-    append(l, create_node(S001P));
-    append(l, create_node(S002P));
-    append(l, create_node(S003P));
-    append(l, create_node(S004P));
-    append(l, create_node(S005P));
-    append(l, create_node(S006P));
-    append(l, create_node(S001C));
-
-    append(l, create_node(T002C));
-    append(l, create_node(T001P));
-    append(l, create_node(T002P));
-    append(l, create_node(T003P));
-    append(l, create_node(T004P));
-    append(l, create_node(T005P));
-    append(l, create_node(T006P));
-    append(l, create_node(T001C));
-
-    append(l, create_node(U002C));
-    append(l, create_node(U001P));
-    append(l, create_node(U002P));
-    append(l, create_node(U003P));
-    append(l, create_node(U004P));
-    append(l, create_node(U005P));
-    append(l, create_node(U006P));
-    append(l, create_node(U001C));
-
-    append(l, create_node(V002C));
-    append(l, create_node(V001P));
-    append(l, create_node(V002P));
-    append(l, create_node(V003P));
-    append(l, create_node(V004P));
-    append(l, create_node(V005P));
-    append(l, create_node(V006P));
-    append(l, create_node(V001C));
-
-    append(l, create_node(W002C));
-    append(l, create_node(W001P));
-    append(l, create_node(W002P));
-    append(l, create_node(W003P));
-    append(l, create_node(W004P));
-    append(l, create_node(W005P));
-    append(l, create_node(W006P));
-    append(l, create_node(W001C));
-
-    append(l, create_node(X002C));
-    append(l, create_node(X001P));
-    append(l, create_node(X002P));
-    append(l, create_node(X003P));
-    append(l, create_node(X004P));
-    append(l, create_node(X005P));
-    append(l, create_node(X006P));
-    append(l, create_node(X001C));
+//    append(l, create_node(S001C));
+//    append(l, create_node(S001P));
+//    append(l, create_node(S002P));
+//    append(l, create_node(S003P));
+//    append(l, create_node(S004P));
+//    append(l, create_node(S005P));
+//    append(l, create_node(S006P));
+//    append(l, create_node(S002C));
+//
+//    append(l, create_node(T001C));
+//    append(l, create_node(T001P));
+//    append(l, create_node(T002P));
+//    append(l, create_node(T003P));
+//    append(l, create_node(T004P));
+//    append(l, create_node(T005P));
+//    append(l, create_node(T006P));
+//    append(l, create_node(T002C));
+//
+//    append(l, create_node(U001C));
+//    append(l, create_node(U001P));
+//    append(l, create_node(U002P));
+//    append(l, create_node(U003P));
+//    append(l, create_node(U004P));
+//    append(l, create_node(U005P));
+//    append(l, create_node(U006P));
+//    append(l, create_node(U002C));
+//
+//    append(l, create_node(V001C));
+//    append(l, create_node(V001P));
+//    append(l, create_node(V002P));
+//    append(l, create_node(V003P));
+//    append(l, create_node(V004P));
+//    append(l, create_node(V005P));
+//    append(l, create_node(V006P));
+//    append(l, create_node(V002C));
+//
+//    append(l, create_node(W001C));
+//    append(l, create_node(W001P));
+//    append(l, create_node(W002P));
+//    append(l, create_node(W003P));
+//    append(l, create_node(W004P));
+//    append(l, create_node(W005P));
+//    append(l, create_node(W006P));
+//    append(l, create_node(W002C));
+//
+//    append(l, create_node(X001C));
+//    append(l, create_node(X001P));
+//    append(l, create_node(X002P));
+//    append(l, create_node(X003P));
+//    append(l, create_node(X004P));
+//    append(l, create_node(X005P));
+//    append(l, create_node(X006P));
+//    append(l, create_node(X002C));
     return l;
 }
 

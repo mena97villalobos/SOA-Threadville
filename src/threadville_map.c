@@ -2569,13 +2569,13 @@ void insert_street_info_corners(TableStreetInfo *t, CornersIds id) {
         case W003C:
             insert_street_info(t, id, create_street_info(0.762, 0.965, SOUTH_DIR));
             break;
-        case S001C: // &&  M002C
+        case S002C: // &&  M001C
             insert_street_info(t, id, create_street_info(0.085, 0.778, NORTH_DIR));
             break;
         case S004C:
             insert_street_info(t, id, create_street_info(0.085, 0.965, NORTH_DIR));
             break;
-        case M001C: // && S002C
+        case S001C: // && M002C
             insert_street_info(t, id, create_street_info(0.200, 0.778, SOUTH_DIR));
             break;
         case S003C:
