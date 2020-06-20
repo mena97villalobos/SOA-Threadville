@@ -12,7 +12,8 @@
 
 LinkedList *createRoute() {
     LinkedList *l = create_linked_list();
-    int *path = floyd_path(S001C, X002C);
+    //int *path = floyd_path(K007P, Q002C);
+    int *path = floyd_path(R013P,L014P); 
     for (int i = path[0]; i >= 1; --i) {
         push(l, create_node(path[i]));
         printf("%d ", path[i]);

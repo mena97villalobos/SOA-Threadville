@@ -28,6 +28,8 @@ void insert_street_info_highways(TableStreetInfo *, HighwaysIds);
 
 void insert_street_info_bridge(TableStreetInfo *, BridgeIds);
 
+void insert_street_info_bridge_up(TableStreetInfo *t, BridgeIds id);
+
 void insert_street_info_roundabouts(TableStreetInfo *, RoundaboutIds);
 
 void insert_street_info_stops(TableStreetInfo *, StopIds);

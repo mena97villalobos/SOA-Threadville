@@ -4,7 +4,7 @@
 #include<stdbool.h>
 #include "floyd.h"
 
-#define NODES_COUNT 955
+#define NODES_COUNT 985
 
 int threadville_floyd_matrix[NODES_COUNT][NODES_COUNT];
 
