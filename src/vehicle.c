@@ -13,13 +13,14 @@
 LinkedList *createRoute() {
     LinkedList *l = create_linked_list();
     //int *path = floyd_path(K007P, Q002C);
-    int *path = floyd_path(R013P,L014P); 
+    int *path = floyd_path(X004C,X008S); 
     for (int i = path[0]; i >= 1; --i) {
         push(l, create_node(path[i]));
         printf("%d ", path[i]);
         fflush(stdout);
     }
     free(path);
+
 //    append(l, create_node(M002C));
 //    append(l, create_node(M012P));
 //    append(l, create_node(M011P));
