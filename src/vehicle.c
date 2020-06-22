@@ -6,6 +6,7 @@
 #include "interface.h"
 #include "floyd.h"
 #include "globals.h"
+#include "bus.h"
 
 #define AF_DISTANCE 48.0 // distance from A1 to F2
 
@@ -698,15 +699,48 @@ char* get_stop_id(int stop, int destinations_left) {
     }
 }
 
-LinkedList *createRoute(int start_point, int end_point) {
+LinkedList *create_route(int start_point, int end_point) {
     LinkedList *l = create_linked_list();
-//    int *path = floyd_path(start_point,end_point);
-    int *path = floyd_path(H001H,H030H);
+    int *path = floyd_path(start_point,end_point);
     for (int i = path[0]; i >= 1; --i) {
         push(l, create_node(path[i]));
     }
     free(path);
     return l;
+}
+
+void create_bus_route(Vehicle *vehicle) {
+    switch (vehicle->vehicleType) {
+        case RED_BUS:
+            create_route_red(vehicle);
+            break;
+        case GREEN_BUS:
+            create_route_green(vehicle);
+            break;
+        case BLUE_BUS:
+            create_route_blue(vehicle);
+            break;
+        case WHITE_BUS:
+            create_route_white(vehicle);
+            break;
+        case GRAY_BUS:
+            create_route_gray(vehicle);
+            break;
+        case BLACK_BUS:
+            create_route_black(vehicle);
+            break;
+        case PINK_BUS:
+            create_route_pink(vehicle);
+            break;
+        case LIGHT_BLUE_BUS:
+            create_route_light_blue(vehicle);
+            break;
+        case ORANGE_BUS:
+            create_route_orange(vehicle);
+            break;
+        default:
+            break;
+    }
 }
 
 float getVehicleSpeed(VehicleType type) {
@@ -758,37 +792,43 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
     if (speed < 0) {
         return NULL;
     }
+    v->speed = speed;
+    v->vehicleType = type;
+    v->vehicleDir = dir;
 
-    int *destinations = calloc(3, sizeof(int));
-    destinations[0] = random_stop_id();
-    destinations[1] = random_stop_id();
-    destinations[2] = Z006R;
+    if (is_bus(type)) {
+        create_bus_route(v);
+    } else {
+        int *destinations = calloc(4, sizeof(int));
+        destinations[0] = random_stop_id();
+        destinations[1] = random_stop_id();
+        destinations[2] = Z006R;
+        destinations[3] = -1;
+        v->destinations = destinations;
+        v->current_route = create_route(Y006R, destinations[0]);
+    }
+
     // Starting point is always Y006R
-    StreetInfo *info = lookup_street_info(map->streetInfoTable, Y006R);
-    printf("Carro Creado: %d, %d\n", destinations[0], destinations[1]);
-    fflush(stdout);
-
+    StreetInfo *info = lookup_street_info(
+            map->streetInfoTable,
+            v->current_route->first_node->destination_id
+    );
     node_t *ui_info = create_object(
             v,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
-            get_stop_id(destinations[0], 3)
+            get_stop_id(
+                    v->current_route->first_node->destination_id,
+                    get_destinations_size(v->destinations)
+            )
     );
-
     v->ui_info = ui_info;
-    v->vehicleType = type;
-    v->vehicleDir = dir;
-    v->speed = speed;
-    v->current_route = createRoute(Y006R, destinations[0]);
-
-    v->destinations = destinations;
     return v;
 }
 
-VehicleThreadInfo *create_vehicle_thread_info(Vehicle *vehicle, ThreadvilleMap *threadvilleMap) {
+VehicleThreadInfo *create_vehicle_thread_info(Vehicle *vehicle) {
     VehicleThreadInfo *info = malloc(sizeof(VehicleThreadInfo));
     info->vehicle = vehicle;
-    info->map = threadvilleMap;
     return info;
 }
 
@@ -813,32 +853,36 @@ int is_bus(VehicleType type) {
     }
 }
 
-void *handle_vehicle(void *arg) {
-    VehicleThreadInfo *info = (VehicleThreadInfo *) arg;
-    Vehicle *vehicle = info->vehicle;
-    ThreadvilleMap *threadvilleMap = info->map;
+int *copy_destinations(int* d) {
+    int* destinations = calloc(get_destinations_size(d), sizeof(destinations));
+    int index = 0;
+    while (d[index] != -1) {
+        destinations[index] = d[index];
+        index++;
+    }
+    return destinations;
+}
+
+int get_destinations_size(const int* destinations) {
+    int index = 0;
+    while (destinations[index] != -1) index++;
+    return index + 1;
+}
+
+void handle_normal_vehicle(Vehicle *vehicle) {
     // Start vehicle at the roundabout
     int startDestination;
     int nextDestination = 0;
     // Know if vehicle is a bus
     int isBus = is_bus(vehicle->vehicleType);
     pthread_mutex_t* currentStreet = NULL;
-    pthread_mutex_t* previousStreet;
-    pthread_mutex_t* previousStreetTmp;
     while (nextDestination != 3) {
         while (vehicle->current_route->first_node != NULL) {
-
             NodeL *currentNode = vehicle->current_route->first_node;
-            previousStreetTmp = previousStreet;
-            previousStreet = currentStreet;
-            currentStreet = lookup(threadvilleMap->map, currentNode->destination_id);
-            // TODO Arreglar buses
+            currentStreet = lookup(map->map, currentNode->destination_id);
             pthread_mutex_lock(currentStreet);
-            if (isBus && previousStreet != NULL)
-                pthread_mutex_unlock(previousStreet);
-                pthread_mutex_lock(previousStreet);
             usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
-            StreetInfo *streetInfo = lookup_street_info(threadvilleMap->streetInfoTable, currentNode->destination_id);
+            StreetInfo *streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
             edit_object_with_node(
                     vehicle->ui_info,
                     from_vehicle_type(vehicle->vehicleType, streetInfo->dir),
@@ -850,18 +894,99 @@ void *handle_vehicle(void *arg) {
             }
             pop(vehicle->current_route);
             pthread_mutex_unlock(currentStreet);
-            if (isBus)
-                pthread_mutex_unlock(previousStreet);
         }
-        pthread_mutex_t *currentStop = lookup(threadvilleMap->map, vehicle->destinations[nextDestination]);
+        pthread_mutex_t *currentStop = lookup(map->map, vehicle->destinations[nextDestination]);
         pthread_mutex_lock(currentStop);
         sleep(3);
         pthread_mutex_unlock(currentStop);
         nextDestination++;
-        vehicle->current_route = createRoute(startDestination, vehicle->destinations[nextDestination]);
+        vehicle->current_route = create_route(startDestination, vehicle->destinations[nextDestination]);
     }
     delete_object(vehicle->ui_info);
     free(vehicle);
+}
+
+void handle_bus(Vehicle *vehicle) {
+    pthread_mutex_t* currentStreet = NULL;
+    pthread_mutex_t* previousStreet = NULL;
+    pthread_mutex_t* previousStreetTmp = NULL;
+    NodeL *currentNode;
+    int currentDestination = 0;
+    StreetInfo *streetInfo;
+    LinkedList *busRouteCopy = copy_list(vehicle->current_route);
+    // TODO MECANISMO PARA DETENER EL BUS
+    while (1) {
+        while (vehicle->destinations[currentDestination] != -1 && vehicle->current_route->first_node != NULL) {
+            currentNode = vehicle->current_route->first_node;
+            currentStreet = lookup(map->map, currentNode->destination_id);
+
+            pthread_mutex_lock(currentStreet);
+            if (previousStreet != NULL) {
+                pthread_mutex_lock(previousStreet);
+            }
+            if (previousStreetTmp != NULL) {
+                pthread_mutex_unlock(previousStreetTmp);
+            }
+
+            streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
+            if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
+                sleep(5);
+                currentDestination++;
+            } else {
+                usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
+                sleep(1);
+            }
+            edit_object_with_node(
+                    vehicle->ui_info,
+                    from_vehicle_type(vehicle->vehicleType, streetInfo->dir),
+                    streetInfo->x, streetInfo->y,
+                    get_stop_id(
+                            vehicle->destinations[currentDestination],
+                            get_destinations_size(vehicle->destinations) - currentDestination
+                    )
+            );
+            pop(vehicle->current_route);
+
+            previousStreetTmp = previousStreet;
+            previousStreet = currentStreet;
+            pthread_mutex_unlock(currentStreet);
+        }
+        fflush(stdout);
+        currentDestination = 0;
+        vehicle->current_route = copy_list(busRouteCopy);
+    }
+    delete_object(vehicle->ui_info);
+    free(vehicle);
+}
+
+void *handle_vehicle(void *arg) {
+    VehicleThreadInfo *info = (VehicleThreadInfo *) arg;
+    Vehicle *vehicle = info->vehicle;
+    switch (vehicle->vehicleType) {
+        case RED_BUS:
+        case GREEN_BUS:
+        case BLUE_BUS:
+        case WHITE_BUS:
+        case GRAY_BUS:
+        case BLACK_BUS:
+        case PINK_BUS:
+        case LIGHT_BLUE_BUS:
+        case ORANGE_BUS:
+            handle_bus(vehicle);
+            break;
+        case AMBULANCE:
+            break;
+        case RED_CAR:
+        case BLUE_CAR:
+        case GREEN_CAR:
+        case BLACK_CAR:
+        case WHITE_CAR:
+        case YELLOW_CAR:
+            handle_normal_vehicle(vehicle);
+            break;
+        default:
+            break;
+    }
     return NULL;
 }
 

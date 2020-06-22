@@ -36,3 +36,13 @@ void pop(LinkedList *list) {
     list->first_node = deleted->next_node;
     free(deleted);
 }
+
+LinkedList *copy_list(LinkedList *l) {
+    LinkedList *list = create_linked_list();
+    NodeL *nextNode = l->first_node;
+    while (nextNode->next_node != NULL) {
+        append(list, create_node(nextNode->destination_id));
+        nextNode = nextNode->next_node;
+    }
+    return list;
+}

@@ -24,7 +24,7 @@ void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     Vehicle* v = create_vehicle(BLUE_BUS, NORTH);
-    VehicleThreadInfo* vi = create_vehicle_thread_info(v, map);
+    VehicleThreadInfo* vi = create_vehicle_thread_info(v);
 
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);

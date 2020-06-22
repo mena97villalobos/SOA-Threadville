@@ -20,4 +20,6 @@ void push(LinkedList *, NodeL *);
 
 void pop(LinkedList *);
 
+LinkedList *copy_list(LinkedList *);
+
 #endif //PROYECTO3_LINKED_LIST_H

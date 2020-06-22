@@ -34,37 +34,47 @@ typedef enum VehicleDir {
 
 typedef struct Vehicle {
     VehicleType vehicleType;
-    VehicleDir  vehicleDir;
+    VehicleDir vehicleDir;
     // Vehicle speed
     double speed;
     // Route to get current destination
     LinkedList *current_route;
     // Vehicle must have 2 destinations and thrid one for the exit point
-    int* destinations;
-    node_t* ui_info;
+    // Buses have n dedstinations, final element of array should be -1
+    int *destinations;
+    node_t *ui_info;
 } Vehicle;
 
 typedef struct VehicleThreadInfo {
     Vehicle *vehicle;
-    ThreadvilleMap *map;
 } VehicleThreadInfo;
 
 int random_stop_id();
 
 char *get_stop_id(int, int);
 
-LinkedList *createRoute(int start_point, int end_point);
+LinkedList *create_route(int start_point, int end_point);
+
+void create_bus_route(Vehicle *v);
 
 float getVehicleSpeed(VehicleType);
 
 Vehicle *create_vehicle(VehicleType, VehicleDir);
 
-VehicleThreadInfo *create_vehicle_thread_info(Vehicle *, ThreadvilleMap *);
+VehicleThreadInfo *create_vehicle_thread_info(Vehicle *);
 
 void *handle_vehicle(void *arg);
 
+void handle_normal_vehicle(Vehicle *vehicle);
+
+void handle_bus(Vehicle *vehicle);
+
 int highway_multiplier(int);
 
-int is_bus(VehicleType)
+int is_bus(VehicleType);
+
+int get_destinations_size(const int *destinations);
+
+int *copy_destinations(int *);
 
 #endif //PROYECTO3_VEHICLE_H

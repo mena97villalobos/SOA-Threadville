@@ -7,6 +7,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-rdynamic")
 include_directories(src headers)
 
 add_executable(proyecto3
+        headers/bus.h
         headers/controller.h
         headers/dict.h
         headers/floyd.h
@@ -34,7 +35,7 @@ add_executable(proyecto3
         src/threadville_map.c
         src/utils.c
         src/vehicle.c
-        headers/globals.h)
+        src/bus.c)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
