@@ -805,7 +805,8 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
         destinations[2] = Z006R;
         destinations[3] = -1;
         v->destinations = destinations;
-        v->current_route = create_route(Y006R, destinations[0]);
+//        v->current_route = create_route(Y006R, destinations[0]);
+        v->current_route = create_route(M006S, Y006R);
     }
 
     // Starting point is always Y006R
@@ -921,21 +922,17 @@ void handle_bus(Vehicle *vehicle) {
             currentStreet = lookup(map->map, currentNode->destination_id);
 
             pthread_mutex_lock(currentStreet);
-            if (previousStreet != NULL) {
-                pthread_mutex_lock(previousStreet);
-            }
-            if (previousStreetTmp != NULL) {
-                pthread_mutex_unlock(previousStreetTmp);
-            }
+            printf("Lock current\n");
+//            if (previousStreet != NULL) {
+//                pthread_mutex_lock(previousStreet);
+//                printf("Lock previous\n");
+//            }
+//            if (previousStreetTmp != NULL) {
+//                pthread_mutex_unlock(previousStreetTmp);
+//                printf("Unlock previous street tmp\n\n");
+//            }
 
             streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
-            if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
-                sleep(5);
-                currentDestination++;
-            } else {
-                usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
-                sleep(1);
-            }
             edit_object_with_node(
                     vehicle->ui_info,
                     from_vehicle_type(vehicle->vehicleType, streetInfo->dir),
@@ -945,10 +942,17 @@ void handle_bus(Vehicle *vehicle) {
                             get_destinations_size(vehicle->destinations) - currentDestination
                     )
             );
+            if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
+                sleep(5);
+                currentDestination++;
+            } else {
+                usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
+                usleep(0.5 * 1000000);
+            }
             pop(vehicle->current_route);
 
-            previousStreetTmp = previousStreet;
-            previousStreet = currentStreet;
+//            previousStreetTmp = previousStreet;
+//            previousStreet = currentStreet;
             pthread_mutex_unlock(currentStreet);
         }
         fflush(stdout);

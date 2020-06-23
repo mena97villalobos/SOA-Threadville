@@ -765,117 +765,117 @@ void insert_street_info_stops(TableStreetInfo *t, StopIds id) {
             insert_street_info(t, id, create_street_info(0.806, 0.253, NORTH_DIR));
             break;
 
-        case M001S:
+        case M002S:
             insert_street_info(t, id, create_street_info(0.181, 0.655, NORTH_DIR));
             break;
-        case M002S:
+        case M003S:
             insert_street_info(t, id, create_street_info(0.181, 0.723, NORTH_DIR));
             break;
-        case M003S:
+        case M004S:
             insert_street_info(t, id, create_street_info(0.165, 0.75, NORTH_DIR));
             break;
-        case M004S:
+        case M005S:
             insert_street_info(t, id, create_street_info(0.117, 0.75, NORTH_DIR));
             break;
-        case M005S:
+        case M006S:
             insert_street_info(t, id, create_street_info(0.104, 0.723, NORTH_DIR));
             break;
-        case M006S:
+        case M001S:
             insert_street_info(t, id, create_street_info(0.104, 0.655, NORTH_DIR));
             break;
 
-        case N001S:
+        case N002S:
             insert_street_info(t, id, create_street_info(0.3215, 0.655, NORTH_DIR));
             break;
-        case N002S:
+        case N003S:
             insert_street_info(t, id, create_street_info(0.3215, 0.723, NORTH_DIR));
             break;
-        case N003S:
+        case N004S:
             insert_street_info(t, id, create_street_info(0.3065, 0.75, NORTH_DIR));
             break;
-        case N004S:
+        case N005S:
             insert_street_info(t, id, create_street_info(0.2585, 0.75, NORTH_DIR));
             break;
-        case N005S:
+        case N006S:
             insert_street_info(t, id, create_street_info(0.2455, 0.723, NORTH_DIR));
             break;
-        case N006S:
+        case N001S:
             insert_street_info(t, id, create_street_info(0.2455, 0.655, NORTH_DIR));
             break;
 
-        case O001S:
+        case O002S:
             insert_street_info(t, id, create_street_info(0.462, 0.655, NORTH_DIR));
             break;
-        case O002S:
+        case O003S:
             insert_street_info(t, id, create_street_info(0.462, 0.723, NORTH_DIR));
             break;
-        case O003S:
+        case O004S:
             insert_street_info(t, id, create_street_info(0.448, 0.75, NORTH_DIR));
             break;
-        case O004S:
+        case O005S:
             insert_street_info(t, id, create_street_info(0.400, 0.75, NORTH_DIR));
             break;
-        case O005S:
+        case O006S:
             insert_street_info(t, id, create_street_info(0.386, 0.723, NORTH_DIR));
             break;
-        case O006S:
+        case O001S:
             insert_street_info(t, id, create_street_info(0.386, 0.655, NORTH_DIR));
             break;
 
-        case P001S:
+        case P002S:
             insert_street_info(t, id, create_street_info(0.6025, 0.654, NORTH_DIR));
             break;
-        case P002S:
+        case P003S:
             insert_street_info(t, id, create_street_info(0.6025, 0.722, NORTH_DIR));
             break;
-        case P003S:
+        case P004S:
             insert_street_info(t, id, create_street_info(0.5865, 0.75, NORTH_DIR));
             break;
-        case P004S:
+        case P005S:
             insert_street_info(t, id, create_street_info(0.5385, 0.75, NORTH_DIR));
             break;
-        case P005S:
+        case P006S:
             insert_street_info(t, id, create_street_info(0.5255, 0.723, NORTH_DIR));
             break;
-        case P006S:
+        case P001S:
             insert_street_info(t, id, create_street_info(0.5255, 0.655, NORTH_DIR));
             break;
 
-        case Q001S:
+        case Q002S:
             insert_street_info(t, id, create_street_info(0.743, 0.655, NORTH_DIR));
             break;
-        case Q002S:
+        case Q003S:
             insert_street_info(t, id, create_street_info(0.743, 0.723, NORTH_DIR));
             break;
-        case Q003S:
+        case Q004S:
             insert_street_info(t, id, create_street_info(0.727, 0.75, NORTH_DIR));
             break;
-        case Q004S:
+        case Q005S:
             insert_street_info(t, id, create_street_info(0.679, 0.75, NORTH_DIR));
             break;
-        case Q005S:
+        case Q006S:
             insert_street_info(t, id, create_street_info(0.666, 0.723, NORTH_DIR));
             break;
-        case Q006S:
+        case Q001S:
             insert_street_info(t, id, create_street_info(0.666, 0.655, NORTH_DIR));
             break;
 
-        case R001S:
+        case R002S:
             insert_street_info(t, id, create_street_info(0.883, 0.655, NORTH_DIR));
             break;
-        case R002S:
+        case R003S:
             insert_street_info(t, id, create_street_info(0.883, 0.723, NORTH_DIR));
             break;
-        case R003S:
+        case R004S:
             insert_street_info(t, id, create_street_info(0.867, 0.75, NORTH_DIR));
             break;
-        case R004S:
+        case R005S:
             insert_street_info(t, id, create_street_info(0.819, 0.75, NORTH_DIR));
             break;
-        case R005S:
+        case R006S:
             insert_street_info(t, id, create_street_info(0.806, 0.723, NORTH_DIR));
             break;
-        case R006S:
+        case R001S:
             insert_street_info(t, id, create_street_info(0.806, 0.655, NORTH_DIR));
             break;
 

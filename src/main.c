@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
+#include <threadville_maintenance.h>
 #include "threadville_map.h"
 #include "interface.h"
 #include "floyd.h"
@@ -15,11 +16,10 @@ extern GtkBuilder *builder;
 int main(int argc, char *argv[]) {
     floyd();
     map = create_threadville_map();
-//    MaintenanceInfo *maintenanceInfo = create_maintenance_info(map);
 
 //    pthread_t maintenance_thread;
-//    pthread_create(&maintenance_thread, NULL, &run_maintenance, maintenanceInfo);
-//    pthread_join(maintenance_thread, NULL);
+//    pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
+//    pthread_detach(maintenance_thread);
 
     //Init
     gtk_init(&argc, &argv);
