@@ -14,6 +14,10 @@ int random_stop_id() {
    return (rand() % (R006S - A001S + 1)) + A001S;
 }
 
+int random_car_id() {
+   return (rand() % (YELLOW_CAR - RED_CAR + 1)) + RED_CAR;
+}
+
 char* get_stop_id(int stop, int destinations_left) {
     char* res = calloc(6, sizeof(char));
     switch (stop) {
@@ -786,7 +790,7 @@ float getVehicleSpeed(VehicleType type) {
     return speed;
 }
 
-Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
+Vehicle *create_bus(VehicleType type, VehicleDir dir) {
     Vehicle *v = malloc(sizeof(Vehicle));
     float speed = getVehicleSpeed(type);
     if (speed < 0) {
@@ -798,15 +802,38 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
 
     if (is_bus(type)) {
         create_bus_route(v);
-    } else {
-        int *destinations = calloc(4, sizeof(int));
-        destinations[0] = random_stop_id();
-        destinations[1] = random_stop_id();
-        destinations[2] = Z006R;
-        destinations[3] = -1;
-        v->destinations = destinations;
-        v->current_route = create_route(Y006R, destinations[0]);
     }
+
+    // Starting point is always Y006R
+    StreetInfo *info = lookup_street_info(
+            map->streetInfoTable,
+            v->current_route->first_node->destination_id
+    );
+    node_t *ui_info = create_object(
+            v,
+            from_vehicle_type(type, info->dir),
+            info->x, info->y,
+            get_stop_id(
+                    v->current_route->first_node->destination_id,
+                    get_destinations_size(v->destinations)
+            )
+    );
+    v->ui_info = ui_info;
+    return v;
+}
+
+
+Vehicle *create_vehicle(VehicleType type, VehicleDir dir, int *destinations) {
+    Vehicle *v = malloc(sizeof(Vehicle));
+    float speed = getVehicleSpeed(type);
+    if (speed < 0) {
+        return NULL;
+    }
+    v->speed = speed;
+    v->vehicleType = type;
+    v->vehicleDir = dir;
+    v->destinations = destinations;
+    v->current_route = create_route(Y006R, destinations[0]);
 
     // Starting point is always Y006R
     StreetInfo *info = lookup_street_info(

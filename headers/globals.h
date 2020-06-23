@@ -10,6 +10,7 @@
 #include "threadville_map.h"
 
 GtkBuilder *builder;
+GtkWidget *window;
 
 ThreadvilleMap *map;
 

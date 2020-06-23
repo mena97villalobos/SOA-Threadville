@@ -51,6 +51,8 @@ typedef struct VehicleThreadInfo {
 
 int random_stop_id();
 
+int random_car_id();
+
 char *get_stop_id(int, int);
 
 LinkedList *create_route(int start_point, int end_point);
@@ -59,7 +61,9 @@ void create_bus_route(Vehicle *v);
 
 float getVehicleSpeed(VehicleType);
 
-Vehicle *create_vehicle(VehicleType, VehicleDir);
+Vehicle *create_vehicle(VehicleType, VehicleDir, int *destinations);
+
+Vehicle *create_bus(VehicleType, VehicleDir);
 
 VehicleThreadInfo *create_vehicle_thread_info(Vehicle *);
 

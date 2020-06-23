@@ -7,7 +7,7 @@
 #include "floyd.h"
 
 //Interface variables
-GtkWidget *window;
+extern GtkWidget *window;
 GtkWidget *drA_maps_images;
 
 extern ThreadvilleMap *map;
