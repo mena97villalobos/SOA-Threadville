@@ -805,8 +805,7 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir) {
         destinations[2] = Z006R;
         destinations[3] = -1;
         v->destinations = destinations;
-//        v->current_route = create_route(Y006R, destinations[0]);
-        v->current_route = create_route(M006S, Y006R);
+        v->current_route = create_route(Y006R, destinations[0]);
     }
 
     // Starting point is always Y006R
