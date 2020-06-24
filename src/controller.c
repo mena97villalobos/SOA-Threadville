@@ -14,6 +14,10 @@
 extern GtkWidget *window;
 extern GtkBuilder *builder;
 
+extern int K;
+extern int M;
+extern int N;
+
 //Definition funtions
 void change_botons_sensitive(char* active, char* desactive);
 void remove_spaces(char* s);
@@ -293,6 +297,42 @@ void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
     printf("%s\n", "Valores actualizados");
+
+    GtkWidget *input_K= GTK_WIDGET(gtk_builder_get_object(builder, "input_K"));
+    GtkWidget *input_M= GTK_WIDGET(gtk_builder_get_object(builder, "input_M"));
+    GtkWidget *input_N= GTK_WIDGET(gtk_builder_get_object(builder, "input_N"));
+
+    const gchar *char_K = gtk_entry_get_text(GTK_ENTRY(input_K));
+    const gchar *char_M = gtk_entry_get_text(GTK_ENTRY(input_M));
+    const gchar *char_N = gtk_entry_get_text(GTK_ENTRY(input_N));
+
+    int temp_k = atoi(char_K);
+    int temp_M = atoi(char_M);
+    int temp_N = atoi(char_N);
+
+    if(temp_k<=0 || temp_M<=0 || temp_N<=0 ){
+        GtkWidget *messageDialog = gtk_message_dialog_new(GTK_WINDOW(window), 
+            GTK_DIALOG_MODAL, 
+            GTK_MESSAGE_INFO, 
+            GTK_BUTTONS_CLOSE, 
+            "Input error K, M and N must be integers greater than 0.");
+        gtk_dialog_run (GTK_DIALOG (messageDialog));
+        gtk_widget_destroy (messageDialog);
+
+
+    }else{
+        K = temp_k;
+        M = temp_M;
+        N = temp_N;
+    }
+
+    char int_char[5];
+    sprintf(int_char, "%d", K);
+    gtk_entry_set_text(GTK_ENTRY(input_K), int_char);
+    sprintf(int_char, "%d", M);
+    gtk_entry_set_text(GTK_ENTRY(input_M), int_char);
+    sprintf(int_char, "%d", N);
+    gtk_entry_set_text(GTK_ENTRY(input_N), int_char);
 
 
 }
