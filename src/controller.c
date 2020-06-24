@@ -8,28 +8,11 @@
 #include "interface.h"
 #include "linked_list_cars.h"
 #include "vehicle.h"
-#include "globals.h"
 #include "utils.h"
 #include "priority_semaphore.h"
 
-priority_semaphore* semaphore_p;
-
-void *threadfunction(void *arg)
-{
-    int a = (int) arg;
-    int con = 0;
-
-    while(1 && con < 4){
-        lock_priority_semaphore(a, semaphore_p);
-        printf("Hello, World!  %d  %d\n", a, con); 
-        if(a==0){
-            con+=1;
-        }
-        sleep(1);
-        unlock_priority_semaphore(a, semaphore_p);
-    }
-}
-
+extern GtkWidget *window;
+extern GtkBuilder *builder;
 
 //Definition funtions
 void change_botons_sensitive(char* active, char* desactive);
@@ -45,7 +28,7 @@ void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
-/*	int *destinations = calloc(4, sizeof(int));
+	int *destinations = calloc(4, sizeof(int));
     destinations[0] = random_stop_id();
     destinations[1] = random_stop_id();
     destinations[2] = Z006R;
@@ -56,8 +39,8 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
 
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
-    pthread_detach(maintenance_thread);*/
-
+    pthread_detach(maintenance_thread);
+/*
     semaphore_p = get_priority_semaphore();
 
     pthread_t thread;
@@ -71,6 +54,7 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     pthread_t thread2;
     pthread_create(&thread2, NULL, threadfunction, (void *) 1);
     pthread_detach(thread2); 
+*/
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
@@ -307,6 +291,12 @@ void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
 
 }
 
+void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
+    printf("%s\n", "Valores actualizados");
+
+
+}
+
 
 //Funtions
 void change_botons_sensitive(char* active, char* desactive) {
@@ -335,7 +325,7 @@ void remove_spaces(char* s) {
         while (*d == ' ') {
             ++d;
         }
-    } while (*s++ = *d++);
+    } while ((*s++ = *d++));
 }
 
 int string_to_id(char* s) {
@@ -774,7 +764,7 @@ int string_to_id(char* s) {
     else if(compare_string("O1",s,2)){	
     	return O001S;
     }
-    else if(compare_string("02",s,2)){	
+    else if(compare_string("O2",s,2)){	
     	return O002S;
     }
     else if(compare_string("O3",s,2)){	

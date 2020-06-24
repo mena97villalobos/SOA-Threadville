@@ -1,14 +1,16 @@
 #include "vehicle.h"
+#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "utils.h"
 #include "hash_table.h"
 #include "interface.h"
 #include "floyd.h"
-#include "globals.h"
 #include "bus.h"
 
 #define AF_DISTANCE 48.0 // distance from A1 to F2
+
+extern ThreadvilleMap *map;
 
 int random_stop_id() {
    return (rand() % (R006S - A001S + 1)) + A001S;
@@ -810,7 +812,7 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
             v->current_route->first_node->destination_id
     );
     node_t *ui_info = create_object(
-            v,
+            (int)(uintptr_t)v,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
             get_stop_id(
@@ -841,7 +843,7 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir, int *destinations) {
             v->current_route->first_node->destination_id
     );
     node_t *ui_info = create_object(
-            v,
+            (int)(uintptr_t)v,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
             get_stop_id(
@@ -901,7 +903,8 @@ void handle_normal_vehicle(Vehicle *vehicle) {
     int startDestination;
     int nextDestination = 0;
     // Know if vehicle is a bus
-    int isBus = is_bus(vehicle->vehicleType);
+    //int isBus = is_bus(vehicle->vehicleType);
+    is_bus(vehicle->vehicleType);
     pthread_mutex_t* currentStreet = NULL;
     while (nextDestination != 3) {
         while (vehicle->current_route->first_node != NULL) {
@@ -929,14 +932,14 @@ void handle_normal_vehicle(Vehicle *vehicle) {
         nextDestination++;
         vehicle->current_route = create_route(startDestination, vehicle->destinations[nextDestination]);
     }
-    delete_object(vehicle->ui_info);
+    delete_object((int)(uintptr_t)vehicle->ui_info);
     free(vehicle);
 }
 
 void handle_bus(Vehicle *vehicle) {
     pthread_mutex_t* currentStreet = NULL;
-    pthread_mutex_t* previousStreet = NULL;
-    pthread_mutex_t* previousStreetTmp = NULL;
+    //pthread_mutex_t* previousStreet = NULL;
+    //pthread_mutex_t* previousStreetTmp = NULL;
     NodeL *currentNode;
     int currentDestination = 0;
     StreetInfo *streetInfo;
@@ -985,7 +988,7 @@ void handle_bus(Vehicle *vehicle) {
         currentDestination = 0;
         vehicle->current_route = copy_list(busRouteCopy);
     }
-    delete_object(vehicle->ui_info);
+    delete_object((int)(uintptr_t)vehicle->ui_info);
     free(vehicle);
 }
 

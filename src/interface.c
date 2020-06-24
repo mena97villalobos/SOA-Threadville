@@ -601,4 +601,6 @@ images_enum from_vehicle_type(VehicleType type, StreetDir dir) {
             }
             break;
     }
+
+    return 0;
 }

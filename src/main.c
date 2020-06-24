@@ -13,6 +13,10 @@ GtkWidget *drA_maps_images;
 extern ThreadvilleMap *map;
 extern GtkBuilder *builder;
 
+extern int K;
+extern int M;
+extern int N;
+
 int main(int argc, char *argv[]) {
     floyd();
     map = create_threadville_map();
@@ -38,6 +42,17 @@ int main(int argc, char *argv[]) {
 
     gtk_widget_show(window);
     g_timeout_add(1000 / 60 / 2, (GSourceFunc) on_tick, drA_maps_images);  //60 is the fps
+
+    GtkWidget *input= GTK_WIDGET(gtk_builder_get_object(builder, "input_K"));
+    char int_char[5];
+    sprintf(int_char, "%d", K);
+    gtk_entry_set_text(GTK_ENTRY(input), int_char);
+    input= GTK_WIDGET(gtk_builder_get_object(builder, "input_M"));
+    sprintf(int_char, "%d", M);
+    gtk_entry_set_text(GTK_ENTRY(input), int_char);
+    input= GTK_WIDGET(gtk_builder_get_object(builder, "input_N"));
+    sprintf(int_char, "%d", N);
+    gtk_entry_set_text(GTK_ENTRY(input), int_char);
 
     gtk_main();
 

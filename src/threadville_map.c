@@ -1169,6 +1169,8 @@ void insert_street_info_bridge_up(TableStreetInfo *t, BridgeIds id) {
         case BU25B:
             insert_street_info(t, id, create_street_info(0.775, 0.555, NORTH_DIR));
             break;
+        default:
+            break;
     }
 }
 
@@ -1267,6 +1269,8 @@ void insert_street_info_bridge(TableStreetInfo *t, BridgeIds id) {
             break;
         case B030B:
             insert_street_info(t, id, create_street_info(0.775, 0.555, SOUTH_DIR));
+            break;
+        default:
             break;
     }
 }

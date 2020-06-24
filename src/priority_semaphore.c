@@ -19,7 +19,7 @@ priority_semaphore * get_priority_semaphore(){
 
     semaphore_p->in_use = false;
 
-    memset(semaphore_p->priority, 0, 10);
+    memset(semaphore_p->priority, 0, 10*sizeof(int));
     return semaphore_p;
 }
 

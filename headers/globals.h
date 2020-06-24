@@ -14,4 +14,8 @@ GtkWidget *window;
 
 ThreadvilleMap *map;
 
+int K = 0;
+int M = 0;
+int N = 0;
+
 #endif //PROYECTO3_GLOBALS_H
