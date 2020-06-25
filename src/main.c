@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 //    generate_file();
     map = create_threadville_map();
 
-//    pthread_t maintenance_thread;
-//    pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
-//    pthread_detach(maintenance_thread);
+    pthread_t maintenance_thread;
+    pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
+    pthread_detach(maintenance_thread);
 
     //Init
     gtk_init(&argc, &argv);
