@@ -874,11 +874,12 @@ void handle_bus(Vehicle *vehicle) {
     }
 
     //Deter el bus
+    delete_object(vehicle->vehicle_id);
     unlock_priority_semaphore(5, currentStreet);
     if (previousStreet != NULL) {
         unlock_priority_semaphore(0, previousStreet);
     } 
-    delete_object(vehicle->vehicle_id);
+    
 
     GtkWidget *active_w = GTK_WIDGET(gtk_builder_get_object(builder, get_active_button(vehicle->vehicleType)));
     gtk_widget_set_sensitive(active_w, true);
