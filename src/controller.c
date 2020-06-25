@@ -38,8 +38,8 @@ void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     int *destinations = calloc(4, sizeof(int));
-    destinations[0] = R006S;
-    destinations[1] = 984;
+    destinations[0] = random_stop_id();
+    destinations[1] = random_stop_id();
     destinations[2] = Z006R;
     destinations[3] = -1;
 
