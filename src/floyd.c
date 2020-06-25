@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"graph.h"
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "graph.h"
+#include "graph_floyd.h"
+#include <stdbool.h>
 #include "floyd.h"
 
 #define NODES_COUNT 985
@@ -16,6 +17,44 @@ void print_matrix(int matrix[NODES_COUNT][NODES_COUNT]) {
         }
         printf("\n");
     }
+}
+
+void generate_file(){
+    FILE *fp;
+    fp = fopen ("./headers/graph_floyd.h", "w");
+    fputs("int threadville_graph_fast[", fp);
+
+    char snum[100];
+    sprintf(snum, "%d", NODES_COUNT);
+    fputs(snum, fp);
+    fputs("][", fp);
+    fputs(snum, fp);
+    fputs("]  =  {", fp);
+
+    int i, j;
+    for (i = 0; i < NODES_COUNT; i++) {
+
+        fputs("{", fp);
+
+        for (j = 0; j < NODES_COUNT; j++) {
+
+            sprintf(snum, "%d", threadville_floyd_matrix[i][j]);
+            fputs(snum, fp);
+            if (j+1<NODES_COUNT){
+                    fputs(" ,", fp);
+            }
+
+        }
+        if (i+1<NODES_COUNT){
+            fputs("},\n", fp);
+        }else{
+            fputs("}};\n", fp);
+        }
+    }
+
+
+    fclose (fp);
+
 }
 
 void initialize_reconstruction_matrix() {
@@ -60,10 +99,20 @@ int *floyd_path_aux(int i, int j, int *floyd_path) {
     return floyd_path;
 }
 
+int *floyd_path_aux_fast(int i, int j, int *floyd_path) {
+    floyd_path[0]++;
+    floyd_path[floyd_path[0]] = j;
+    if (i != j) {
+        floyd_path_aux_fast(i, threadville_graph_fast[i][j], floyd_path);
+    }
+    return floyd_path;
+}
+
 int *floyd_path(int i, int j) {
-    int path_buffer[NODES_COUNT + 3];
+    int path_buffer[NODES_COUNT*NODES_COUNT];
     path_buffer[0] = 0;
-    floyd_path_aux(i, j, path_buffer);
+    //floyd_path_aux(i, j, path_buffer);
+    floyd_path_aux_fast(i, j, path_buffer);
     int path_length = path_buffer[0];
     int *floyd_path = malloc(sizeof(int) * path_length + 1); // to accommodate for size as first index
     floyd_path[0] = path_length;

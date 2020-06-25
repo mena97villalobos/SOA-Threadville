@@ -10,7 +10,7 @@
 #define PROYECTO3_FLOYD_H
 
 void floyd();
-
+void generate_file();
 int *floyd_path(int i, int j);
 
 #endif //PROYECTO3_FLOYD_H

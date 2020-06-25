@@ -18,7 +18,8 @@ extern int M;
 extern int N;
 
 int main(int argc, char *argv[]) {
-    floyd();
+    //floyd();  //Solo hay que ejecutarlo una vez para crear el archivo y ya 
+    //generate_file();
     map = create_threadville_map();
 
 //    pthread_t maintenance_thread;
