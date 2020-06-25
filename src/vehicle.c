@@ -20,7 +20,9 @@ extern bool isa_bpink;
 extern bool isa_blblue;
 extern bool isa_bwhite;
 extern bool isa_bblack;
+
 extern ThreadvilleMap *map;
+extern GtkBuilder *builder;
 
 int random_stop_id() {
     return (rand() % (R006S - A001S + 1)) + A001S;
@@ -550,6 +552,31 @@ char *get_stop_id(int stop, int destinations_left) {
     return res;
 }
 
+char *get_active_button(VehicleType type){
+    switch (type) {
+    case RED_BUS:
+        return "btn_cbr";
+    case GREEN_BUS:
+        return "btn_cbgr";
+    case BLUE_BUS:
+        return "btn_cbb";
+    case WHITE_BUS:
+        return "btn_cbw";
+    case GRAY_BUS:
+        return "btn_cbg";
+    case BLACK_BUS:
+        return "btn_cbbl";
+    case PINK_BUS:
+        return "btn_cbp";
+    case LIGHT_BLUE_BUS:
+        return "btn_cblb";
+    case ORANGE_BUS:
+        return "btn_cbo";
+    default:
+        return "";
+    }
+}
+
 bool get_actual_variable(VehicleType type) {
     switch (type) {
         case RED_BUS:
@@ -800,8 +827,6 @@ void handle_normal_vehicle(Vehicle *vehicle) {
     }
 }
 
-
-
 void handle_bus(Vehicle *vehicle) {
     priority_semaphore *currentStreet = NULL;
     priority_semaphore *previousStreet = NULL;
@@ -854,6 +879,9 @@ void handle_bus(Vehicle *vehicle) {
         unlock_priority_semaphore(0, previousStreet);
     } 
     delete_object(vehicle->vehicle_id);
+
+    GtkWidget *active_w = GTK_WIDGET(gtk_builder_get_object(builder, get_active_button(vehicle->vehicleType)));
+    gtk_widget_set_sensitive(active_w, true);
 }
 
 void *handle_vehicle(void *arg) {

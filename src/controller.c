@@ -42,6 +42,8 @@ int val_input(char *s1);
 
 void create_vehicle_in_map(int type_vehicule, char *destinosSplit);
 
+void desactive_botons_sensitive(char *buton_name);
+
 //Called when window is closed
 void on_window_main_destroy(GtkWidget *widget, gpointer user_data) {
     gtk_main_quit();
@@ -134,7 +136,8 @@ void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_red(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbr", "btn_dbr");
+    //change_botons_sensitive("btn_cbr", "btn_dbr");
+    desactive_botons_sensitive("btn_dbr");
     isa_bred  = false;
 
 }
@@ -152,7 +155,8 @@ void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_gray(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbg", "btn_dbg");
+    //change_botons_sensitive("btn_cbg", "btn_dbg");
+    desactive_botons_sensitive("btn_dbg");
     isa_bgray  = false;
 }
 
@@ -169,7 +173,8 @@ void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_green(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbgr", "btn_dbgr");
+    //change_botons_sensitive("btn_cbgr", "btn_dbgr");
+    desactive_botons_sensitive("btn_dbgr");
     isa_bgreen  = false;
 }
 
@@ -186,7 +191,8 @@ void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_pink(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbp", "btn_dbp");
+    //change_botons_sensitive("btn_cbp", "btn_dbp");
+    desactive_botons_sensitive("btn_dbp");
     isa_bpink  = false;
 }
 
@@ -203,7 +209,8 @@ void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_orange(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbo", "btn_dbo");
+    //change_botons_sensitive("btn_cbo", "btn_dbo");
+    desactive_botons_sensitive("btn_dbo");
     isa_borange  = false;
 }
 
@@ -220,7 +227,8 @@ void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_lblue(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cblb", "btn_dblb");
+    //change_botons_sensitive("btn_cblb", "btn_dblb");
+    desactive_botons_sensitive("btn_dblb");
     isa_blblue  = false;
 }
 
@@ -237,7 +245,8 @@ void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_blue(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbb", "btn_dbb");
+    //change_botons_sensitive("btn_cbb", "btn_dbb");
+    desactive_botons_sensitive("btn_dbb");
     isa_bblue   = false;
 }
 
@@ -254,7 +263,8 @@ void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_white(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbw", "btn_dbw");
+    //change_botons_sensitive("btn_cbw", "btn_dbw");
+    desactive_botons_sensitive("btn_dbw");
     isa_bwhite   = false;
 }
 
@@ -271,7 +281,8 @@ void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_delete_bus_black(GtkWidget *widget, gpointer user_data) {
-    change_botons_sensitive("btn_cbbl", "btn_dbbl");
+    //change_botons_sensitive("btn_cbbl", "btn_dbbl");
+    desactive_botons_sensitive("btn_dbbl");
     isa_bblack  = false;
 }
 
@@ -336,6 +347,11 @@ void change_botons_sensitive(char *active, char *desactive) {
     GtkWidget *desactive_w = GTK_WIDGET(gtk_builder_get_object(builder, desactive));;
     gtk_widget_set_sensitive(desactive_w, false);
     gtk_widget_set_sensitive(active_w, true);
+}
+
+void desactive_botons_sensitive(char *buton_name) {
+    GtkWidget *desactive_w = GTK_WIDGET(gtk_builder_get_object(builder, buton_name));;
+    gtk_widget_set_sensitive(desactive_w, false);
 }
 
 int val_input(char *s1) {
