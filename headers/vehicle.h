@@ -33,6 +33,7 @@ typedef enum VehicleDir {
 } VehicleDir;
 
 typedef struct Vehicle {
+    int vehicle_id;
     VehicleType vehicleType;
     VehicleDir vehicleDir;
     // Vehicle speed
@@ -64,6 +65,8 @@ float getVehicleSpeed(VehicleType);
 Vehicle *create_vehicle(VehicleType, VehicleDir, int *destinations);
 
 Vehicle *create_bus(VehicleType, VehicleDir);
+
+void free_vehicle(Vehicle *);
 
 VehicleThreadInfo *create_vehicle_thread_info(Vehicle *);
 

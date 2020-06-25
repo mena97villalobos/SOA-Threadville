@@ -27,7 +27,7 @@ typedef struct TableStreetInfo {
 
 TableStreetInfo *create_table_street_info(int size);
 
-StreetInfo *create_street_info(float, float, StreetDir);
+StreetInfo *create_street_info(double, double, StreetDir);
 
 int hash_code_street_info(TableStreetInfo *, int);
 

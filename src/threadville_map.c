@@ -6,58 +6,57 @@ ThreadvilleMap *create_threadville_map() {
     threadvilleMap->map = create_table(984);
     threadvilleMap->streetInfoTable = create_table_street_info(954);
 
-    pthread_mutexattr_t mattr = get_mutex_attributes();
-    insert_highways(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
-    insert_bridges(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
-    insert_roundabouts(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
-    insert_stops(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
-    insert_streets(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
-    insert_corners(threadvilleMap->map, threadvilleMap->streetInfoTable, &mattr);
+    insert_highways(threadvilleMap->map, threadvilleMap->streetInfoTable);
+    insert_bridges(threadvilleMap->map, threadvilleMap->streetInfoTable);
+    insert_roundabouts(threadvilleMap->map, threadvilleMap->streetInfoTable);
+    insert_stops(threadvilleMap->map, threadvilleMap->streetInfoTable);
+    insert_streets(threadvilleMap->map, threadvilleMap->streetInfoTable);
+    insert_corners(threadvilleMap->map, threadvilleMap->streetInfoTable);
     return threadvilleMap;
 }
 
-void insert_highways(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_highways(Table *table, TableStreetInfo *streetInfo) {
     for (int i = H001H; i <= H144H; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_highways(streetInfo, i);
     }
 }
 
-void insert_bridges(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_bridges(Table *table, TableStreetInfo *streetInfo) {
     for (int i = B001B; i <= B030B; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_bridge(streetInfo, i);
     }
     for (int i = BU01B; i <= BU30B; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_bridge_up(streetInfo, i);
     }
 }
 
-void insert_roundabouts(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_roundabouts(Table *table, TableStreetInfo *streetInfo) {
     for (int i = Y001R; i <= Z006R; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_roundabouts(streetInfo, i);
     }
 }
 
-void insert_stops(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_stops(Table *table, TableStreetInfo *streetInfo) {
     for (int i = A001S; i <= R006S; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_stops(streetInfo, i);
     }
 }
 
-void insert_streets(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_streets(Table *table, TableStreetInfo *streetInfo) {
     for (int i = A001P; i <= R018P; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_streets(streetInfo, i);
     }
 }
 
-void insert_corners(Table *table, TableStreetInfo *streetInfo, pthread_mutexattr_t *mattr) {
+void insert_corners(Table *table, TableStreetInfo *streetInfo) {
     for (int i = A001C; i <= X004C; ++i) {
-        insert(table, i, get_mutex(mattr));
+        insert(table, i, get_priority_semaphore());
         insert_street_info_corners(streetInfo, i);
     }
 }
@@ -495,6 +494,8 @@ void insert_street_info_highways(TableStreetInfo *t, HighwaysIds id) {
             break;
         case H144H:
             insert_street_info(t, id, create_street_info(0.844, 0.55, EAST_DIR));
+            break;
+        default:
             break;
     }
 }
@@ -1028,7 +1029,8 @@ void insert_street_info_stops(TableStreetInfo *t, StopIds id) {
         case X008S:
             insert_street_info(t, id, create_street_info(0.806, 0.842, NORTH_DIR));
             break;
-
+        default:
+            break;
     }
 }
 
@@ -1069,6 +1071,8 @@ void insert_street_info_roundabouts(TableStreetInfo *t, RoundaboutIds id) {
             break;
         case Z006R:
             insert_street_info(t, id, create_street_info(0.924, 0.39, NORTH_DIR));
+            break;
+        default:
             break;
     }
 }
@@ -2634,7 +2638,8 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
         case X012P:
             insert_street_info(t, id, create_street_info(0.900, 0.933, SOUTH_DIR));
             break;
-
+        default:
+            break;
     }
 }
 
@@ -2783,6 +2788,8 @@ void insert_street_info_corners(TableStreetInfo *t, CornersIds id) {
             break;
         case V004C:
             insert_street_info(t, id, create_street_info(0.5035, 0.965, WEST_DIR));
+            break;
+        default:
             break;
     }
 }

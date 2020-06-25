@@ -34,8 +34,8 @@ _Noreturn void* run_maintenance(void *arg) {
         sleep(current_waiting_time);
         threadville_id = random_threadville_id();
         StreetInfo *streetInfo = lookup_street_info(map->streetInfoTable, threadville_id);
-        pthread_mutex_t *mutex = lookup(map->map, threadville_id);
-        pthread_mutex_lock(mutex);
+        priority_semaphore *mutex = lookup(map->map, threadville_id);
+        lock_priority_semaphore(3, mutex);
         create_object(
                 tid,
                 REPAIR,
@@ -47,7 +47,7 @@ _Noreturn void* run_maintenance(void *arg) {
         printf("Current Maintenance Time: %d\n", maintenance_time);
         fflush(stdout);
         sleep(maintenance_time);
-        pthread_mutex_unlock(mutex);
+        unlock_priority_semaphore(3, mutex);
         delete_object(tid);
         current_waiting_time = ran_expo();
     }

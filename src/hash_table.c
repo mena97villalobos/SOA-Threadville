@@ -18,7 +18,7 @@ int hash_code(Table *t, int key) {
     return key % t->size;
 }
 
-void insert(Table *t, int key, pthread_mutex_t* val) {
+void insert(Table *t, int key, priority_semaphore* val) {
     int pos = hash_code(t, key);
     Node *list = t->list[pos];
     Node *newNode = (Node *) malloc(sizeof(Node));
@@ -36,7 +36,7 @@ void insert(Table *t, int key, pthread_mutex_t* val) {
     t->list[pos] = newNode;
 }
 
-pthread_mutex_t* lookup(Table *t, int key) {
+priority_semaphore * lookup(Table *t, int key) {
     int pos = hash_code(t, key);
     Node *list = t->list[pos];
     Node *temp = list;

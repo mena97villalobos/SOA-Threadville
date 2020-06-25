@@ -10,35 +10,41 @@
 
 
 #define SIZE 68 //Number is the same of the len in the enum in interface.h
-#define min(a,b) \
+#define min(a, b) \
    ({ __typeof__ (a) _a = (a); \
        __typeof__ (b) _b = (b); \
      _a < _b ? _a : _b; })
 
 //Variables to calculate the responsive in a quick time
-static struct DataItem* hashImages[SIZE];
-static struct data_node* semaphores[5];
+static struct DataItem *hashImages[SIZE];
+static struct data_node *semaphores[5];
 static int before_height = 0;
 static int before_width = 0;
 static int map_height = 0;
 static int map_width = 0;
-static node_t * vehicle_list = NULL;
+static node_t *vehicle_list = NULL;
 static gint64 last_tick = 0;
 static int fps = 60;
 static pthread_mutex_t lock_vehicle;
 static pthread_mutex_t lock_semaphore;
 
 //Definition of functions
-struct DataItem * create_item(char *image_path, images_enum type_item, float real_height, float real_width);
-GdkPixbuf * transform_image(GdkPixbuf *map_image, float real_h, float real_w, int actual_height, int actual_width);
-GdkPixbuf * transform_image_relation(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width);
+struct DataItem *create_item(char *image_path, images_enum type_item, float real_height, float real_width);
+
+GdkPixbuf *transform_image(GdkPixbuf *map_image, float real_h, float real_w, int actual_height, int actual_width);
+
+GdkPixbuf *transform_image_relation(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width);
+
 void paint_all_map(cairo_t *cr);
+
 void paint_vehicles(cairo_t *cr);
-data_node * create_semaphore(images_enum type_image_p, float x, float y);
+
+data_node *create_semaphore(images_enum type_image_p, float x, float y);
+
 void generate_semaphores();
 
 //Funtions code
-void load_interface(){
+void load_interface() {
     //MAP load
     insertDict(MAP, create_item("images/MAP.PNG", MAP, 1.0, 1.0), hashImages, SIZE);
     //SEMAPHORE load
@@ -66,22 +72,22 @@ void load_interface(){
     insertDict(WHITEBUSR, create_item("images/WHITE_BR.png", WHITEBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(WHITEBUSB, create_item("images/WHITE_BB.png", WHITEBUSB, 0.050, 0.015), hashImages, SIZE);
     insertDict(WHITEBUSF, create_item("images/WHITE_BF.png", WHITEBUSF, 0.050, 0.015), hashImages, SIZE);
-     //Gray bus load   
+    //Gray bus load
     insertDict(GRAYBUSL, create_item("images/GRAY_BL.png", GRAYBUSL, 0.025, 0.030), hashImages, SIZE);
     insertDict(GRAYBUSR, create_item("images/GRAY_BR.png", GRAYBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(GRAYBUSB, create_item("images/GRAY_BB.png", GRAYBUSB, 0.050, 0.015), hashImages, SIZE);
     insertDict(GRAYBUSF, create_item("images/GRAY_BF.png", GRAYBUSF, 0.050, 0.015), hashImages, SIZE);
-     //Black bus load   
+    //Black bus load
     insertDict(BLACKBUSL, create_item("images/BLACK_BL.png", BLACKBUSL, 0.025, 0.030), hashImages, SIZE);
     insertDict(BLACKBUSR, create_item("images/BLACK_BR.png", BLACKBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(BLACKBUSB, create_item("images/BLACK_BB.png", BLACKBUSB, 0.050, 0.015), hashImages, SIZE);
     insertDict(BLACKBUSF, create_item("images/BLACK_BF.png", BLACKBUSF, 0.050, 0.015), hashImages, SIZE);
-     //Pink bus load   
+    //Pink bus load
     insertDict(PINKBUSL, create_item("images/PINK_BL.png", PINKBUSL, 0.025, 0.030), hashImages, SIZE);
     insertDict(PINKBUSR, create_item("images/PINK_BR.png", PINKBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(PINKBUSB, create_item("images/PINK_BB.png", PINKBUSB, 0.050, 0.015), hashImages, SIZE);
     insertDict(PINKBUSF, create_item("images/PINK_BF.png", PINKBUSF, 0.050, 0.015), hashImages, SIZE);
-     //Ligth blue bus load   
+    //Ligth blue bus load
     insertDict(LIGHTBLUEBUSL, create_item("images/LBLUE_BL.png", LIGHTBLUEBUSL, 0.025, 0.030), hashImages, SIZE);
     insertDict(LIGHTBLUEBUSR, create_item("images/LBLUE_BR.png", LIGHTBLUEBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(LIGHTBLUEBUSB, create_item("images/LBLUE_BB.png", LIGHTBLUEBUSB, 0.050, 0.015), hashImages, SIZE);
@@ -91,7 +97,7 @@ void load_interface(){
     insertDict(ORANGEBUSR, create_item("images/ORANGE_BR.png", ORANGEBUSR, 0.025, 0.030), hashImages, SIZE);
     insertDict(ORANGEBUSB, create_item("images/ORANGE_BB.png", ORANGEBUSB, 0.050, 0.015), hashImages, SIZE);
     insertDict(ORANGEBUSF, create_item("images/ORANGE_BF.png", ORANGEBUSF, 0.050, 0.015), hashImages, SIZE);
-     //Ambulance load   
+    //Ambulance load
     insertDict(AMBULANCEL, create_item("images/AMBULANCEL.jpg", AMBULANCEL, 0.025, 0.015), hashImages, SIZE);
     insertDict(AMBULANCER, create_item("images/AMBULANCER.jpg", AMBULANCER, 0.025, 0.015), hashImages, SIZE);
     insertDict(AMBULANCEB, create_item("images/AMBULANCEB.jpg", AMBULANCEB, 0.025, 0.015), hashImages, SIZE);
@@ -121,24 +127,24 @@ void load_interface(){
     insertDict(BLACKCARR, create_item("images/BLACKR.jpg", BLACKCARR, 0.025, 0.015), hashImages, SIZE);
     insertDict(BLACKCARB, create_item("images/BLACKB.jpg", BLACKCARB, 0.025, 0.015), hashImages, SIZE);
     insertDict(BLACKCARF, create_item("images/BLACKF.jpg", BLACKCARF, 0.025, 0.015), hashImages, SIZE);
-     //Yellow car load   
+    //Yellow car load
     insertDict(YELLOWCARL, create_item("images/YELLOWL.jpg", YELLOWCARL, 0.025, 0.015), hashImages, SIZE);
     insertDict(YELLOWCARR, create_item("images/YELLOWR.jpg", YELLOWCARR, 0.025, 0.015), hashImages, SIZE);
     insertDict(YELLOWCARB, create_item("images/YELLOWB.jpg", YELLOWCARB, 0.025, 0.015), hashImages, SIZE);
     insertDict(YELLOWCARF, create_item("images/YELLOWF.jpg", YELLOWCARF, 0.025, 0.015), hashImages, SIZE);
 
 
-	if (pthread_mutex_init(&lock_vehicle, NULL) != 0){
+    if (pthread_mutex_init(&lock_vehicle, NULL) != 0) {
         printf("\n Mutex of vehicle init failed\n");
     }
-    if (pthread_mutex_init(&lock_semaphore, NULL) != 0){
+    if (pthread_mutex_init(&lock_semaphore, NULL) != 0) {
         printf("\n Mutex of semaphore init failed\n");
     }
     //Generate semaphores
     generate_semaphores();
 }
 
-void generate_semaphores(){
+void generate_semaphores() {
     semaphores[0] = create_semaphore(SEMAPHORED, 0.211, 0.42);
     semaphores[1] = create_semaphore(SEMAPHORED, 0.351, 0.42);
     semaphores[2] = create_semaphore(SEMAPHORED, 0.491, 0.42);
@@ -146,9 +152,9 @@ void generate_semaphores(){
     semaphores[4] = create_semaphore(SEMAPHORED, 0.773, 0.42);
 }
 
-data_node * create_semaphore(images_enum type_image_p, float x, float y){
-    struct data_node *data_add = (struct data_node*) malloc(sizeof(struct data_node));
-    
+data_node *create_semaphore(images_enum type_image_p, float x, float y) {
+    struct data_node *data_add = (struct data_node *) malloc(sizeof(struct data_node));
+
     //Data to draw images
     data_add->width = x;
     data_add->height = y;
@@ -156,42 +162,41 @@ data_node * create_semaphore(images_enum type_image_p, float x, float y){
     return data_add;
 }
 
-void paint_semaphores(cairo_t *cr){
+void paint_semaphores(cairo_t *cr) {
     struct DataItem *item = NULL;
 
-    for (int i = 0; i < 5; ++i)
-    {
+    for (int i = 0; i < 5; ++i) {
         item = search(semaphores[i]->type_image, hashImages, SIZE);
-        gdk_cairo_set_source_pixbuf(cr, 
-            item->trans_image, 
-            semaphores[i]->width*map_width,
-            semaphores[i]->height*map_height);
+        gdk_cairo_set_source_pixbuf(cr,
+                                    item->trans_image,
+                                    semaphores[i]->width * map_width,
+                                    semaphores[i]->height * map_height);
         cairo_paint(cr);
     }
 }
 
-void paint_vehicles(cairo_t *cr){
-	if (vehicle_list==NULL){
-		return;
-	}
+void paint_vehicles(cairo_t *cr) {
+    if (vehicle_list == NULL) {
+        return;
+    }
 
-	struct DataItem *item = NULL;
-	node_t * current = vehicle_list;
+    struct DataItem *item = NULL;
+    node_t *current = vehicle_list;
     while (current != NULL) {
         //Draw vehicule
-    	item = search(current->data->type_image, hashImages, SIZE);
-    	gdk_cairo_set_source_pixbuf(cr, 
-    		item->trans_image, 
-    		current->data->width*map_width,
-    		current->data->height*map_height);
+        item = search(current->data->type_image, hashImages, SIZE);
+        gdk_cairo_set_source_pixbuf(cr,
+                                    item->trans_image,
+                                    current->data->width * map_width,
+                                    current->data->height * map_height);
         cairo_paint(cr);
         //Pos of text 
-        int total_h = item->real_h*map_height;
-        int total_w = item->real_w*map_width;
+        int total_h = item->real_h * map_height;
+        int total_w = item->real_w * map_width;
         //Write text for vehicule
-        cairo_set_source_rgb (cr, 0.0/255.0, 0.0/255.0, 255.0/255.0);
-        cairo_set_font_size(cr, (0.80)*min(total_w,total_h));
-        cairo_move_to(cr, current->data->width*map_width, current->data->height*map_height+(1.3*(total_h)/2));
+        cairo_set_source_rgb(cr, 0.0 / 255.0, 0.0 / 255.0, 255.0 / 255.0);
+        cairo_set_font_size(cr, (0.80) * min(total_w, total_h));
+        cairo_move_to(cr, current->data->width * map_width, current->data->height * map_height + (1.3 * (total_h) / 2));
         cairo_show_text(cr, current->data->next_stop);
         cairo_fill(cr);
         //Next element
@@ -200,123 +205,124 @@ void paint_vehicles(cairo_t *cr){
 
 }
 
-void paint_all_map(cairo_t *cr){
-	struct DataItem *item = search(MAP, hashImages, SIZE);
-	gdk_cairo_set_source_pixbuf(cr, item->trans_image, 0, 0);
+void paint_all_map(cairo_t *cr) {
+    struct DataItem *item = search(MAP, hashImages, SIZE);
+    gdk_cairo_set_source_pixbuf(cr, item->trans_image, 0, 0);
     cairo_paint(cr);
     paint_semaphores(cr);
     paint_vehicles(cr);
 }
 
-struct DataItem * create_item(char *image_path, images_enum type_item, float real_height, float real_width){
-	GError *err = NULL;
-	struct DataItem *item = (struct DataItem*) malloc(sizeof(struct DataItem));
-	if(err){
+struct DataItem *create_item(char *image_path, images_enum type_item, float real_height, float real_width) {
+    GError *err = NULL;
+    struct DataItem *item = (struct DataItem *) malloc(sizeof(struct DataItem));
+    if (err) {
         printf("Error : %s\n", err->message);
         g_error_free(err);
     }
-	item-> key = type_item;
-	item-> image = gdk_pixbuf_new_from_file(image_path, &err);
-	item-> width = gdk_pixbuf_get_width(item-> image);
-   	item-> height = gdk_pixbuf_get_height(item-> image);
-   	item-> real_h = real_height;
-  	item-> real_w = real_width;
-    item-> trans_image = NULL;
+    item->key = type_item;
+    item->image = gdk_pixbuf_new_from_file(image_path, &err);
+    item->width = gdk_pixbuf_get_width(item->image);
+    item->height = gdk_pixbuf_get_height(item->image);
+    item->real_h = real_height;
+    item->real_w = real_width;
+    item->trans_image = NULL;
     return item;
 }
 
 //CCall every n FPS
-gboolean on_tick (gpointer *parameters) {
-	GtkWidget *drawing = (GtkWidget *)parameters;
-    gint64 current = g_get_real_time ();
-    if ((current - last_tick) < (1000/ fps)) {
+gboolean on_tick(gpointer *parameters) {
+    GtkWidget *drawing = (GtkWidget *) parameters;
+    gint64 current = g_get_real_time();
+    if ((current - last_tick) < (1000 / fps)) {
         last_tick = current;
         return G_SOURCE_CONTINUE;
     }
 
     //Posible error de semaforos
-	gtk_widget_queue_draw_area(drawing, 0, 0, before_width, before_height);
+    gtk_widget_queue_draw_area(drawing, 0, 0, before_width, before_height);
 
     last_tick = current;
     return G_SOURCE_CONTINUE;
 }
 
-GdkPixbuf * transform_image(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width){
-    GdkPixbuf * final_image =  gdk_pixbuf_scale_simple (image,
-                         real_w*actual_width,
-                         real_h*actual_height,
-                         GDK_INTERP_BILINEAR);
+GdkPixbuf *transform_image(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width) {
+    GdkPixbuf *final_image = gdk_pixbuf_scale_simple(image,
+                                                     real_w * actual_width,
+                                                     real_h * actual_height,
+                                                     GDK_INTERP_BILINEAR);
 
     return final_image;
 }
 
-GdkPixbuf * transform_image_relation(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width){
-    int w,h;
+GdkPixbuf *transform_image_relation(GdkPixbuf *image, float real_h, float real_w, int actual_height, int actual_width) {
+    int w, h;
     w = gdk_pixbuf_get_width(image);
     h = gdk_pixbuf_get_height(image);
 
-    int tentatibe_width = real_w*actual_width;
-    int tentatibe_height = real_w*(int)((((float)h/(float)w)*(float)actual_width)*(float)real_w);
+    int tentatibe_width = real_w * actual_width;
+    int tentatibe_height = real_w * (int) ((((float) h / (float) w) * (float) actual_width) * (float) real_w);
 
-    GdkPixbuf * final_image  = NULL;
+    GdkPixbuf *final_image = NULL;
 
-    if (tentatibe_height<= actual_height){
-        final_image =  gdk_pixbuf_scale_simple (image,
-                             tentatibe_width,
-                             (int)((((float)h/(float)w)*(float)actual_width)*(float)real_w),
-                             GDK_INTERP_BILINEAR);
-    }else{
-        final_image =  gdk_pixbuf_scale_simple (image,
-                             (int)((((float)w/(float)h)*(float)actual_height)*(float)real_h),
-                             real_h*actual_height,
-                             GDK_INTERP_BILINEAR);
+    if (tentatibe_height <= actual_height) {
+        final_image = gdk_pixbuf_scale_simple(image,
+                                              tentatibe_width,
+                                              (int) ((((float) h / (float) w) * (float) actual_width) * (float) real_w),
+                                              GDK_INTERP_BILINEAR);
+    } else {
+        final_image = gdk_pixbuf_scale_simple(image,
+                                              (int) ((((float) w / (float) h) * (float) actual_height) *
+                                                     (float) real_h),
+                                              real_h * actual_height,
+                                              GDK_INTERP_BILINEAR);
     }
 
     return final_image;
 }
 
-gboolean on_window_draw (GtkWidget *widget, cairo_t *cr, gpointer user_data){
-    int actual_height = gtk_widget_get_allocated_height (widget);
-    int actual_width = gtk_widget_get_allocated_width (widget);
+gboolean on_window_draw(GtkWidget *widget, cairo_t *cr, gpointer user_data) {
+    int actual_height = gtk_widget_get_allocated_height(widget);
+    int actual_width = gtk_widget_get_allocated_width(widget);
     int flat = 0;
 
     //Posible error de semaforos
-    if (before_height!= actual_height) {
-    	before_height = actual_height;
-    	flat = 1;
+    if (before_height != actual_height) {
+        before_height = actual_height;
+        flat = 1;
     }
-    if (before_width!= actual_width) {
-    	before_width = actual_width;\
-    	flat = 1;
+    if (before_width != actual_width) {
+        before_width = actual_width;\
+        flat = 1;
     }
-    
-    if (flat == 1){
+
+    if (flat == 1) {
 
         //Mao responsive
         struct DataItem *item_map = search(MAP, hashImages, SIZE);
         item_map->trans_image = transform_image_relation(item_map->image,
-            item_map->real_h, 
-            item_map->real_w,
-            before_height, 
-            before_width);
+                                                         item_map->real_h,
+                                                         item_map->real_w,
+                                                         before_height,
+                                                         before_width);
         map_height = gdk_pixbuf_get_height(item_map->trans_image);
         map_width = gdk_pixbuf_get_width(item_map->trans_image);
 
         //All image responsive about the map
-    	for(int i = 0; i<SIZE; i++) {
-            if(i!=MAP){
-        		if(hashImages[i] != NULL){
-        			if (hashImages[i]-> trans_image != NULL){
-        				g_object_unref(hashImages[i]-> trans_image);
-        			}
-        			hashImages[i]->trans_image = transform_image(hashImages[i]->image, 
-        				hashImages[i]->real_h, 
-    	      			hashImages[i]->real_w,
-    	      			map_height, 
-    	      			map_width);
-        		}	
-    		}
-    	}
+        for (int i = 0; i < SIZE; i++) {
+            if (i != MAP) {
+                if (hashImages[i] != NULL) {
+                    if (hashImages[i]->trans_image != NULL) {
+                        g_object_unref(hashImages[i]->trans_image);
+                    }
+                    hashImages[i]->trans_image = transform_image(hashImages[i]->image,
+                                                                 hashImages[i]->real_h,
+                                                                 hashImages[i]->real_w,
+                                                                 map_height,
+                                                                 map_width);
+                }
+            }
+        }
     }
     pthread_mutex_lock(&lock_vehicle);
     pthread_mutex_lock(&lock_semaphore);
@@ -326,77 +332,58 @@ gboolean on_window_draw (GtkWidget *widget, cairo_t *cr, gpointer user_data){
     return TRUE;
 }
 
-node_t * create_object(int num, images_enum type_image_p, double x, double y, char * next_stop_p){
-	struct data_node *data_add = (struct data_node*) malloc(sizeof(struct data_node));
-	
-	//Data to draw images
-	data_add->width = x;
-	data_add->height = y;
-	data_add->type_image = type_image_p;
+node_t *create_object(int num, images_enum type_image_p, double x, double y, char *next_stop_p) {
+    struct data_node *data_add = (struct data_node *) malloc(sizeof(struct data_node));
+
+    //Data to draw images
+    data_add->width = x;
+    data_add->height = y;
+    data_add->type_image = type_image_p;
     strcpy(data_add->next_stop, next_stop_p);
 
-	pthread_mutex_lock(&lock_vehicle);
-	node_t * new_node;
-	if (vehicle_list==NULL){
-		vehicle_list = (node_t *) malloc(sizeof(node_t));
-		vehicle_list->val = num;
-		vehicle_list->next = NULL;
-		vehicle_list->data = data_add;
-		new_node = vehicle_list;
-	}else{
-		new_node = push_begin(&vehicle_list, num, data_add);
-
-	}
-    pthread_mutex_unlock(&lock_vehicle);
-	fflush(stdout);
-    return new_node;
-
-	print_list(vehicle_list);
-}
-
-void delete_object(int num){
-	pthread_mutex_lock(&lock_vehicle);
-	if (vehicle_list==NULL){
-		pthread_mutex_unlock(&lock_vehicle);
-		return;
-	}
-
-	int result = remove_by_val(&vehicle_list, num);
-	if (result == -2){
-		if(vehicle_list->data!=NULL){
-			free(vehicle_list->data);
-		}
-		free(vehicle_list);
-		vehicle_list = NULL;
-	}
-	pthread_mutex_unlock(&lock_vehicle);
-}
-
-void edit_object(int num, images_enum type_image_p, float x_p, float y_p, char * next_stop_p){
     pthread_mutex_lock(&lock_vehicle);
-    node_t * current = vehicle_list;
+    vehicle_list = push_begin(vehicle_list, num, data_add);
+    pthread_mutex_unlock(&lock_vehicle);
+    fflush(stdout);
+    return vehicle_list;
+}
+
+void delete_object(int num) {
+    pthread_mutex_lock(&lock_vehicle);
+    if (vehicle_list == NULL) {
+        pthread_mutex_unlock(&lock_vehicle);
+        return;
+    }
+
+    vehicle_list = remove_by_val(vehicle_list, num);
+    pthread_mutex_unlock(&lock_vehicle);
+}
+
+void edit_object(int num, images_enum type_image_p, float x_p, float y_p, char *next_stop_p) {
+    pthread_mutex_lock(&lock_vehicle);
+    node_t *current = vehicle_list;
     while (current != NULL) {
-    	if(current->val == num){
-    		current->data->width = x_p;
-    		current->data->height = y_p;
-    		current->data->type_image = type_image_p;
+        if (current->val == num) {
+            current->data->width = x_p;
+            current->data->height = y_p;
+            current->data->type_image = type_image_p;
             strcpy(current->data->next_stop, next_stop_p);
-    		break;
-    	}
+            break;
+        }
         current = current->next;
     }
     pthread_mutex_unlock(&lock_vehicle);
 }
 
-void edit_semaphore(int num, images_enum type_image_p){
-    if(num>=0 && num<5){
+void edit_semaphore(int num, images_enum type_image_p) {
+    if (num >= 0 && num < 5) {
         pthread_mutex_lock(&lock_semaphore);
         semaphores[num]->type_image = type_image_p;
         pthread_mutex_unlock(&lock_semaphore);
     }
 }
 
-void edit_object_with_node(node_t * node, images_enum type_image_p, float x_p, float y_p, char * next_stop_p){
+void edit_object_with_node(node_t *node, images_enum type_image_p, float x_p, float y_p, char *next_stop_p) {
     fflush(stdout);
     pthread_mutex_lock(&lock_vehicle);
     node->data->width = x_p;

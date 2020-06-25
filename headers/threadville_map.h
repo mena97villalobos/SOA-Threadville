@@ -12,17 +12,17 @@ typedef struct ThreadvilleMap {
 
 ThreadvilleMap *create_threadville_map();
 
-void insert_highways(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_highways(Table *, TableStreetInfo *);
 
-void insert_bridges(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_bridges(Table *, TableStreetInfo *);
 
-void insert_roundabouts(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_roundabouts(Table *, TableStreetInfo *);
 
-void insert_stops(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_stops(Table *, TableStreetInfo *);
 
-void insert_streets(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_streets(Table *, TableStreetInfo *);
 
-void insert_corners(Table *, TableStreetInfo *, pthread_mutexattr_t *);
+void insert_corners(Table *, TableStreetInfo *);
 
 void insert_street_info_highways(TableStreetInfo *, HighwaysIds);
 

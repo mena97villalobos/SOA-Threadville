@@ -2,10 +2,11 @@
 #define PROYECTO3_HASH_TABLE_H
 
 #include <pthread.h>
+#include "priority_semaphore.h"
 
 typedef struct Node {
     int key;
-    pthread_mutex_t *val;
+    priority_semaphore *val;
     struct Node *next;
 } Node;
 
@@ -18,8 +19,8 @@ Table *create_table(int size);
 
 int hash_code(Table*, int);
 
-void insert(Table*, int, pthread_mutex_t*);
+void insert(Table*, int, priority_semaphore*);
 
-pthread_mutex_t *lookup(Table *t, int);
+priority_semaphore *lookup(Table *t, int);
 
 #endif //PROYECTO3_HASH_TABLE_H

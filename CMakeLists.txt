@@ -8,6 +8,7 @@ include_directories(src headers)
 
 add_executable(proyecto3
         headers/bus.h
+        headers/bridge_handlers.h
         headers/controller.h
         headers/dict.h
         headers/floyd.h
@@ -18,10 +19,12 @@ add_executable(proyecto3
         headers/interface.h
         headers/linked_list.h
         headers/linked_list_cars.h
+        headers/priority_semaphore.h
         headers/threadville_maintenance.h
         headers/threadville_map.h
         headers/utils.h
         headers/vehicle.h
+        src/bridge_handlers.c
         src/controller.c
         src/dict.c
         src/floyd.c
@@ -30,6 +33,7 @@ add_executable(proyecto3
         src/interface.c
         src/linked_list.c
         src/linked_lists_cars.c
+        src/priority_semaphore.c
         src/main.c
         src/threadville_maintenance.c
         src/threadville_map.c
