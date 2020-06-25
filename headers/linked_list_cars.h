@@ -6,7 +6,7 @@ typedef struct data_node {
     float width;
     float height;
     int type_image;
-    char next_stop[2];
+    char next_stop[20];
 } data_node;
 
 
