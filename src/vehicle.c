@@ -25,684 +25,519 @@ char *get_stop_id(int stop, int destinations_left) {
     switch (stop) {
         case A001S:
             sprintf(res, "%s-%d", "A1", destinations_left);
-            return res;
             break;
         case A002S:
             sprintf(res, "%s-%d", "A2", destinations_left);
-            return res;
             break;
         case A003S:
             sprintf(res, "%s-%d", "A3", destinations_left);
-            return res;
             break;
         case A004S:
             sprintf(res, "%s-%d", "A4", destinations_left);
-            return res;
             break;
         case A005S:
             sprintf(res, "%s-%d", "A5", destinations_left);
-            return res;
             break;
         case A006S:
             sprintf(res, "%s-%d", "A6", destinations_left);
-            return res;
             break;
         case A007S:
             sprintf(res, "%s-%d", "A7", destinations_left);
-            return res;
             break;
         case A008S:
             sprintf(res, "%s-%d", "A8", destinations_left);
-            return res;
             break;
         case B001S:
             sprintf(res, "%s-%d", "B1", destinations_left);
-            return res;
             break;
         case B002S:
             sprintf(res, "%s-%d", "B2", destinations_left);
-            return res;
             break;
         case B003S:
             sprintf(res, "%s-%d", "B3", destinations_left);
-            return res;
             break;
         case B004S:
             sprintf(res, "%s-%d", "B4", destinations_left);
-            return res;
             break;
         case B005S:
             sprintf(res, "%s-%d", "B5", destinations_left);
-            return res;
             break;
         case B006S:
             sprintf(res, "%s-%d", "B6", destinations_left);
-            return res;
             break;
         case B007S:
             sprintf(res, "%s-%d", "B7", destinations_left);
-            return res;
             break;
         case B008S:
             sprintf(res, "%s-%d", "B8", destinations_left);
-            return res;
             break;
         case C001S:
             sprintf(res, "%s-%d", "C1", destinations_left);
-            return res;
             break;
         case C002S:
             sprintf(res, "%s-%d", "C2", destinations_left);
-            return res;
             break;
         case C003S:
             sprintf(res, "%s-%d", "C3", destinations_left);
-            return res;
             break;
         case C004S:
             sprintf(res, "%s-%d", "C4", destinations_left);
-            return res;
             break;
         case C005S:
             sprintf(res, "%s-%d", "C5", destinations_left);
-            return res;
             break;
         case C006S:
             sprintf(res, "%s-%d", "C6", destinations_left);
-            return res;
             break;
         case C007S:
             sprintf(res, "%s-%d", "C7", destinations_left);
-            return res;
             break;
         case C008S:
             sprintf(res, "%s-%d", "C8", destinations_left);
-            return res;
             break;
         case D001S:
             sprintf(res, "%s-%d", "D1", destinations_left);
-            return res;
             break;
         case D002S:
             sprintf(res, "%s-%d", "D2", destinations_left);
-            return res;
             break;
         case D003S:
             sprintf(res, "%s-%d", "D3", destinations_left);
-            return res;
             break;
         case D004S:
             sprintf(res, "%s-%d", "D4", destinations_left);
-            return res;
             break;
         case D005S:
             sprintf(res, "%s-%d", "D5", destinations_left);
-            return res;
             break;
         case D006S:
             sprintf(res, "%s-%d", "D6", destinations_left);
-            return res;
             break;
         case D007S:
             sprintf(res, "%s-%d", "D7", destinations_left);
-            return res;
             break;
         case D008S:
             sprintf(res, "%s-%d", "D8", destinations_left);
-            return res;
             break;
         case E001S:
             sprintf(res, "%s-%d", "E1", destinations_left);
-            return res;
             break;
         case E002S:
             sprintf(res, "%s-%d", "E2", destinations_left);
-            return res;
             break;
         case E003S:
             sprintf(res, "%s-%d", "E3", destinations_left);
-            return res;
             break;
         case E004S:
             sprintf(res, "%s-%d", "E4", destinations_left);
-            return res;
             break;
         case E005S:
             sprintf(res, "%s-%d", "E5", destinations_left);
-            return res;
             break;
         case E006S:
             sprintf(res, "%s-%d", "E6", destinations_left);
-            return res;
             break;
         case E007S:
             sprintf(res, "%s-%d", "E7", destinations_left);
-            return res;
             break;
         case E008S:
             sprintf(res, "%s-%d", "E8", destinations_left);
-            return res;
             break;
         case F001S:
             sprintf(res, "%s-%d", "F1", destinations_left);
-            return res;
             break;
         case F002S:
             sprintf(res, "%s-%d", "F2", destinations_left);
-            return res;
             break;
         case F003S:
             sprintf(res, "%s-%d", "F3", destinations_left);
-            return res;
             break;
         case F004S:
             sprintf(res, "%s-%d", "F4", destinations_left);
-            return res;
             break;
         case F005S:
             sprintf(res, "%s-%d", "F5", destinations_left);
-            return res;
             break;
         case F006S:
             sprintf(res, "%s-%d", "F6", destinations_left);
-            return res;
             break;
         case F007S:
             sprintf(res, "%s-%d", "F7", destinations_left);
-            return res;
             break;
         case F008S:
             sprintf(res, "%s-%d", "F8", destinations_left);
-            return res;
             break;
         case S001S:
             sprintf(res, "%s-%d", "S1", destinations_left);
-            return res;
             break;
         case S002S:
             sprintf(res, "%s-%d", "S2", destinations_left);
-            return res;
             break;
         case S003S:
             sprintf(res, "%s-%d", "S3", destinations_left);
-            return res;
             break;
         case S004S:
             sprintf(res, "%s-%d", "S4", destinations_left);
-            return res;
             break;
         case S005S:
             sprintf(res, "%s-%d", "S5", destinations_left);
-            return res;
             break;
         case S006S:
             sprintf(res, "%s-%d", "S6", destinations_left);
-            return res;
             break;
         case S007S:
             sprintf(res, "%s-%d", "S7", destinations_left);
-            return res;
             break;
         case S008S:
             sprintf(res, "%s-%d", "S8", destinations_left);
-            return res;
             break;
         case T001S:
             sprintf(res, "%s-%d", "T1", destinations_left);
-            return res;
             break;
         case T002S:
             sprintf(res, "%s-%d", "T2", destinations_left);
-            return res;
             break;
         case T003S:
             sprintf(res, "%s-%d", "T3", destinations_left);
-            return res;
             break;
         case T004S:
             sprintf(res, "%s-%d", "T4", destinations_left);
-            return res;
             break;
         case T005S:
             sprintf(res, "%s-%d", "T5", destinations_left);
-            return res;
             break;
         case T006S:
             sprintf(res, "%s-%d", "T6", destinations_left);
-            return res;
             break;
         case T007S:
             sprintf(res, "%s-%d", "T7", destinations_left);
-            return res;
             break;
         case T008S:
             sprintf(res, "%s-%d", "T8", destinations_left);
-            return res;
             break;
         case U001S:
             sprintf(res, "%s-%d", "U1", destinations_left);
-            return res;
             break;
         case U002S:
             sprintf(res, "%s-%d", "U2", destinations_left);
-            return res;
             break;
         case U003S:
             sprintf(res, "%s-%d", "U3", destinations_left);
-            return res;
             break;
         case U004S:
             sprintf(res, "%s-%d", "U4", destinations_left);
-            return res;
             break;
         case U005S:
             sprintf(res, "%s-%d", "U5", destinations_left);
-            return res;
             break;
         case U006S:
             sprintf(res, "%s-%d", "U6", destinations_left);
-            return res;
             break;
         case U007S:
             sprintf(res, "%s-%d", "U7", destinations_left);
-            return res;
             break;
         case U008S:
             sprintf(res, "%s-%d", "U8", destinations_left);
-            return res;
             break;
         case V001S:
             sprintf(res, "%s-%d", "V1", destinations_left);
-            return res;
             break;
         case V002S:
             sprintf(res, "%s-%d", "V2", destinations_left);
-            return res;
             break;
         case V003S:
             sprintf(res, "%s-%d", "V3", destinations_left);
-            return res;
             break;
         case V004S:
             sprintf(res, "%s-%d", "V4", destinations_left);
-            return res;
             break;
         case V005S:
             sprintf(res, "%s-%d", "V5", destinations_left);
-            return res;
             break;
         case V006S:
             sprintf(res, "%s-%d", "V6", destinations_left);
-            return res;
             break;
         case V007S:
             sprintf(res, "%s-%d", "V7", destinations_left);
-            return res;
             break;
         case V008S:
             sprintf(res, "%s-%d", "V8", destinations_left);
-            return res;
             break;
         case W001S:
             sprintf(res, "%s-%d", "W1", destinations_left);
-            return res;
             break;
         case W002S:
             sprintf(res, "%s-%d", "W2", destinations_left);
-            return res;
             break;
         case W003S:
             sprintf(res, "%s-%d", "W3", destinations_left);
-            return res;
             break;
         case W004S:
             sprintf(res, "%s-%d", "W4", destinations_left);
-            return res;
             break;
         case W005S:
             sprintf(res, "%s-%d", "W5", destinations_left);
-            return res;
             break;
         case W006S:
             sprintf(res, "%s-%d", "W6", destinations_left);
-            return res;
             break;
         case W007S:
             sprintf(res, "%s-%d", "W7", destinations_left);
-            return res;
             break;
         case W008S:
             sprintf(res, "%s-%d", "W8", destinations_left);
-            return res;
             break;
         case X001S:
             sprintf(res, "%s-%d", "X1", destinations_left);
-            return res;
             break;
         case X002S:
             sprintf(res, "%s-%d", "X2", destinations_left);
-            return res;
             break;
         case X003S:
             sprintf(res, "%s-%d", "X3", destinations_left);
-            return res;
             break;
         case X004S:
             sprintf(res, "%s-%d", "X4", destinations_left);
-            return res;
             break;
         case X005S:
             sprintf(res, "%s-%d", "X5", destinations_left);
-            return res;
             break;
         case X006S:
             sprintf(res, "%s-%d", "X6", destinations_left);
-            return res;
             break;
         case X007S:
             sprintf(res, "%s-%d", "X7", destinations_left);
-            return res;
             break;
         case X008S:
             sprintf(res, "%s-%d", "X8", destinations_left);
-            return res;
             break;
         case G001S:
             sprintf(res, "%s-%d", "G1", destinations_left);
-            return res;
             break;
         case G002S:
             sprintf(res, "%s-%d", "G2", destinations_left);
-            return res;
             break;
         case G003S:
             sprintf(res, "%s-%d", "G3", destinations_left);
-            return res;
             break;
         case G004S:
             sprintf(res, "%s-%d", "G4", destinations_left);
-            return res;
             break;
         case G005S:
             sprintf(res, "%s-%d", "G5", destinations_left);
-            return res;
             break;
         case G006S:
             sprintf(res, "%s-%d", "G6", destinations_left);
-            return res;
             break;
         case H001S:
             sprintf(res, "%s-%d", "H1", destinations_left);
-            return res;
             break;
         case H002S:
             sprintf(res, "%s-%d", "H2", destinations_left);
-            return res;
             break;
         case H003S:
             sprintf(res, "%s-%d", "H3", destinations_left);
-            return res;
             break;
         case H004S:
             sprintf(res, "%s-%d", "H4", destinations_left);
-            return res;
             break;
         case H005S:
             sprintf(res, "%s-%d", "H5", destinations_left);
-            return res;
             break;
         case H006S:
             sprintf(res, "%s-%d", "H6", destinations_left);
-            return res;
             break;
         case I001S:
             sprintf(res, "%s-%d", "I1", destinations_left);
-            return res;
             break;
         case I002S:
             sprintf(res, "%s-%d", "I2", destinations_left);
-            return res;
             break;
         case I003S:
             sprintf(res, "%s-%d", "I3", destinations_left);
-            return res;
             break;
         case I004S:
             sprintf(res, "%s-%d", "I4", destinations_left);
-            return res;
             break;
         case I005S:
             sprintf(res, "%s-%d", "I5", destinations_left);
-            return res;
             break;
         case I006S:
             sprintf(res, "%s-%d", "I6", destinations_left);
-            return res;
             break;
         case J001S:
             sprintf(res, "%s-%d", "J1", destinations_left);
-            return res;
             break;
         case J002S:
             sprintf(res, "%s-%d", "J2", destinations_left);
-            return res;
             break;
         case J003S:
             sprintf(res, "%s-%d", "J3", destinations_left);
-            return res;
             break;
         case J004S:
             sprintf(res, "%s-%d", "J4", destinations_left);
-            return res;
             break;
         case J005S:
             sprintf(res, "%s-%d", "J5", destinations_left);
-            return res;
             break;
         case J006S:
             sprintf(res, "%s-%d", "J6", destinations_left);
-            return res;
             break;
         case K001S:
             sprintf(res, "%s-%d", "K1", destinations_left);
-            return res;
             break;
         case K002S:
             sprintf(res, "%s-%d", "K2", destinations_left);
-            return res;
             break;
         case K003S:
             sprintf(res, "%s-%d", "K3", destinations_left);
-            return res;
             break;
         case K004S:
             sprintf(res, "%s-%d", "K4", destinations_left);
-            return res;
             break;
         case K005S:
             sprintf(res, "%s-%d", "K5", destinations_left);
-            return res;
             break;
         case K006S:
             sprintf(res, "%s-%d", "K6", destinations_left);
-            return res;
             break;
         case L001S:
             sprintf(res, "%s-%d", "L1", destinations_left);
-            return res;
             break;
         case L002S:
             sprintf(res, "%s-%d", "L2", destinations_left);
-            return res;
             break;
         case L003S:
             sprintf(res, "%s-%d", "L3", destinations_left);
-            return res;
             break;
         case L004S:
             sprintf(res, "%s-%d", "L4", destinations_left);
-            return res;
             break;
         case L005S:
             sprintf(res, "%s-%d", "L5", destinations_left);
-            return res;
             break;
         case L006S:
             sprintf(res, "%s-%d", "L6", destinations_left);
-            return res;
             break;
         case M001S:
             sprintf(res, "%s-%d", "M1", destinations_left);
-            return res;
             break;
         case M002S:
             sprintf(res, "%s-%d", "M2", destinations_left);
-            return res;
             break;
         case M003S:
             sprintf(res, "%s-%d", "M3", destinations_left);
-            return res;
             break;
         case M004S:
             sprintf(res, "%s-%d", "M4", destinations_left);
-            return res;
             break;
         case M005S:
             sprintf(res, "%s-%d", "M5", destinations_left);
-            return res;
             break;
         case M006S:
             sprintf(res, "%s-%d", "M6", destinations_left);
-            return res;
             break;
         case N001S:
             sprintf(res, "%s-%d", "N1", destinations_left);
-            return res;
             break;
         case N002S:
             sprintf(res, "%s-%d", "N2", destinations_left);
-            return res;
             break;
         case N003S:
             sprintf(res, "%s-%d", "N3", destinations_left);
-            return res;
             break;
         case N004S:
             sprintf(res, "%s-%d", "N4", destinations_left);
-            return res;
             break;
         case N005S:
             sprintf(res, "%s-%d", "N5", destinations_left);
-            return res;
             break;
         case N006S:
             sprintf(res, "%s-%d", "N6", destinations_left);
-            return res;
             break;
         case O001S:
             sprintf(res, "%s-%d", "O1", destinations_left);
-            return res;
             break;
         case O002S:
             sprintf(res, "%s-%d", "O2", destinations_left);
-            return res;
             break;
         case O003S:
             sprintf(res, "%s-%d", "O3", destinations_left);
-            return res;
             break;
         case O004S:
             sprintf(res, "%s-%d", "O4", destinations_left);
-            return res;
             break;
         case O005S:
             sprintf(res, "%s-%d", "O5", destinations_left);
-            return res;
             break;
         case O006S:
             sprintf(res, "%s-%d", "O6", destinations_left);
-            return res;
             break;
         case P001S:
             sprintf(res, "%s-%d", "P1", destinations_left);
-            return res;
             break;
         case P002S:
             sprintf(res, "%s-%d", "P2", destinations_left);
-            return res;
             break;
         case P003S:
             sprintf(res, "%s-%d", "P3", destinations_left);
-            return res;
             break;
         case P004S:
             sprintf(res, "%s-%d", "P4", destinations_left);
-            return res;
             break;
         case P005S:
             sprintf(res, "%s-%d", "P5", destinations_left);
-            return res;
             break;
         case P006S:
             sprintf(res, "%s-%d", "P6", destinations_left);
-            return res;
             break;
         case Q001S:
             sprintf(res, "%s-%d", "Q1", destinations_left);
-            return res;
             break;
         case Q002S:
             sprintf(res, "%s-%d", "Q2", destinations_left);
-            return res;
             break;
         case Q003S:
             sprintf(res, "%s-%d", "Q3", destinations_left);
-            return res;
             break;
         case Q004S:
             sprintf(res, "%s-%d", "Q4", destinations_left);
-            return res;
             break;
         case Q005S:
             sprintf(res, "%s-%d", "Q5", destinations_left);
-            return res;
             break;
         case Q006S:
             sprintf(res, "%s-%d", "Q6", destinations_left);
-            return res;
             break;
         case R001S:
             sprintf(res, "%s-%d", "R1", destinations_left);
-            return res;
             break;
         case R002S:
             sprintf(res, "%s-%d", "R2", destinations_left);
-            return res;
             break;
         case R003S:
             sprintf(res, "%s-%d", "R3", destinations_left);
-            return res;
             break;
         case R004S:
             sprintf(res, "%s-%d", "R4", destinations_left);
-            return res;
             break;
         case R005S:
             sprintf(res, "%s-%d", "R5", destinations_left);
-            return res;
             break;
         case R006S:
             sprintf(res, "%s-%d", "R6", destinations_left);
-            return res;
             break;
         case Z006R:
             sprintf(res, "%s-%d", "Z6", destinations_left);
-            return res;
+            break;
+        case Y006R:
+            sprintf(res, "%s-%d", "Y6", destinations_left);
             break;
         default:
             return "";
             break;
     }
+    return res;
 }
 
 LinkedList *create_route(int start_point, int end_point) {
@@ -884,20 +719,10 @@ int is_bus(VehicleType type) {
     }
 }
 
-int *copy_destinations(int *d) {
-    int *destinations = calloc(get_destinations_size(d), sizeof(destinations));
-    int index = 0;
-    while (d[index] != -1) {
-        destinations[index] = d[index];
-        index++;
-    }
-    return destinations;
-}
-
 int get_destinations_size(const int *destinations) {
     int index = 0;
     while (destinations[index] != -1) index++;
-    return index + 1;
+    return index - 2;
 }
 
 void handle_normal_vehicle(Vehicle *vehicle) {
@@ -911,7 +736,6 @@ void handle_normal_vehicle(Vehicle *vehicle) {
             currentStreet = lookup(map->map, currentNode->destination_id);
             lock_priority_semaphore(5, currentStreet);
             usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
-            sleep(2);
             StreetInfo *streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
             edit_object_with_node(
                     vehicle->ui_info,
@@ -947,15 +771,13 @@ void handle_bus(Vehicle *vehicle) {
     LinkedList *busRouteCopy = copy_list(vehicle->current_route);
     // TODO MECANISMO PARA DETENER EL BUS
     while (1) {
-        while (vehicle->destinations[currentDestination] != -1 && vehicle->current_route->first_node != NULL) {
+        while (vehicle->current_route->first_node != NULL) {
             currentNode = vehicle->current_route->first_node;
             currentStreet = lookup(map->map, currentNode->destination_id);
 
             lock_priority_semaphore(5, currentStreet);
-            printf("Lock current\n");
             if (previousStreet != NULL) {
                 lock_priority_semaphore(0, previousStreet);
-                printf("Lock previous\n");
             }
 
             streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
@@ -965,7 +787,7 @@ void handle_bus(Vehicle *vehicle) {
                     streetInfo->x, streetInfo->y,
                     get_stop_id(
                             vehicle->destinations[currentDestination],
-                            get_destinations_size(vehicle->destinations) - currentDestination - 1
+                            get_destinations_size(vehicle->destinations) - (currentDestination - 1)
                     )
             );
             if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
@@ -973,7 +795,6 @@ void handle_bus(Vehicle *vehicle) {
                 currentDestination++;
             } else {
                 usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
-                usleep(0.5 * 1000000);
             }
             pop(vehicle->current_route);
 
@@ -983,7 +804,6 @@ void handle_bus(Vehicle *vehicle) {
             }
             previousStreet = currentStreet;
         }
-        fflush(stdout);
         currentDestination = 0;
         vehicle->current_route = copy_list(busRouteCopy);
     }
@@ -1017,11 +837,8 @@ void *handle_vehicle(void *arg) {
         default:
             break;
     }
-    printf("Entrando a posible seg fault\n");
     delete_object(vehicle->vehicle_id);
-    printf("Entrando a posible seg fault 2\n");
     free(vehicle);
-    printf("Saliendo Thread\n");
     return NULL;
 }
 

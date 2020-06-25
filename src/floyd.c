@@ -111,7 +111,7 @@ int *floyd_path_aux_fast(int i, int j, int *floyd_path) {
 int *floyd_path(int i, int j) {
     int path_buffer[NODES_COUNT*NODES_COUNT];
     path_buffer[0] = 0;
-    //floyd_path_aux(i, j, path_buffer);
+    // floyd_path_aux(i, j, path_buffer);
     floyd_path_aux_fast(i, j, path_buffer);
     int path_length = path_buffer[0];
     int *floyd_path = malloc(sizeof(int) * (path_length + 1)); // to accommodate for size as first index

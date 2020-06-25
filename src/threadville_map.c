@@ -4,7 +4,7 @@
 ThreadvilleMap *create_threadville_map() {
     ThreadvilleMap *threadvilleMap = create_shared_memory(sizeof(ThreadvilleMap));
     threadvilleMap->map = create_table(984);
-    threadvilleMap->streetInfoTable = create_table_street_info(954);
+    threadvilleMap->streetInfoTable = create_table_street_info(984);
 
     insert_highways(threadvilleMap->map, threadvilleMap->streetInfoTable);
     insert_bridges(threadvilleMap->map, threadvilleMap->streetInfoTable);

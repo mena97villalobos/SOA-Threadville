@@ -644,6 +644,7 @@ G.add_edge(926, 835, w=6)
 # R
 # Interconeccions
 G.add_edge(846, 929, w=6)
+G.add_edge(930, 853, w=6)
 #    R003C = 929,
 #    R004C = 930,
 
@@ -1295,8 +1296,6 @@ G.add_edge(746, 317, w=6)
 # L005S = 317,
 G.add_edge(318, 749, w=6)
 G.add_edge(749, 318, w=6)
-
-
 # L006S = 318,
 
 # #M
