@@ -7,9 +7,19 @@
 #include "interface.h"
 #include "floyd.h"
 #include "bus.h"
+#include <stdbool.h>
 
 #define AF_DISTANCE 48.0 // distance from A1 to F2
 
+extern bool isa_bred;
+extern bool isa_bgreen;
+extern bool isa_borange;
+extern bool isa_bblue;
+extern bool isa_bgray;
+extern bool isa_bpink;
+extern bool isa_blblue;
+extern bool isa_bwhite;
+extern bool isa_bblack;
 extern ThreadvilleMap *map;
 
 int random_stop_id() {
@@ -540,6 +550,31 @@ char *get_stop_id(int stop, int destinations_left) {
     return res;
 }
 
+bool get_actual_variable(VehicleType type) {
+    switch (type) {
+        case RED_BUS:
+            return isa_bred;
+        case GREEN_BUS:
+            return isa_bgreen;
+        case BLUE_BUS:
+            return isa_bblue;
+        case WHITE_BUS:
+            return isa_bwhite;
+        case GRAY_BUS:
+            return isa_bgray;
+        case BLACK_BUS:
+            return isa_bblack;
+        case PINK_BUS:
+            return isa_bpink;
+        case LIGHT_BLUE_BUS:
+            return isa_blblue;
+        case ORANGE_BUS:
+            return isa_borange;
+        default:
+            return false;
+    }
+}
+
 LinkedList *create_route(int start_point, int end_point) {
     LinkedList *l = create_linked_list();
     int *path = floyd_path(start_point, end_point);
@@ -628,6 +663,7 @@ float getVehicleSpeed(VehicleType type) {
 }
 
 Vehicle *create_bus(VehicleType type, VehicleDir dir) {
+    static int bus_id = 0;
     Vehicle *v = malloc(sizeof(Vehicle));
     float speed = getVehicleSpeed(type);
     if (speed < 0) {
@@ -647,7 +683,7 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
             v->current_route->first_node->destination_id
     );
     node_t *ui_info = create_object(
-            (int) (uintptr_t) v,
+            bus_id,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
             get_stop_id(
@@ -656,6 +692,8 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
             )
     );
     v->ui_info = ui_info;
+    v->vehicle_id = bus_id;
+    bus_id++;
     return v;
 }
 
@@ -762,6 +800,8 @@ void handle_normal_vehicle(Vehicle *vehicle) {
     }
 }
 
+
+
 void handle_bus(Vehicle *vehicle) {
     priority_semaphore *currentStreet = NULL;
     priority_semaphore *previousStreet = NULL;
@@ -770,8 +810,8 @@ void handle_bus(Vehicle *vehicle) {
     StreetInfo *streetInfo;
     LinkedList *busRouteCopy = copy_list(vehicle->current_route);
     // TODO MECANISMO PARA DETENER EL BUS
-    while (1) {
-        while (vehicle->current_route->first_node != NULL) {
+    while (get_actual_variable(vehicle->vehicleType)) {
+        while (vehicle->current_route->first_node != NULL && get_actual_variable(vehicle->vehicleType)) {
             currentNode = vehicle->current_route->first_node;
             currentStreet = lookup(map->map, currentNode->destination_id);
 
@@ -807,6 +847,13 @@ void handle_bus(Vehicle *vehicle) {
         currentDestination = 0;
         vehicle->current_route = copy_list(busRouteCopy);
     }
+
+    //Deter el bus
+    unlock_priority_semaphore(5, currentStreet);
+    if (previousStreet != NULL) {
+        unlock_priority_semaphore(0, previousStreet);
+    } 
+    delete_object(vehicle->vehicle_id);
 }
 
 void *handle_vehicle(void *arg) {

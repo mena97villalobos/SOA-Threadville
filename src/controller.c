@@ -10,6 +10,7 @@
 #include "vehicle.h"
 #include "utils.h"
 #include "priority_semaphore.h"
+#include <stdbool.h>
 
 extern GtkWidget *window;
 extern GtkBuilder *builder;
@@ -17,6 +18,16 @@ extern GtkBuilder *builder;
 extern int K;
 extern int M;
 extern int N;
+
+extern bool isa_bred;
+extern bool isa_bgreen;
+extern bool isa_borange;
+extern bool isa_bblue;
+extern bool isa_bgray;
+extern bool isa_bpink;
+extern bool isa_blblue;
+extern bool isa_bwhite;
+extern bool isa_bblack;
 
 //Definition funtions
 void change_botons_sensitive(char *active, char *desactive);
@@ -49,21 +60,6 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     pthread_t vehicle_thread;
     pthread_create(&vehicle_thread, NULL, &handle_vehicle, vi);
     pthread_detach(vehicle_thread);
-/*
-    semaphore_p = get_priority_semaphore();
-
-    pthread_t thread;
-    pthread_create(&thread, NULL, threadfunction, (void *) 1);
-    pthread_detach(thread); 
-
-    pthread_t thread1;
-    pthread_create(&thread1, NULL, threadfunction, (void *) 0);
-    pthread_detach(thread1); 
-
-    pthread_t thread2;
-    pthread_create(&thread2, NULL, threadfunction, (void *) 1);
-    pthread_detach(thread2); 
-*/
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
@@ -127,6 +123,7 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbr", "btn_cbr");
+    isa_bred  = true;
 
     Vehicle *v = create_bus(RED_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -138,10 +135,13 @@ void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_red(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbr", "btn_dbr");
+    isa_bred  = false;
+
 }
 
 void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbg", "btn_cbg");
+    isa_bgray  = true;
 
     Vehicle *v = create_bus(GRAY_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -153,10 +153,12 @@ void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_gray(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbg", "btn_dbg");
+    isa_bgray  = false;
 }
 
 void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbgr", "btn_cbgr");
+    isa_bgreen  = true;
 
     Vehicle *v = create_bus(GREEN_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -168,10 +170,12 @@ void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_green(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbgr", "btn_dbgr");
+    isa_bgreen  = false;
 }
 
 void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbp", "btn_cbp");
+    isa_bpink  = true;
 
     Vehicle *v = create_bus(PINK_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -183,10 +187,12 @@ void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_pink(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbp", "btn_dbp");
+    isa_bpink  = false;
 }
 
 void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbo", "btn_cbo");
+    isa_borange  = true;
 
     Vehicle *v = create_bus(ORANGE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -198,10 +204,12 @@ void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_orange(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbo", "btn_dbo");
+    isa_borange  = false;
 }
 
 void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dblb", "btn_cblb");
+    isa_blblue  = true;
 
     Vehicle *v = create_bus(LIGHT_BLUE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -213,10 +221,12 @@ void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_lblue(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cblb", "btn_dblb");
+    isa_blblue  = false;
 }
 
 void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbb", "btn_cbb");
+    isa_bblue   = true;
 
     Vehicle *v = create_bus(BLUE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -228,10 +238,12 @@ void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_blue(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbb", "btn_dbb");
+    isa_bblue   = false;
 }
 
 void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbw", "btn_cbw");
+    isa_bwhite   = true;
 
     Vehicle *v = create_bus(WHITE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -243,10 +255,12 @@ void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_white(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbw", "btn_dbw");
+    isa_bwhite   = false;
 }
 
 void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbbl", "btn_cbbl");
+    isa_bblack  = true;
 
     Vehicle *v = create_bus(BLACK_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -258,6 +272,7 @@ void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
 
 void on_press_btn_delete_bus_black(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_cbbl", "btn_dbbl");
+    isa_bblack  = false;
 }
 
 void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
@@ -342,6 +357,74 @@ void remove_spaces(char *s) {
             ++d;
         }
     } while ((*s++ = *d++));
+}
+
+
+int compare_string(char *s1, char *s2, int length) {
+    int i;
+    for (i = 0; i < length; ++i) {
+        if (s2[i] == '\0' || s1[i] != s2[i]) {
+            return 0;
+        }
+    }
+    if (s2[length] != '\0') {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+void create_vehicle_in_map(int type_vehicule, char *destinosSplit) {
+    int total = 3;
+    int actual_pos = 0;
+    int *destinations = (int *) malloc(total * sizeof(int));
+    int var = 0;
+
+    for (char *p = strtok(destinosSplit, ","); p != NULL; p = strtok(NULL, ",")) {
+        remove_spaces(p);
+        total += 1;
+        var = string_to_id(p);
+        destinations = (int *) realloc(destinations, total);
+        destinations[actual_pos] = var;
+        actual_pos += 1;
+    }
+
+    destinations[actual_pos] = Z006R;
+    destinations[actual_pos + 1] = -1;
+    destinations[actual_pos + 2] = '\0';
+
+    Vehicle *v = create_vehicle(type_vehicule, NORTH, destinations);
+    VehicleThreadInfo *vi = create_vehicle_thread_info(v);
+
+    pthread_t maintenance_thread;
+    pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
+    pthread_detach(maintenance_thread);
+}
+
+void active_all_buses(){
+
+
+    isa_bred  = true;
+    isa_bgreen  = true;
+    isa_borange  = true;
+    isa_bblue  = true;
+    isa_bgray  = true;
+    isa_bpink  = true;
+    isa_blblue  = true;
+    isa_bwhite  = true;
+    isa_bblack  = true;
+
+    for (int i = RED_BUS; i <= ORANGE_BUS; ++i)
+    {
+        Vehicle *v = create_bus(i, NORTH);
+        VehicleThreadInfo *vi = create_vehicle_thread_info(v);
+
+        pthread_t maintenance_thread;
+        pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
+        pthread_detach(maintenance_thread);
+    }
+
+
 }
 
 int string_to_id(char *s) {
@@ -685,45 +768,3 @@ int string_to_id(char *s) {
         return -1;
     }
 }
-
-int compare_string(char *s1, char *s2, int length) {
-    int i;
-    for (i = 0; i < length; ++i) {
-        if (s2[i] == '\0' || s1[i] != s2[i]) {
-            return 0;
-        }
-    }
-    if (s2[length] != '\0') {
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-void create_vehicle_in_map(int type_vehicule, char *destinosSplit) {
-    int total = 3;
-    int actual_pos = 0;
-    int *destinations = (int *) malloc(total * sizeof(int));
-    int var = 0;
-
-    for (char *p = strtok(destinosSplit, ","); p != NULL; p = strtok(NULL, ",")) {
-        remove_spaces(p);
-        total += 1;
-        var = string_to_id(p);
-        destinations = (int *) realloc(destinations, total);
-        destinations[actual_pos] = var;
-        actual_pos += 1;
-    }
-
-    destinations[actual_pos] = Z006R;
-    destinations[actual_pos + 1] = -1;
-    destinations[actual_pos + 2] = '\0';
-
-    Vehicle *v = create_vehicle(type_vehicule, NORTH, destinations);
-    VehicleThreadInfo *vi = create_vehicle_thread_info(v);
-
-    pthread_t maintenance_thread;
-    pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
-    pthread_detach(maintenance_thread);
-}
-

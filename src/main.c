@@ -5,6 +5,7 @@
 #include "threadville_map.h"
 #include "interface.h"
 #include "floyd.h"
+#include "controller.h"
 
 //Interface variables
 extern GtkWidget *window;
@@ -54,7 +55,7 @@ int main(int argc, char *argv[]) {
     input= GTK_WIDGET(gtk_builder_get_object(builder, "input_N"));
     sprintf(int_char, "%d", N);
     gtk_entry_set_text(GTK_ENTRY(input), int_char);
-
+    active_all_buses();
     gtk_main();
 
     return 0;

@@ -254,6 +254,7 @@
                               <object class="GtkButton" id="btn_cbr">
                                 <property name="label" translatable="yes">Red</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -272,7 +273,6 @@
                               <object class="GtkButton" id="btn_dbr">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -303,6 +303,7 @@
                               <object class="GtkButton" id="btn_cbg">
                                 <property name="label" translatable="yes">Gray</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -321,7 +322,6 @@
                               <object class="GtkButton" id="btn_dbg">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -364,6 +364,7 @@
                               <object class="GtkButton" id="btn_cbgr">
                                 <property name="label" translatable="yes">Green</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -382,7 +383,6 @@
                               <object class="GtkButton" id="btn_dbgr">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -413,6 +413,7 @@
                               <object class="GtkButton" id="btn_cbp">
                                 <property name="label" translatable="yes">Pink</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -431,7 +432,6 @@
                               <object class="GtkButton" id="btn_dbp">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -474,6 +474,7 @@
                               <object class="GtkButton" id="btn_cbo">
                                 <property name="label" translatable="yes">Orange</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -492,7 +493,6 @@
                               <object class="GtkButton" id="btn_dbo">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -523,6 +523,7 @@
                               <object class="GtkButton" id="btn_cblb">
                                 <property name="label" translatable="yes">L Blue</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -541,7 +542,6 @@
                               <object class="GtkButton" id="btn_dblb">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -584,6 +584,7 @@
                               <object class="GtkButton" id="btn_cbb">
                                 <property name="label" translatable="yes">Blue</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -602,7 +603,6 @@
                               <object class="GtkButton" id="btn_dbb">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -633,6 +633,7 @@
                               <object class="GtkButton" id="btn_cbw">
                                 <property name="label" translatable="yes">White</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -651,7 +652,6 @@
                               <object class="GtkButton" id="btn_dbw">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -694,6 +694,7 @@
                               <object class="GtkButton" id="btn_cbbl">
                                 <property name="label" translatable="yes">Black</property>
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
@@ -712,7 +713,6 @@
                               <object class="GtkButton" id="btn_dbbl">
                                 <property name="label" translatable="yes">Delete</property>
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="margin_left">2</property>
