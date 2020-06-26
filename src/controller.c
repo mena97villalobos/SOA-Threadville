@@ -299,6 +299,7 @@ void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Hilo disparado");
 
 }
 
@@ -390,6 +391,8 @@ int compare_string(char *s1, char *s2, int length) {
     }
 }
 
+
+// Revisar codigo posibles ciclos para paradas iguales seguidas, hay que ignorarlas
 void create_vehicle_in_map(int type_vehicule, char *destinosSplit) {
     int total = 3;
     int actual_pos = 0;

@@ -710,9 +710,7 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
     v->vehicleType = type;
     v->vehicleDir = dir;
 
-    if (is_bus(type)) {
-        create_bus_route(v);
-    }
+    create_bus_route(v);
 
     // Starting point is always Y006R
     StreetInfo *info = lookup_street_info(
@@ -800,24 +798,25 @@ int get_destinations_size(const int *destinations) {
     return index - 2;
 }
 
-void handle_normal_vehicle(Vehicle *vehicle) {
+void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
     int startDestination;
     int nextDestination = 0;
     priority_semaphore *currentStreet = NULL;
     priority_semaphore *beforeStreet = NULL;
+    NodeL *currentNode;
 
     while (1) {
         
         while (vehicle->current_route->first_node != NULL) {
-            NodeL *currentNode = vehicle->current_route->first_node;
+            currentNode = vehicle->current_route->first_node;
 
             beforeStreet = currentStreet;
 
             currentStreet = lookup(map->map, currentNode->destination_id);
-            lock_priority_semaphore(5, currentStreet);
+            lock_priority_semaphore(priority_value, currentStreet);
 
             if(beforeStreet != NULL){
-                unlock_priority_semaphore(5, beforeStreet);
+                unlock_priority_semaphore(priority_value, beforeStreet);
             }
 
             //Se pinte luego de obtener el semaforo
@@ -847,24 +846,32 @@ void handle_normal_vehicle(Vehicle *vehicle) {
             break;
         }
     }
+
+    unlock_priority_semaphore(priority_value, currentStreet);
 }
 
 void handle_bus(Vehicle *vehicle) {
     priority_semaphore *currentStreet = NULL;
     priority_semaphore *previousStreet = NULL;
+    priority_semaphore *previouspreviousStreet = NULL;
     NodeL *currentNode;
     int currentDestination = 0;
     StreetInfo *streetInfo;
     LinkedList *busRouteCopy = copy_list(vehicle->current_route);
+    
     // TODO MECANISMO PARA DETENER EL BUS
     while (get_actual_variable(vehicle->vehicleType)) {
         while (vehicle->current_route->first_node != NULL && get_actual_variable(vehicle->vehicleType)) {
             currentNode = vehicle->current_route->first_node;
-            currentStreet = lookup(map->map, currentNode->destination_id);
+            
+            previouspreviousStreet = previousStreet;
+            previousStreet = currentStreet;
 
+            currentStreet = lookup(map->map, currentNode->destination_id);
             lock_priority_semaphore(5, currentStreet);
-            if (previousStreet != NULL) {
-                lock_priority_semaphore(0, previousStreet);
+            
+            if (previouspreviousStreet != NULL) {
+                unlock_priority_semaphore(0, previouspreviousStreet);
             }
 
             streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
@@ -877,25 +884,30 @@ void handle_bus(Vehicle *vehicle) {
                             get_destinations_size(vehicle->destinations) - (currentDestination - 1)
                     )
             );
+
+            //Si llegue a una parada duermo 5 segundos
             if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
+                previouspreviousStreet = NULL;
+                
+                if (previousStreet != NULL) {
+                    unlock_priority_semaphore(0, previousStreet);
+                    previousStreet = NULL;
+                }
+
                 sleep(5);
                 currentDestination++;
             } else {
                 usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
             }
+
             pop(vehicle->current_route);
 
-            unlock_priority_semaphore(5, currentStreet);
-            if (previousStreet != NULL) {
-                unlock_priority_semaphore(0, previousStreet);
-            }
-            previousStreet = currentStreet;
         }
         currentDestination = 0;
         vehicle->current_route = copy_list(busRouteCopy);
     }
 
-    //Deter el bus
+    //Detener el bus
     delete_object(vehicle->vehicle_id);
     unlock_priority_semaphore(5, currentStreet);
     if (previousStreet != NULL) {
@@ -923,6 +935,7 @@ void *handle_vehicle(void *arg) {
             handle_bus(vehicle);
             break;
         case AMBULANCE:
+            handle_normal_vehicle(vehicle, 1);
             break;
         case RED_CAR:
         case BLUE_CAR:
@@ -930,7 +943,7 @@ void *handle_vehicle(void *arg) {
         case BLACK_CAR:
         case WHITE_CAR:
         case YELLOW_CAR:
-            handle_normal_vehicle(vehicle);
+            handle_normal_vehicle(vehicle, 5);
             break;
         default:
             break;

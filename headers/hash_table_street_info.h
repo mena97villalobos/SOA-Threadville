@@ -5,7 +5,8 @@ typedef enum StreetDir {
     NORTH_DIR,
     SOUTH_DIR,
     WEST_DIR,
-    EAST_DIR
+    EAST_DIR,
+    
 } StreetDir;
 
 typedef struct StreetInfo {
