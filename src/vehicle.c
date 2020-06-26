@@ -24,6 +24,12 @@ extern bool isa_bblack;
 extern ThreadvilleMap *map;
 extern GtkBuilder *builder;
 
+
+extern int moe_direction; // 0 libre, 1 arriba, -1 abajo
+extern pthread_mutex_t mutex_moe;
+extern int moe_cars;
+extern pthread_mutex_t check_mutex_moe;
+
 int random_stop_id() {
     return (rand() % (R006S - A001S + 1)) + A001S;
 }
@@ -813,6 +819,59 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
             beforeStreet = currentStreet;
 
             currentStreet = lookup(map->map, currentNode->destination_id);
+
+            //Bloqueo de llegada
+            if(currentNode->destination_id == B013B){ // Para abajo
+                pthread_mutex_lock(&check_mutex_moe);
+                if(moe_direction==0 || moe_direction==1){
+                    pthread_mutex_unlock(&check_mutex_moe);
+                    pthread_mutex_lock(&mutex_moe);
+                    moe_direction = -1;
+                    printf("%s\n", "Moe change direction to South");
+                    edit_semaphore(2, SEMAPHORED);
+
+                    pthread_mutex_lock(&check_mutex_moe);
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+
+                }else{
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+                }
+
+                
+
+            }else if (currentNode->destination_id == BU13B){//Para arriba
+                pthread_mutex_lock(&check_mutex_moe);
+                if(moe_direction==0 || moe_direction==-1){
+                    pthread_mutex_unlock(&check_mutex_moe);
+                    pthread_mutex_lock(&mutex_moe);
+                    moe_direction = 1;
+                    printf("%s\n", "Moe change direction to North");
+                    edit_semaphore(2, SEMAPHOREU);
+                    
+                    pthread_mutex_lock(&check_mutex_moe);
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+
+                }else{
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+                }
+
+
+            }
+
+            //Bloqueo de salida
+             if(currentNode->destination_id == B018B || currentNode->destination_id == BU18B){// Para abajo
+                pthread_mutex_lock(&check_mutex_moe);
+                moe_cars-=1;
+                if (moe_cars==0){
+                    pthread_mutex_unlock(&mutex_moe);
+                }
+                pthread_mutex_unlock(&check_mutex_moe);
+             } 
+
             lock_priority_semaphore(priority_value, currentStreet);
 
             if(beforeStreet != NULL){
@@ -895,6 +954,62 @@ void handle_bus(Vehicle *vehicle) {
             previousStreet = currentStreet;
 
             currentStreet = lookup(map->map, currentNode->destination_id);
+
+            //Bloqueo de llegada
+            if(currentNode->destination_id == B013B){ // Para abajo
+                pthread_mutex_lock(&check_mutex_moe);
+                if(moe_direction==0 || moe_direction==1){
+                    pthread_mutex_unlock(&check_mutex_moe);
+                    pthread_mutex_lock(&mutex_moe);
+                    moe_direction = -1;
+                    printf("%s\n", "Moe change direction to South");
+                    edit_semaphore(2, SEMAPHORED);
+
+                    pthread_mutex_lock(&check_mutex_moe);
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+
+                }else{
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+                }
+
+                
+
+            }else if (currentNode->destination_id == BU13B){//Para arriba
+                pthread_mutex_lock(&check_mutex_moe);
+                if(moe_direction==0 || moe_direction==-1){
+                    pthread_mutex_unlock(&check_mutex_moe);
+                    pthread_mutex_lock(&mutex_moe);
+                    moe_direction = 1;
+                    printf("%s\n", "Moe change direction to North");
+                    edit_semaphore(2, SEMAPHOREU);
+                    
+                    pthread_mutex_lock(&check_mutex_moe);
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+
+                }else{
+                    moe_cars+=1;
+                    pthread_mutex_unlock(&check_mutex_moe);
+                }
+
+
+            }
+
+            //Bloqueo de salida
+             if(currentNode->destination_id == B018B || currentNode->destination_id == BU18B){// Para abajo
+                pthread_mutex_lock(&check_mutex_moe);
+                moe_cars-=1;
+                if (moe_cars==0){
+                    pthread_mutex_unlock(&mutex_moe);
+                }
+                pthread_mutex_unlock(&check_mutex_moe);
+             } 
+
+
+
+
             lock_priority_semaphore(5, currentStreet);
             
             if (previouspreviousStreet != NULL) {
