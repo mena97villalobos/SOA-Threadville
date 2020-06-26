@@ -612,6 +612,16 @@ LinkedList *create_route(int start_point, int end_point) {
     return l;
 }
 
+LinkedList *create_route_aux(int start_point, int end_point) {
+    LinkedList *l = create_linked_list();
+    int *path = floyd_path(start_point, end_point);
+    for (int i = path[0]; i > 1; --i) {
+        push(l, create_node(path[i]));
+    }
+    free(path);
+    return l;
+}
+
 void create_bus_route(Vehicle *vehicle) {
     switch (vehicle->vehicleType) {
         case RED_BUS:
@@ -793,14 +803,24 @@ int get_destinations_size(const int *destinations) {
 void handle_normal_vehicle(Vehicle *vehicle) {
     int startDestination;
     int nextDestination = 0;
-    is_bus(vehicle->vehicleType);
     priority_semaphore *currentStreet = NULL;
+    priority_semaphore *beforeStreet = NULL;
+
     while (1) {
+        
         while (vehicle->current_route->first_node != NULL) {
             NodeL *currentNode = vehicle->current_route->first_node;
+
+            beforeStreet = currentStreet;
+
             currentStreet = lookup(map->map, currentNode->destination_id);
             lock_priority_semaphore(5, currentStreet);
-            usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
+
+            if(beforeStreet != NULL){
+                unlock_priority_semaphore(5, beforeStreet);
+            }
+
+            //Se pinte luego de obtener el semaforo
             StreetInfo *streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
             edit_object_with_node(
                     vehicle->ui_info,
@@ -808,19 +828,22 @@ void handle_normal_vehicle(Vehicle *vehicle) {
                     streetInfo->x, streetInfo->y,
                     get_stop_id(vehicle->destinations[nextDestination], 3 - nextDestination)
             );
+
+            //Duerma el tiempo que necesite para pasar la calle
+            usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
+            
+
             if (vehicle->current_route->first_node->next_node == NULL) {
                 startDestination = vehicle->current_route->first_node->destination_id;
             }
+
             pop(vehicle->current_route);
-            unlock_priority_semaphore(5, currentStreet);
         }
-        priority_semaphore *currentStop = lookup(map->map, vehicle->destinations[nextDestination]);
-        lock_priority_semaphore(5, currentStreet);
+
         sleep(3);
-        unlock_priority_semaphore(5, currentStreet);
         nextDestination++;
         if (vehicle->destinations[nextDestination] != -1) {
-            vehicle->current_route = create_route(startDestination, vehicle->destinations[nextDestination]);
+            vehicle->current_route = create_route_aux(startDestination, vehicle->destinations[nextDestination]);
         } else {
             break;
         }
