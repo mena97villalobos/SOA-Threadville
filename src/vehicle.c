@@ -864,16 +864,12 @@ void handle_bus(Vehicle *vehicle) {
         while (vehicle->current_route->first_node != NULL && get_actual_variable(vehicle->vehicleType)) {
             currentNode = vehicle->current_route->first_node;
             
-            previousStreet = currentStreet;
             previouspreviousStreet = previousStreet;
+            previousStreet = currentStreet;
 
             currentStreet = lookup(map->map, currentNode->destination_id);
             lock_priority_semaphore(5, currentStreet);
-            if (previousStreet != NULL) {
-                unlock_priority_semaphore(5, previousStreet);
-                lock_priority_semaphore(0, previousStreet);
-            }
-
+            
             if (previouspreviousStreet != NULL) {
                 unlock_priority_semaphore(0, previouspreviousStreet);
             }

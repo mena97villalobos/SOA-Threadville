@@ -32,8 +32,14 @@ _Noreturn void* run_maintenance(void *arg) {
         printf("Current Waiting Time: %f\n", current_waiting_time);
         fflush(stdout);
         sleep(current_waiting_time);
+
         threadville_id = random_threadville_id();
-        StreetInfo *streetInfo = lookup_street_info(map->streetInfoTable, threadville_id);
+        StreetInfo *streetInfo = NULL;
+        while(streetInfo==NULL){
+            threadville_id = random_threadville_id();
+            streetInfo = lookup_street_info(map->streetInfoTable, threadville_id);
+        }
+        
         priority_semaphore *mutex = lookup(map->map, threadville_id);
         lock_priority_semaphore(3, mutex);
         create_object(
