@@ -39,6 +39,9 @@ extern int joe_cars_waitu;
 extern int larry_cars_waitd;
 extern int joe_cars_waitd;
 
+
+extern pthread_mutex_t mutex_bus_active;
+
 int random_stop_id() {
     return (rand() % (R006S - A001S + 1)) + A001S;
 }
@@ -593,26 +596,38 @@ char *get_active_button(VehicleType type){
 }
 
 bool get_actual_variable(VehicleType type) {
+
+    pthread_mutex_lock(&mutex_bus_active);
     switch (type) {
         case RED_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bred;
         case GREEN_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bgreen;
         case BLUE_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bblue;
         case WHITE_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bwhite;
         case GRAY_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bgray;
         case BLACK_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bblack;
         case PINK_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_bpink;
         case LIGHT_BLUE_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_blblue;
         case ORANGE_BUS:
+        pthread_mutex_unlock(&mutex_bus_active);
             return isa_borange;
         default:
+        pthread_mutex_unlock(&mutex_bus_active);
             return false;
     }
 }

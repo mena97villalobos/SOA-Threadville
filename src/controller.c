@@ -29,6 +29,9 @@ extern bool isa_blblue;
 extern bool isa_bwhite;
 extern bool isa_bblack;
 
+extern pthread_mutex_t mutex_bus_active;
+extern pthread_mutex_t mutex_KMN;
+
 //Definition funtions
 void change_botons_sensitive(char *active, char *desactive);
 
@@ -131,7 +134,9 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbr", "btn_cbr");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bred  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(RED_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -145,14 +150,18 @@ void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_red(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbr", "btn_dbr");
     desactive_botons_sensitive("btn_dbr");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bred  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Red bus removal process started");
 }
 
 void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbg", "btn_cbg");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bgray  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(GRAY_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -166,14 +175,18 @@ void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_gray(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbg", "btn_dbg");
     desactive_botons_sensitive("btn_dbg");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bgray  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Gray bus removal process started");
 }
 
 void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbgr", "btn_cbgr");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bgreen  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(GREEN_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -187,13 +200,17 @@ void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_green(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbgr", "btn_dbgr");
     desactive_botons_sensitive("btn_dbgr");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bgreen  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Green bus removal process started");
 }
 
 void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
     change_botons_sensitive("btn_dbp", "btn_cbp");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bpink  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(PINK_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -208,14 +225,18 @@ void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_pink(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbp", "btn_dbp");
     desactive_botons_sensitive("btn_dbp");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bpink  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Pink bus removal process started");
 }
 
 void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbo", "btn_cbo");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_borange  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(ORANGE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -229,14 +250,18 @@ void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_orange(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbo", "btn_dbo");
     desactive_botons_sensitive("btn_dbo");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_borange  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Orange bus removal process started");
 }
 
 void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dblb", "btn_cblb");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_blblue  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(LIGHT_BLUE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -250,14 +275,18 @@ void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_lblue(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cblb", "btn_dblb");
     desactive_botons_sensitive("btn_dblb");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_blblue  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Light blue bus removal process started");
 }
 
 void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbb", "btn_cbb");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bblue   = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(BLUE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -271,14 +300,18 @@ void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_blue(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbb", "btn_dbb");
     desactive_botons_sensitive("btn_dbb");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bblue   = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Blue bus removal process started");
 }
 
 void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbw", "btn_cbw");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bwhite   = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(WHITE_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -292,14 +325,18 @@ void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_white(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbw", "btn_dbw");
     desactive_botons_sensitive("btn_dbw");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bwhite   = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "White bus removal process started");
 }
 
 void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
     
     change_botons_sensitive("btn_dbbl", "btn_cbbl");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bblack  = true;
+    pthread_mutex_unlock(&mutex_bus_active);
 
     Vehicle *v = create_bus(BLACK_BUS, NORTH);
     VehicleThreadInfo *vi = create_vehicle_thread_info(v);
@@ -313,7 +350,9 @@ void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
 void on_press_btn_delete_bus_black(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbbl", "btn_dbbl");
     desactive_botons_sensitive("btn_dbbl");
+    pthread_mutex_lock(&mutex_bus_active);
     isa_bblack  = false;
+    pthread_mutex_unlock(&mutex_bus_active);
     printf("%s\n", "Black bus removal process started");
 }
 
@@ -359,13 +398,16 @@ void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
 
 
     } else {
+        pthread_mutex_lock(&mutex_KMN);
         K = temp_k;
         M = temp_M;
         N = temp_N;
+        pthread_mutex_unlock(&mutex_KMN);
 
         printf("%s\n", "\033[0;36mValues are updated\033[0m");
     }
 
+    pthread_mutex_lock(&mutex_KMN);
     char int_char[5];
     sprintf(int_char, "%d", K);
     gtk_entry_set_text(GTK_ENTRY(input_K), int_char);
@@ -373,6 +415,7 @@ void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
     gtk_entry_set_text(GTK_ENTRY(input_M), int_char);
     sprintf(int_char, "%d", N);
     gtk_entry_set_text(GTK_ENTRY(input_N), int_char);
+    pthread_mutex_unlock(&mutex_KMN);
 }
 
 

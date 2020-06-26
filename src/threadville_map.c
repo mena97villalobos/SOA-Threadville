@@ -1974,37 +1974,37 @@ void insert_street_info_streets(TableStreetInfo *t, StreetIds id) {
             insert_street_info(t, id, create_street_info(0.5035, 0.040, NORTH_DIR));
             break;
         case D023P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.065, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.065, NORTH_DIR));
             break;
         case D022P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.090, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.090, NORTH_DIR));
             break;
         case D021P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.115, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.115, NORTH_DIR));
             break;
         case D020P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.138, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.138, NORTH_DIR));
             break;
         case D019P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.163, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.163, NORTH_DIR));
             break;
         case J018P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.226, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.226, NORTH_DIR));
             break;
         case J017P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.251, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.251, NORTH_DIR));
             break;
         case J016P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.275, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.275, NORTH_DIR));
             break;
         case J015P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.300, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.300, NORTH_DIR));
             break;
         case J014P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.323, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.323, NORTH_DIR));
             break;
         case J013P:
-            insert_street_info(t, id, create_street_info(0.5035, 0.345, SOUTH_DIR));
+            insert_street_info(t, id, create_street_info(0.5035, 0.345, NORTH_DIR));
             break;
 //Columna 7
         case D007P:

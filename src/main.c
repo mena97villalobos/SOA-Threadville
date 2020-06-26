@@ -164,16 +164,16 @@ int main(int argc, char *argv[]) {
     pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
     pthread_detach(maintenance_thread);
 
-//    // Curly bridge initialization
-//    startCurl(
-//            lookup(map->map, B007B),
-//            lookup(map->map, BU07B)
-//    );
-//    // Shemp bridge initialization
-//    startShemp(
-//            lookup(map->map, B019B),
-//            lookup(map->map, BU19B)
-//    );
+   // Curly bridge initialization
+   startCurl(
+           lookup(map->map, B007B),
+           lookup(map->map, BU07B)
+   );
+   // Shemp bridge initialization
+   startShemp(
+           lookup(map->map, B019B),
+           lookup(map->map, BU19B)
+   );
 //    // Larry bridge initialization
     startLarry(
             lookup(map->map, B001B),

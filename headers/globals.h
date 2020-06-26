@@ -16,11 +16,13 @@ GtkWidget *window;
 
 ThreadvilleMap *map;
 
+pthread_mutex_t mutex_KMN = PTHREAD_MUTEX_INITIALIZER;
 volatile int K = 5;
 volatile int M = 5;
 volatile int N = 5;
 
 
+pthread_mutex_t mutex_bus_active = PTHREAD_MUTEX_INITIALIZER;
 volatile bool isa_bred  = false;
 volatile bool isa_bgreen  = false;
 volatile bool isa_borange  = false;

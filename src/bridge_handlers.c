@@ -9,6 +9,8 @@
 #include <errno.h>
 #include <stdbool.h>
 
+extern pthread_mutex_t mutex_KMN;
+
 double elapsed_seconds(clock_t begin) {
     clock_t end = clock();
     return (double) (end - begin) / CLOCKS_PER_SEC;
@@ -97,14 +99,42 @@ bool can_chance(BridgesType type, bool direction){
     return false;
 }
 
+int get_k(){
+    extern int K;
+    int k_result;
+
+    pthread_mutex_lock(&mutex_KMN);
+    k_result = K;
+    pthread_mutex_unlock(&mutex_KMN);
+    return k_result;
+}
+
+int get_m(){
+    extern int M;
+    int m_result;
+
+    pthread_mutex_lock(&mutex_KMN);
+    m_result = M;
+    pthread_mutex_unlock(&mutex_KMN);
+    return m_result;
+}
+
+int get_n(){
+    extern int N;
+    int n_result;
+
+    pthread_mutex_lock(&mutex_KMN);
+    n_result = N;
+    pthread_mutex_unlock(&mutex_KMN);
+    return n_result;
+}
 
 _Noreturn
 void *handleLarryJoe(void *arg) {
     // Get side of the bridge
     // Check if direction must change
-    extern int K;
     struct timespec time;
-
+    int k_local;
 
     LarryJoeInformation *information = (LarryJoeInformation *) arg;
     pthread_cond_t *cond = get_conditional_mutex(information->type);
@@ -125,6 +155,7 @@ void *handleLarryJoe(void *arg) {
         bridge_image = SEMAPHORED;
     }
     while (1) {
+        k_local = get_k();
         pthread_mutex_lock(mutex);
 
         // See which side of the bridge should be available
@@ -137,7 +168,7 @@ void *handleLarryJoe(void *arg) {
         edit_semaphore(information->type, bridge_image);
         pthread_mutex_lock(&currentSemaphore->mutex);
 
-        while (local_counter < K) {
+        while (local_counter < k_local) {
             timespec_get(&time, TIME_UTC);
             time.tv_sec += 5;
             
@@ -176,8 +207,8 @@ void *handleLarryJoe(void *arg) {
 _Noreturn
 void *handleCurlyShemp(void *arg) {
     // Get side of the bridge
-    extern int M;
-    extern int N;
+    int M_local = get_m();
+    int N_local = get_n();
     CurlyShempInformation *information = (CurlyShempInformation *) arg;
     pthread_cond_t *cond = get_conditional_mutex(information->type);
     pthread_mutex_t *mutex = get_bridge_mutex(information->type);
@@ -188,13 +219,29 @@ void *handleCurlyShemp(void *arg) {
     if (information->direction) {
         prioritySemaphore = information->north_side;
         bridge_image = SEMAPHOREU;
-        seconds = &M;
+        seconds = &M_local;
     } else {
         prioritySemaphore = information->south_side;
         bridge_image = SEMAPHORED;
-        seconds = &N;
+        seconds = &N_local;
     }
     while (1) {
+        //Update values in real time
+        M_local = get_m();
+        N_local = get_n();
+        if (information->direction) {
+            prioritySemaphore = information->north_side;
+            bridge_image = SEMAPHOREU;
+            seconds = &M_local;
+        } else {
+            prioritySemaphore = information->south_side;
+            bridge_image = SEMAPHORED;
+            seconds = &N_local;
+        }
+        //Fin de update
+
+
+
         pthread_mutex_lock(mutex);
         // See which side of the bridge should be available
         if (information->direction != *information->nextDirection) {
