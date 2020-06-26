@@ -176,13 +176,13 @@ int main(int argc, char *argv[]) {
 //    // Larry bridge initialization
     startLarry(
             lookup(map->map, B001B),
-            lookup(map->map, BU06B)
+            lookup(map->map, BU01B)
     );
 //    // Joe bridge initialization
-//    startJoe(
-//            lookup(map->map, B025B),
-//            lookup(map->map, BU30B)
-//    );
+   startJoe(
+           lookup(map->map, B025B),
+           lookup(map->map, BU25B)
+   );
 
     //Conect xml with code with main code/variables
     window = GTK_WIDGET(gtk_builder_get_object(builder, "win_threadville"));

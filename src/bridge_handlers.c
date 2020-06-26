@@ -7,6 +7,7 @@
 #include <sys/mman.h>
 #include <interface.h>
 #include <errno.h>
+#include <stdbool.h>
 
 double elapsed_seconds(clock_t begin) {
     clock_t end = clock();
@@ -70,6 +71,33 @@ void error_pthread_cond_timedwait(const int timed_wait_rv) {
     }
 }
 
+
+bool can_chance(BridgesType type, bool direction){
+
+    extern int larry_cars_waitu;
+    extern int joe_cars_waitu;
+    extern int larry_cars_waitd;
+    extern int joe_cars_waitd;
+
+    // printf("%d\n", larry_cars_waitu);
+    // printf("%d\n", joe_cars_waitu);
+    // printf("%d\n", larry_cars_waitd);
+    // printf("%d\n", joe_cars_waitd);
+
+    if(type == LARRY && !direction && larry_cars_waitu>0){
+        return true;
+    }else if(type == LARRY && direction && larry_cars_waitd>0){
+        return true;
+    }else if(type == JOE && !direction && joe_cars_waitu>0){
+        return true;
+    }else if(type == JOE && direction && joe_cars_waitd>0){
+        return true;
+    }
+
+    return false;
+}
+
+
 _Noreturn
 void *handleLarryJoe(void *arg) {
     // Get side of the bridge
@@ -117,11 +145,21 @@ void *handleLarryJoe(void *arg) {
             const int res = pthread_cond_timedwait(&currentSemaphore->mutex_condition, &currentSemaphore->mutex,
                                                    &time);
             if (res) {
-                break;
+                if(can_chance(information->type ,information->direction) == true){
+                    break;
+                }
+            }else{
+                local_counter++;
             }
-            local_counter++;
-            printf("Semaforo liberado: %s\n", information->direction ? "South" : "North");
+            //printf("Semaforo liberado: %s\n", information->direction ? "South" : "North");
         }
+        if(information->type == LARRY){
+            printf("\033[0;31mLarry change direction to: %s\033[0m\n", information->direction ? "South" : "North");
+        }else{
+            printf("\033[0;31mJoe change direction to: %s\033[0m\n", information->direction ? "South" : "North");
+        }
+
+
         fflush(stdout);
         *information->nextDirection = !*information->nextDirection;
         local_counter = 0;

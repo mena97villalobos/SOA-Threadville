@@ -63,7 +63,7 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     pthread_create(&vehicle_thread, NULL, &handle_vehicle, vi);
     pthread_detach(vehicle_thread);
 
-    printf("%s\n", "Aleatory car created");
+    printf("%s\n", "\033[0;32mAleatory car created\033[0m");
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
@@ -113,7 +113,7 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
                 break;
         }
 
-        printf("%s\n", "Configured car created");
+        printf("%s\n", "\033[0;34mConfigured car created\033[0m");
 
     } else {
         GtkWidget *messageDialog = gtk_message_dialog_new(GTK_WINDOW(window),
@@ -331,7 +331,7 @@ void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
-    printf("%s\n", "Ambulance created");
+    printf("%s\n", "\033[0;33mAmbulance created\033[0m");
 
 }
 
@@ -363,7 +363,7 @@ void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
         M = temp_M;
         N = temp_N;
 
-        printf("%s\n", "Values are updated");
+        printf("%s\n", "\033[0;36mValues are updated\033[0m");
     }
 
     char int_char[5];

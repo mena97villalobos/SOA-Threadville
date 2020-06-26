@@ -31,11 +31,23 @@ volatile bool isa_blblue  = false;
 volatile bool isa_bwhite  = false;
 volatile bool isa_bblack  = false;
 
-
+//Moe variables
 int moe_direction = 0; // 0 libre, 1 arriba, -1 abajo
 pthread_mutex_t mutex_moe = PTHREAD_MUTEX_INITIALIZER;
 int moe_cars = 0;
 pthread_mutex_t check_mutex_moe = PTHREAD_MUTEX_INITIALIZER;
+
+
+//Larry and joe variables
+pthread_mutex_t mutex_larry_con = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_joe_con = PTHREAD_MUTEX_INITIALIZER;
+
+volatile int larry_cars_waitd = 0;
+volatile int joe_cars_waitd = 0;
+
+volatile int larry_cars_waitu = 0;
+volatile int joe_cars_waitu = 0;
+
 
 
 // Bridges data
