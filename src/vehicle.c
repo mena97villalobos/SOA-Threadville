@@ -838,7 +838,6 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
 
             pop(vehicle->current_route);
         }
-
         sleep(3);
         nextDestination++;
         if (vehicle->destinations[nextDestination] != -1) {
