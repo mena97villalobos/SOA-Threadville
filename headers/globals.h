@@ -16,9 +16,9 @@ GtkWidget *window;
 
 ThreadvilleMap *map;
 
-volatile int K = 0;
-volatile int M = 0;
-volatile int N = 0;
+volatile int K = 5;
+volatile int M = 5;
+volatile int N = 5;
 
 
 volatile bool isa_bred  = false;
@@ -37,5 +37,18 @@ pthread_mutex_t mutex_moe = PTHREAD_MUTEX_INITIALIZER;
 int moe_cars = 0;
 pthread_mutex_t check_mutex_moe = PTHREAD_MUTEX_INITIALIZER;
 
+
+// Bridges data
+pthread_mutex_t *mutex_larry;
+pthread_cond_t *cond_larry;
+
+pthread_mutex_t *mutex_joe;
+pthread_cond_t *cond_joe;
+
+pthread_mutex_t *mutex_curly;
+pthread_cond_t *cond_curly;
+
+pthread_mutex_t *mutex_shemp;
+pthread_cond_t *cond_shemp;
 
 #endif //PROYECTO3_GLOBALS_H
