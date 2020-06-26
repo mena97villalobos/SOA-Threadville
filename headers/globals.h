@@ -9,7 +9,7 @@
 #include <gtk/gtktypes.h>
 #include "threadville_map.h"
 #include <stdbool.h>
-
+#include <pthread.h>
 
 GtkBuilder *builder;
 GtkWidget *window;
@@ -30,5 +30,12 @@ volatile bool isa_bpink  = false;
 volatile bool isa_blblue  = false;
 volatile bool isa_bwhite  = false;
 volatile bool isa_bblack  = false;
+
+
+int moe_direction = 0; // 0 libre, 1 arriba, -1 abajo
+pthread_mutex_t mutex_moe = PTHREAD_MUTEX_INITIALIZER;
+int moe_cars = 0;
+pthread_mutex_t check_mutex_moe = PTHREAD_MUTEX_INITIALIZER;
+
 
 #endif //PROYECTO3_GLOBALS_H
