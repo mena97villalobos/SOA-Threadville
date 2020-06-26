@@ -850,6 +850,20 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
     unlock_priority_semaphore(priority_value, currentStreet);
 }
 
+
+StreetDir best_dirc(StreetDir currentDir_p,  StreetDir previousDir_p,  StreetDir previousprevious_p){
+    if (currentDir_p == previousDir_p){
+        return currentDir_p;
+    } else if (previousDir_p == previousprevious_p){
+        return previousDir_p;
+    }else if (currentDir_p == previousprevious_p){
+        return currentDir_p;
+    }else{
+        return currentDir_p;
+    }
+}
+
+
 void handle_bus(Vehicle *vehicle) {
     priority_semaphore *currentStreet = NULL;
     priority_semaphore *previousStreet = NULL;
@@ -858,6 +872,11 @@ void handle_bus(Vehicle *vehicle) {
     int currentDestination = 0;
     StreetInfo *streetInfo;
     LinkedList *busRouteCopy = copy_list(vehicle->current_route);
+
+    StreetDir currentDir = 0;
+    StreetDir previousDir = 0;
+    StreetDir previousprevious = 0;
+
     
     // TODO MECANISMO PARA DETENER EL BUS
     while (get_actual_variable(vehicle->vehicleType)) {
@@ -875,9 +894,20 @@ void handle_bus(Vehicle *vehicle) {
             }
 
             streetInfo = lookup_street_info(map->streetInfoTable, currentNode->destination_id);
+
+            ///Direcciones
+            previousprevious = previousDir;
+            previousDir = currentDir;
+            currentDir = streetInfo->dir;
+            if(previousStreet == NULL){
+                previousprevious = currentDir;
+                previousDir = currentDir;
+            }
+            ///
+
             edit_object_with_node(
                     vehicle->ui_info,
-                    from_vehicle_type(vehicle->vehicleType, streetInfo->dir),
+                    from_vehicle_type(vehicle->vehicleType, best_dirc(currentDir,previousDir, previousprevious)),
                     streetInfo->x, streetInfo->y,
                     get_stop_id(
                             vehicle->destinations[currentDestination],
