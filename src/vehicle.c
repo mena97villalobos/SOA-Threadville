@@ -877,6 +877,14 @@ void handle_bus(Vehicle *vehicle) {
     StreetDir previousDir = 0;
     StreetDir previousprevious = 0;
 
+    float currentX;
+    float currentY;
+    float previousX;
+    float previousY;
+
+    float useX;
+    float useY;
+
     
     // TODO MECANISMO PARA DETENER EL BUS
     while (get_actual_variable(vehicle->vehicleType)) {
@@ -899,16 +907,37 @@ void handle_bus(Vehicle *vehicle) {
             previousprevious = previousDir;
             previousDir = currentDir;
             currentDir = streetInfo->dir;
+
+            previousX = currentX;
+            previousY = currentY;
+            currentX = streetInfo->x;
+            currentY = streetInfo->y;
+
             if(previousStreet == NULL){
                 previousprevious = currentDir;
                 previousDir = currentDir;
+
+                previousX = currentX;
+                previousY = currentY;
             }
             ///
+            if(vehicle->destinations[currentDestination] == currentNode->destination_id){
+                useX = currentX;
+                useY = currentY;
+
+            }else if(best_dirc(currentDir,previousDir, previousprevious) == SOUTH_DIR || best_dirc(currentDir,previousDir, previousprevious) == EAST_DIR ){
+                useX = previousX;
+                useY = previousY;
+            }else{
+                useX = currentX;
+                useY = currentY;
+            }
 
             edit_object_with_node(
                     vehicle->ui_info,
                     from_vehicle_type(vehicle->vehicleType, best_dirc(currentDir,previousDir, previousprevious)),
-                    streetInfo->x, streetInfo->y,
+                    useX, 
+                    useY,
                     get_stop_id(
                             vehicle->destinations[currentDestination],
                             get_destinations_size(vehicle->destinations) - (currentDestination - 1)
