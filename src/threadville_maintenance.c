@@ -29,8 +29,6 @@ _Noreturn void* run_maintenance(void *arg) {
     pthread_t tid = pthread_self();
     current_waiting_time = ran_expo();
     while (1) {
-        printf("Current Waiting Time: %f\n", current_waiting_time);
-        fflush(stdout);
         sleep(current_waiting_time);
 
         threadville_id = random_threadville_id();
@@ -50,8 +48,6 @@ _Noreturn void* run_maintenance(void *arg) {
                 ""
         );
         maintenance_time = ((rand() % 4) + 1) * 5;
-        printf("Current Maintenance Time: %d\n", maintenance_time);
-        fflush(stdout);
         sleep(maintenance_time);
         unlock_priority_semaphore(3, mutex);
         delete_object(tid);

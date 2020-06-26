@@ -3,12 +3,15 @@
 
 #include <stdbool.h>
 
+#define NORTH_DIR_BRIDGE false
+#define SOUTH_DIR_BRIDGE true
+
 typedef enum BridgesType {
-    LARRY,
-    JOE,
-    CURLY,
-    SHEMP,
-    MOE
+    LARRY = 0,
+    CURLY = 1,
+    MOE   = 2,
+    SHEMP = 3,
+    JOE   = 4
 } BridgesType;
 
 typedef struct CurlyShempInformation {

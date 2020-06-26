@@ -11,7 +11,7 @@ void *create_shared_memory(size_t);
 
 pthread_condattr_t get_conditional_attribute();
 
-pthread_mutexattr_t get_mutex_attributes();
+pthread_mutexattr_t *get_mutex_attributes();
 
 pthread_mutex_t *get_mutex(pthread_mutexattr_t *);
 

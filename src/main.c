@@ -2,6 +2,7 @@
 #include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <threadville_maintenance.h>
+#include <bridge_handlers.h>
 #include "threadville_map.h"
 #include "interface.h"
 #include "floyd.h"
@@ -18,14 +19,136 @@ extern int K;
 extern int M;
 extern int N;
 
+//void startBridgeLarry() {
+//    pthread_t *tid;
+//    volatile int i;
+//    extern pthread_cond_t *cond_larry;
+//
+//    cond_larry = (pthread_cond_t *) malloc(sizeof(pthread_cond_t) * 2);
+//    tid = (pthread_t *) malloc(sizeof(pthread_t) * 2);
+//
+//    bool* nextDirection = create_shared_memory(sizeof(bool));
+//
+//    // Linking semaphores
+//    LarryJoeInformation* northInfo = createLarryJoeInfo(false, LARRY, nextDirection);
+//    LarryJoeInformation* southInfo = createLarryJoeInfo(true, LARRY, nextDirection);
+//
+//    pthread_create(&tid[0], NULL, handleCurlyShemp, (void *) northInfo);
+//    pthread_create(&tid[1], NULL, handleCurlyShemp, (void *) southInfo);
+//
+//    // waiting for thread
+//    for (i = 0; i < 2; i++) {
+//        pthread_join(tid[i], NULL);
+//    }
+//
+//}
+
+void startShemp(priority_semaphore *north, priority_semaphore *south) {
+    pthread_t *tid;
+    extern pthread_cond_t *cond_shemp;
+    extern pthread_mutex_t *mutex_shemp;
+    // allocate memory to cond (conditional variable),
+    // thread id's and array of size threads
+    cond_shemp = (pthread_cond_t *) create_shared_memory(sizeof(pthread_cond_t) * 2);
+    mutex_shemp = get_mutex(get_mutex_attributes());
+    tid = (pthread_t *) malloc(sizeof(pthread_t) * 2);
+
+    bool* nextDirection = create_shared_memory(sizeof(bool));
+
+    CurlyShempInformation* northInfo = createCurlyShempInfo(
+            NORTH_DIR_BRIDGE, SHEMP, nextDirection, north, south
+    );
+    CurlyShempInformation* southInfo = createCurlyShempInfo(
+            SOUTH_DIR_BRIDGE, SHEMP, nextDirection, north, south
+    );
+
+    pthread_create(&tid[0], NULL, handleCurlyShemp, (void *) northInfo);
+    pthread_detach(tid[0]);
+    pthread_create(&tid[1], NULL, handleCurlyShemp, (void *) southInfo);
+    pthread_detach(tid[1]);
+}
+
+void startCurl(priority_semaphore *north, priority_semaphore *south) {
+    pthread_t *tid;
+    extern pthread_cond_t *cond_curly;
+    extern pthread_mutex_t *mutex_curly;
+    // allocate memory to cond (conditional variable),
+    // thread id's and array of size threads
+    cond_curly = (pthread_cond_t *) create_shared_memory(sizeof(pthread_cond_t) * 2);
+    mutex_curly = get_mutex(get_mutex_attributes());
+    tid = (pthread_t *) malloc(sizeof(pthread_t) * 2);
+
+    bool* nextDirection = create_shared_memory(sizeof(bool));
+
+    CurlyShempInformation* northInfo = createCurlyShempInfo(
+            NORTH_DIR_BRIDGE, CURLY, nextDirection, north, south
+    );
+    CurlyShempInformation* southInfo = createCurlyShempInfo(
+            SOUTH_DIR_BRIDGE, CURLY, nextDirection, north, south
+    );
+
+    pthread_create(&tid[0], NULL, handleCurlyShemp, (void *) southInfo);
+    pthread_create(&tid[1], NULL, handleCurlyShemp, (void *) northInfo);
+    pthread_detach(tid[0]);
+    pthread_detach(tid[1]);
+}
+
+void startLarry(priority_semaphore *north, priority_semaphore *south) {
+    pthread_t *tid;
+    extern pthread_cond_t *cond_larry;
+    extern pthread_mutex_t *mutex_larry;
+
+    // allocate memory to cond (conditional variable),
+    // thread id's and array of size threads
+    cond_larry = (pthread_cond_t *) create_shared_memory(sizeof(pthread_cond_t) * 2);
+    mutex_larry = get_mutex(get_mutex_attributes());
+    tid = (pthread_t *) malloc(sizeof(pthread_t) * 2);
+
+    bool* nextDirection = create_shared_memory(sizeof(bool));
+
+    LarryJoeInformation* northInfo = createLarryJoeInfo(
+            NORTH_DIR_BRIDGE, LARRY, nextDirection, north, south
+    );
+    LarryJoeInformation* southInfo = createLarryJoeInfo(
+            SOUTH_DIR_BRIDGE, LARRY, nextDirection, north, south
+    );
+
+    pthread_create(&tid[0], NULL, handleLarryJoe, (void *) northInfo);
+    pthread_create(&tid[1], NULL, handleLarryJoe, (void *) southInfo);
+    pthread_detach(tid[0]);
+    pthread_detach(tid[1]);
+}
+
+void startJoe(priority_semaphore *north, priority_semaphore *south) {
+    pthread_t *tid;
+    extern pthread_cond_t *cond_joe;
+    extern pthread_mutex_t *mutex_joe;
+
+    // allocate memory to cond (conditional variable),
+    // thread id's and array of size threads
+    cond_joe = (pthread_cond_t *) create_shared_memory(sizeof(pthread_cond_t) * 2);
+    mutex_joe = get_mutex(get_mutex_attributes());
+    tid = (pthread_t *) malloc(sizeof(pthread_t) * 2);
+
+    bool* nextDirection = create_shared_memory(sizeof(bool));
+
+    LarryJoeInformation* northInfo = createLarryJoeInfo(
+            NORTH_DIR_BRIDGE, JOE, nextDirection, north, south
+    );
+    LarryJoeInformation* southInfo = createLarryJoeInfo(
+            SOUTH_DIR_BRIDGE, JOE, nextDirection, north, south
+    );
+
+    pthread_create(&tid[0], NULL, handleLarryJoe, (void *) northInfo);
+    pthread_create(&tid[1], NULL, handleLarryJoe, (void *) southInfo);
+    pthread_detach(tid[0]);
+    pthread_detach(tid[1]);
+}
+
 int main(int argc, char *argv[]) {
 //    floyd();  //Solo hay que ejecutarlo una vez para crear el archivo y ya
 //    generate_file();
     map = create_threadville_map();
-
-    pthread_t maintenance_thread;
-    pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
-    pthread_detach(maintenance_thread);
 
     //Init
     gtk_init(&argc, &argv);
@@ -34,6 +157,32 @@ int main(int argc, char *argv[]) {
     //Add glade files
     builder = gtk_builder_new();
     gtk_builder_add_from_file(builder, "glade/threadville.glade", NULL);
+
+    // Maintenance thread
+    pthread_t maintenance_thread;
+    pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
+    pthread_detach(maintenance_thread);
+
+//    // Curly bridge initialization
+//    startCurl(
+//            lookup(map->map, B007B),
+//            lookup(map->map, BU07B)
+//    );
+//    // Shemp bridge initialization
+//    startShemp(
+//            lookup(map->map, B019B),
+//            lookup(map->map, BU19B)
+//    );
+//    // Larry bridge initialization
+    startLarry(
+            lookup(map->map, B001B),
+            lookup(map->map, BU06B)
+    );
+//    // Joe bridge initialization
+//    startJoe(
+//            lookup(map->map, B025B),
+//            lookup(map->map, BU30B)
+//    );
 
     //Conect xml with code with main code/variables
     window = GTK_WIDGET(gtk_builder_get_object(builder, "win_threadville"));
