@@ -17,10 +17,6 @@ struct DataItem {
   float real_w;
   GdkPixbuf *image;
   GdkPixbuf *trans_image;
-  float r;
-  float g;
-  float b;
-
 };
 
 int hashCode(int key, int size);
