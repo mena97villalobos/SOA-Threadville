@@ -82,6 +82,9 @@ typedef enum {
     YELLOWCARF
 } images_enum;
 
+
+void print_wellcome();
+
 void load_interface();
 
 gboolean on_window_draw(GtkWidget *widget, cairo_t *cr, gpointer user_data);
