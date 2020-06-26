@@ -403,9 +403,11 @@ void create_vehicle_in_map(int type_vehicule, char *destinosSplit) {
         remove_spaces(p);
         total += 1;
         var = string_to_id(p);
-        destinations = (int *) realloc(destinations, total);
-        destinations[actual_pos] = var;
-        actual_pos += 1;
+        if (destinations[actual_pos - 1] != var) {
+            destinations = (int *) realloc(destinations, total);
+            destinations[actual_pos] = var;
+            actual_pos += 1;
+        }
     }
 
     destinations[actual_pos] = Z006R;
