@@ -75,7 +75,9 @@ void *handleLarryJoe(void *arg) {
     // Get side of the bridge
     // Check if direction must change
     extern int K;
-    struct timespec max_wait = {500000000, 5000000000000000000};
+    struct timespec time;
+
+
     LarryJoeInformation *information = (LarryJoeInformation *) arg;
     pthread_cond_t *cond = get_conditional_mutex(information->type);
     pthread_mutex_t *mutex = get_bridge_mutex(information->type);
@@ -96,6 +98,7 @@ void *handleLarryJoe(void *arg) {
     }
     while (1) {
         pthread_mutex_lock(mutex);
+
         // See which side of the bridge should be available
         if (information->direction != *information->nextDirection) {
             // Sleep if is this side should not be available
@@ -107,9 +110,12 @@ void *handleLarryJoe(void *arg) {
         pthread_mutex_lock(&currentSemaphore->mutex);
 
         while (local_counter < K) {
+            timespec_get(&time, TIME_UTC);
+            time.tv_sec += 5;
+            
             // pthread_cond_wait(&currentSemaphore->mutex_condition, &currentSemaphore->mutex);
             const int res = pthread_cond_timedwait(&currentSemaphore->mutex_condition, &currentSemaphore->mutex,
-                                                   &max_wait);
+                                                   &time);
             if (res) {
                 break;
             }
