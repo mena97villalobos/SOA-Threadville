@@ -62,11 +62,12 @@ void on_press_btn_create_car_aleatory(GtkWidget *widget, gpointer user_data) {
     pthread_t vehicle_thread;
     pthread_create(&vehicle_thread, NULL, &handle_vehicle, vi);
     pthread_detach(vehicle_thread);
+
+    printf("%s\n", "Aleatory car created");
 }
 
 void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
-    printf("%s\n", "Carro configurado creado");
-
+    
     GtkWidget *input_stops = GTK_WIDGET(gtk_builder_get_object(builder, "input_stops"));
     GtkWidget *type_vehicule = GTK_WIDGET(gtk_builder_get_object(builder, "cb_type_cars"));
     int active = gtk_combo_box_get_active(GTK_COMBO_BOX(type_vehicule));
@@ -76,6 +77,7 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
     strcpy(destinosSplit_test, destino);
 
     if (length > 0 && val_input(destinosSplit_test)) {
+        
         char destinosSplit_final[length];
         strcpy(destinosSplit_final, destino);
         switch (active) {
@@ -110,6 +112,9 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
             default:
                 break;
         }
+
+        printf("%s\n", "Configured car created");
+
     } else {
         GtkWidget *messageDialog = gtk_message_dialog_new(GTK_WINDOW(window),
                                                           GTK_DIALOG_MODAL,
@@ -124,6 +129,7 @@ void on_press_btn_create_car_config(GtkWidget *widget, gpointer user_data) {
 }
 
 void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbr", "btn_cbr");
     isa_bred  = true;
 
@@ -133,16 +139,18 @@ void on_press_btn_create_bus_red(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Red bus created");
 }
 
 void on_press_btn_delete_bus_red(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbr", "btn_dbr");
     desactive_botons_sensitive("btn_dbr");
     isa_bred  = false;
-
+    printf("%s\n", "Red bus removal process started");
 }
 
 void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbg", "btn_cbg");
     isa_bgray  = true;
 
@@ -152,15 +160,18 @@ void on_press_btn_create_bus_gray(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Gray bus created");
 }
 
 void on_press_btn_delete_bus_gray(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbg", "btn_dbg");
     desactive_botons_sensitive("btn_dbg");
     isa_bgray  = false;
+    printf("%s\n", "Gray bus removal process started");
 }
 
 void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbgr", "btn_cbgr");
     isa_bgreen  = true;
 
@@ -170,12 +181,14 @@ void on_press_btn_create_bus_green(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Green bus created");
 }
 
 void on_press_btn_delete_bus_green(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbgr", "btn_dbgr");
     desactive_botons_sensitive("btn_dbgr");
     isa_bgreen  = false;
+    printf("%s\n", "Green bus removal process started");
 }
 
 void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
@@ -188,15 +201,19 @@ void on_press_btn_create_bus_pink(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Pink bus created");
+
 }
 
 void on_press_btn_delete_bus_pink(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbp", "btn_dbp");
     desactive_botons_sensitive("btn_dbp");
     isa_bpink  = false;
+    printf("%s\n", "Pink bus removal process started");
 }
 
 void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbo", "btn_cbo");
     isa_borange  = true;
 
@@ -206,15 +223,18 @@ void on_press_btn_create_bus_orange(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Orange bus created");
 }
 
 void on_press_btn_delete_bus_orange(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbo", "btn_dbo");
     desactive_botons_sensitive("btn_dbo");
     isa_borange  = false;
+    printf("%s\n", "Orange bus removal process started");
 }
 
 void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dblb", "btn_cblb");
     isa_blblue  = true;
 
@@ -224,15 +244,18 @@ void on_press_btn_create_bus_lblue(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Light blue bus created");
 }
 
 void on_press_btn_delete_bus_lblue(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cblb", "btn_dblb");
     desactive_botons_sensitive("btn_dblb");
     isa_blblue  = false;
+    printf("%s\n", "Light blue bus removal process started");
 }
 
 void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbb", "btn_cbb");
     isa_bblue   = true;
 
@@ -242,15 +265,18 @@ void on_press_btn_create_bus_blue(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Blue bus created");
 }
 
 void on_press_btn_delete_bus_blue(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbb", "btn_dbb");
     desactive_botons_sensitive("btn_dbb");
     isa_bblue   = false;
+    printf("%s\n", "Blue bus removal process started");
 }
 
 void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbw", "btn_cbw");
     isa_bwhite   = true;
 
@@ -260,15 +286,18 @@ void on_press_btn_create_bus_white(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "White bus created");
 }
 
 void on_press_btn_delete_bus_white(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbw", "btn_dbw");
     desactive_botons_sensitive("btn_dbw");
     isa_bwhite   = false;
+    printf("%s\n", "White bus removal process started");
 }
 
 void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
+    
     change_botons_sensitive("btn_dbbl", "btn_cbbl");
     isa_bblack  = true;
 
@@ -278,15 +307,18 @@ void on_press_btn_create_bus_black(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
+    printf("%s\n", "Black bus created");
 }
 
 void on_press_btn_delete_bus_black(GtkWidget *widget, gpointer user_data) {
     //change_botons_sensitive("btn_cbbl", "btn_dbbl");
     desactive_botons_sensitive("btn_dbbl");
     isa_bblack  = false;
+    printf("%s\n", "Black bus removal process started");
 }
 
 void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
+    
     int *destinations = calloc(4, sizeof(int));
     destinations[0] = random_stop_id();
     destinations[1] = random_stop_id();
@@ -299,7 +331,7 @@ void on_press_btn_create_ambulance(GtkWidget *widget, gpointer user_data) {
     pthread_t maintenance_thread;
     pthread_create(&maintenance_thread, NULL, &handle_vehicle, vi);
     pthread_detach(maintenance_thread);
-    printf("%s\n", "Hilo disparado");
+    printf("%s\n", "Ambulance created");
 
 }
 
@@ -330,6 +362,8 @@ void on_press_btn_update_values(GtkWidget *widget, gpointer user_data) {
         K = temp_k;
         M = temp_M;
         N = temp_N;
+
+        printf("%s\n", "Values are updated");
     }
 
     char int_char[5];
