@@ -8,6 +8,7 @@
 #include "floyd.h"
 #include "bus.h"
 #include <stdbool.h>
+#include<time.h> 
 
 #define AF_DISTANCE 48.0 // distance from A1 to F2
 
@@ -42,11 +43,26 @@ extern int joe_cars_waitd;
 
 extern pthread_mutex_t mutex_bus_active;
 
+static int global_id = 0;
+
+pthread_mutex_t mutex_global_id = PTHREAD_MUTEX_INITIALIZER;
+
+int get_global_id(){
+    int result = 0;
+    pthread_mutex_lock(&mutex_global_id);
+    result = global_id;
+    global_id +=1;
+    pthread_mutex_unlock(&mutex_global_id);
+    return result;
+}
+
 int random_stop_id() {
+    srand(time(0)); 
     return (rand() % (R006S - A001S + 1)) + A001S;
 }
 
 int random_car_id() {
+    srand(time(0)); 
     return (rand() % (YELLOW_CAR - RED_CAR + 1)) + RED_CAR;
 }
 
@@ -730,7 +746,7 @@ float getVehicleSpeed(VehicleType type) {
 }
 
 Vehicle *create_bus(VehicleType type, VehicleDir dir) {
-    static int bus_id = 0;
+    int actual_id = get_global_id();
     Vehicle *v = malloc(sizeof(Vehicle));
     float speed = getVehicleSpeed(type);
     if (speed < 0) {
@@ -748,7 +764,7 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
             v->current_route->first_node->destination_id
     );
     node_t *ui_info = create_object(
-            bus_id,
+            actual_id,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
             get_stop_id(
@@ -757,13 +773,12 @@ Vehicle *create_bus(VehicleType type, VehicleDir dir) {
             )
     );
     v->ui_info = ui_info;
-    v->vehicle_id = bus_id;
-    bus_id++;
+    v->vehicle_id = actual_id;
     return v;
 }
 
 Vehicle *create_vehicle(VehicleType type, VehicleDir dir, int *destinations) {
-    static int vehicle_id = 0;
+    int actual_id = get_global_id();
     Vehicle *v = malloc(sizeof(Vehicle));
     float speed = getVehicleSpeed(type);
     if (speed < 0) {
@@ -781,7 +796,7 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir, int *destinations) {
             v->current_route->first_node->destination_id
     );
     node_t *ui_info = create_object(
-            vehicle_id,
+            actual_id,
             from_vehicle_type(type, info->dir),
             info->x, info->y,
             get_stop_id(
@@ -790,8 +805,7 @@ Vehicle *create_vehicle(VehicleType type, VehicleDir dir, int *destinations) {
             )
     );
     v->ui_info = ui_info;
-    v->vehicle_id = vehicle_id;
-    vehicle_id++;
+    v->vehicle_id = actual_id;
     return v;
 }
 

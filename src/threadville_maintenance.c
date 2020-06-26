@@ -7,8 +7,10 @@
 #include "utils.h"
 #include "interface.h"
 #include "globals.h"
+#include<time.h> 
 
 double ran_expo() {
+    srand(time(0));
     double u;
     u = rand() / (RAND_MAX + 1.0);
     // Mean value of 40 -> lambda = 0.025
