@@ -72,7 +72,7 @@ VehicleThreadInfo *create_vehicle_thread_info(Vehicle *);
 
 void *handle_vehicle(void *arg);
 
-void handle_normal_vehicle(Vehicle *vehicle);
+void handle_normal_vehicle(Vehicle *vehicle, int priority_value);
 
 void handle_bus(Vehicle *vehicle);
 
