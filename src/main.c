@@ -43,7 +43,10 @@ extern int N;
 //
 //}
 
-void startShemp(priority_semaphore *north, priority_semaphore *south) {
+void startShemp(
+        int start_north_id, int end_north_id,
+        int start_south_id, int end_south_id
+) {
     pthread_t *tid;
     extern pthread_cond_t *cond_shemp;
     extern pthread_mutex_t *mutex_shemp;
@@ -56,10 +59,14 @@ void startShemp(priority_semaphore *north, priority_semaphore *south) {
     bool* nextDirection = create_shared_memory(sizeof(bool));
 
     CurlyShempInformation* northInfo = createCurlyShempInfo(
-            NORTH_DIR_BRIDGE, SHEMP, nextDirection, north, south
+            NORTH_DIR_BRIDGE, SHEMP, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
     CurlyShempInformation* southInfo = createCurlyShempInfo(
-            SOUTH_DIR_BRIDGE, SHEMP, nextDirection, north, south
+            SOUTH_DIR_BRIDGE, SHEMP, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
 
     pthread_create(&tid[0], NULL, handleCurlyShemp, (void *) northInfo);
@@ -68,7 +75,8 @@ void startShemp(priority_semaphore *north, priority_semaphore *south) {
     pthread_detach(tid[1]);
 }
 
-void startCurl(priority_semaphore *north, priority_semaphore *south) {
+void startCurl(int start_north_id, int end_north_id,
+               int start_south_id, int end_south_id) {
     pthread_t *tid;
     extern pthread_cond_t *cond_curly;
     extern pthread_mutex_t *mutex_curly;
@@ -81,10 +89,14 @@ void startCurl(priority_semaphore *north, priority_semaphore *south) {
     bool* nextDirection = create_shared_memory(sizeof(bool));
 
     CurlyShempInformation* northInfo = createCurlyShempInfo(
-            NORTH_DIR_BRIDGE, CURLY, nextDirection, north, south
+            NORTH_DIR_BRIDGE, CURLY, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
     CurlyShempInformation* southInfo = createCurlyShempInfo(
-            SOUTH_DIR_BRIDGE, CURLY, nextDirection, north, south
+            SOUTH_DIR_BRIDGE, CURLY, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
 
     pthread_create(&tid[0], NULL, handleCurlyShemp, (void *) southInfo);
@@ -93,7 +105,8 @@ void startCurl(priority_semaphore *north, priority_semaphore *south) {
     pthread_detach(tid[1]);
 }
 
-void startLarry(priority_semaphore *north, priority_semaphore *south) {
+void startLarry(int start_north_id, int end_north_id,
+                int start_south_id, int end_south_id) {
     pthread_t *tid;
     extern pthread_cond_t *cond_larry;
     extern pthread_mutex_t *mutex_larry;
@@ -107,10 +120,14 @@ void startLarry(priority_semaphore *north, priority_semaphore *south) {
     bool* nextDirection = create_shared_memory(sizeof(bool));
 
     LarryJoeInformation* northInfo = createLarryJoeInfo(
-            NORTH_DIR_BRIDGE, LARRY, nextDirection, north, south
+            NORTH_DIR_BRIDGE, LARRY, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
     LarryJoeInformation* southInfo = createLarryJoeInfo(
-            SOUTH_DIR_BRIDGE, LARRY, nextDirection, north, south
+            SOUTH_DIR_BRIDGE, LARRY, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
 
     pthread_create(&tid[0], NULL, handleLarryJoe, (void *) northInfo);
@@ -119,7 +136,8 @@ void startLarry(priority_semaphore *north, priority_semaphore *south) {
     pthread_detach(tid[1]);
 }
 
-void startJoe(priority_semaphore *north, priority_semaphore *south) {
+void startJoe(int start_north_id, int end_north_id,
+              int start_south_id, int end_south_id) {
     pthread_t *tid;
     extern pthread_cond_t *cond_joe;
     extern pthread_mutex_t *mutex_joe;
@@ -133,10 +151,14 @@ void startJoe(priority_semaphore *north, priority_semaphore *south) {
     bool* nextDirection = create_shared_memory(sizeof(bool));
 
     LarryJoeInformation* northInfo = createLarryJoeInfo(
-            NORTH_DIR_BRIDGE, JOE, nextDirection, north, south
+            NORTH_DIR_BRIDGE, JOE, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
     LarryJoeInformation* southInfo = createLarryJoeInfo(
-            SOUTH_DIR_BRIDGE, JOE, nextDirection, north, south
+            SOUTH_DIR_BRIDGE, JOE, nextDirection,
+            start_north_id, end_north_id,
+            start_south_id, end_south_id
     );
 
     pthread_create(&tid[0], NULL, handleLarryJoe, (void *) northInfo);
@@ -164,25 +186,25 @@ int main(int argc, char *argv[]) {
     pthread_create(&maintenance_thread, NULL, &run_maintenance, NULL);
     pthread_detach(maintenance_thread);
 
-   // Curly bridge initialization
-   startCurl(
-           lookup(map->map, B007B),
-           lookup(map->map, BU07B)
-   );
-   // Shemp bridge initialization
-   startShemp(
-           lookup(map->map, B019B),
-           lookup(map->map, BU19B)
-   );
-//    // Larry bridge initialization
-    startLarry(
-            lookup(map->map, B001B),
-            lookup(map->map, BU01B)
+    // Curly bridge initialization
+    startCurl(
+            B007B, B012B,
+            BU07B, BU12B
     );
-//    // Joe bridge initialization
+    // Shemp bridge initialization
+    startShemp(
+            B019B, B024B,
+            BU19B, BU24B
+    );
+    // Larry bridge initialization
+    startLarry(
+            B001B, B006B,
+            BU01B, BU06B
+    );
+    // Joe bridge initialization
    startJoe(
-           lookup(map->map, B025B),
-           lookup(map->map, BU25B)
+           B025B, B030B,
+           BU25B, BU30B
    );
 
     //Conect xml with code with main code/variables

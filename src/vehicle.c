@@ -1,5 +1,4 @@
 #include "vehicle.h"
-#include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "utils.h"
@@ -8,7 +7,7 @@
 #include "floyd.h"
 #include "bus.h"
 #include <stdbool.h>
-#include<time.h> 
+#include<time.h>
 
 #define AF_DISTANCE 48.0 // distance from A1 to F2
 
@@ -47,22 +46,22 @@ static int global_id = 0;
 
 pthread_mutex_t mutex_global_id = PTHREAD_MUTEX_INITIALIZER;
 
-int get_global_id(){
+int get_global_id() {
     int result = 0;
     pthread_mutex_lock(&mutex_global_id);
     result = global_id;
-    global_id +=1;
+    global_id += 1;
     pthread_mutex_unlock(&mutex_global_id);
     return result;
 }
 
 int random_stop_id() {
-    srand(time(0)); 
+    srand(time(0));
     return (rand() % (R006S - A001S + 1)) + A001S;
 }
 
 int random_car_id() {
-    srand(time(0)); 
+    srand(time(0));
     return (rand() % (YELLOW_CAR - RED_CAR + 1)) + RED_CAR;
 }
 
@@ -586,28 +585,28 @@ char *get_stop_id(int stop, int destinations_left) {
     return res;
 }
 
-char *get_active_button(VehicleType type){
+char *get_active_button(VehicleType type) {
     switch (type) {
-    case RED_BUS:
-        return "btn_cbr";
-    case GREEN_BUS:
-        return "btn_cbgr";
-    case BLUE_BUS:
-        return "btn_cbb";
-    case WHITE_BUS:
-        return "btn_cbw";
-    case GRAY_BUS:
-        return "btn_cbg";
-    case BLACK_BUS:
-        return "btn_cbbl";
-    case PINK_BUS:
-        return "btn_cbp";
-    case LIGHT_BLUE_BUS:
-        return "btn_cblb";
-    case ORANGE_BUS:
-        return "btn_cbo";
-    default:
-        return "";
+        case RED_BUS:
+            return "btn_cbr";
+        case GREEN_BUS:
+            return "btn_cbgr";
+        case BLUE_BUS:
+            return "btn_cbb";
+        case WHITE_BUS:
+            return "btn_cbw";
+        case GRAY_BUS:
+            return "btn_cbg";
+        case BLACK_BUS:
+            return "btn_cbbl";
+        case PINK_BUS:
+            return "btn_cbp";
+        case LIGHT_BLUE_BUS:
+            return "btn_cblb";
+        case ORANGE_BUS:
+            return "btn_cbo";
+        default:
+            return "";
     }
 }
 
@@ -616,34 +615,34 @@ bool get_actual_variable(VehicleType type) {
     pthread_mutex_lock(&mutex_bus_active);
     switch (type) {
         case RED_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bred;
         case GREEN_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bgreen;
         case BLUE_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bblue;
         case WHITE_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bwhite;
         case GRAY_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bgray;
         case BLACK_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bblack;
         case PINK_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_bpink;
         case LIGHT_BLUE_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_blblue;
         case ORANGE_BUS:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return isa_borange;
         default:
-        pthread_mutex_unlock(&mutex_bus_active);
+            pthread_mutex_unlock(&mutex_bus_active);
             return false;
     }
 }
@@ -819,23 +818,6 @@ int highway_multiplier(int street_id) {
     return street_id >= 1 && street_id <= 144 ? 2 : 1;
 }
 
-int is_bus(VehicleType type) {
-    switch (type) {
-        case RED_BUS:
-        case GREEN_BUS:
-        case BLUE_BUS:
-        case WHITE_BUS:
-        case GRAY_BUS:
-        case BLACK_BUS:
-        case PINK_BUS:
-        case LIGHT_BLUE_BUS:
-        case ORANGE_BUS:
-            return 1;
-        default:
-            return 0;
-    }
-}
-
 int get_destinations_size(const int *destinations) {
     int index = 0;
     while (destinations[index] != -1) index++;
@@ -850,58 +832,55 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
     NodeL *currentNode;
 
     while (1) {
-        
+
         while (vehicle->current_route->first_node != NULL) {
             currentNode = vehicle->current_route->first_node;
-
             beforeStreet = currentStreet;
-
             currentStreet = lookup(map->map, currentNode->destination_id);
 
             //Incio de Larry y Joe
             //Larry
-            if(currentNode->destination_id == N018P){ // Larry u
+            if (currentNode->destination_id == N018P) { // Larry u
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitu +=1;
+                larry_cars_waitu += 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            } else if (currentNode->destination_id == G012P){ // Larry d
+            } else if (currentNode->destination_id == G012P) { // Larry d
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitd +=1;
+                larry_cars_waitd += 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            } else if (currentNode->destination_id == BU02B){// Larry u get
+            } else if (currentNode->destination_id == BU02B) {// Larry u get
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitu -=1;
+                larry_cars_waitu -= 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            }else if (currentNode->destination_id == B002B){// Larry d get
+            } else if (currentNode->destination_id == B002B) {// Larry d get
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitd -=1;
+                larry_cars_waitd -= 1;
                 pthread_mutex_unlock(&mutex_larry_con);
             }
 
-
             //Joe
-            if(currentNode->destination_id == R018P){ // Joe u
+            if (currentNode->destination_id == R018P) { // Joe u
 
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitu +=1;
+                joe_cars_waitu += 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            } else if (currentNode->destination_id == K012P){ // Joe d
+            } else if (currentNode->destination_id == K012P) { // Joe d
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitd +=1;
+                joe_cars_waitd += 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            } else if (currentNode->destination_id == BU26B){// Joe u get
+            } else if (currentNode->destination_id == BU26B) {// Joe u get
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitu -=1;
+                joe_cars_waitu -= 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            }else if (currentNode->destination_id == B026B){// Joe d get
+            } else if (currentNode->destination_id == B026B) {// Joe d get
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitd -=1;
+                joe_cars_waitd -= 1;
                 pthread_mutex_unlock(&mutex_joe_con);
             }
 
@@ -909,9 +888,9 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
 
             //Inicio de puente central
             //Bloqueo de llegada
-            if(currentNode->destination_id == B013B){ // Para abajo
+            if (currentNode->destination_id == B013B) { // Para abajo
                 pthread_mutex_lock(&check_mutex_moe);
-                if(moe_direction==0 || moe_direction==1){
+                if (moe_direction == 0 || moe_direction == 1) {
                     pthread_mutex_unlock(&check_mutex_moe);
                     pthread_mutex_lock(&mutex_moe);
                     moe_direction = -1;
@@ -919,31 +898,30 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
                     edit_semaphore(2, SEMAPHORED);
 
                     pthread_mutex_lock(&check_mutex_moe);
-                    moe_cars+=1;
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
 
-                }else{
-                    moe_cars+=1;
+                } else {
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
                 }
 
-                
 
-            }else if (currentNode->destination_id == BU13B){//Para arriba
+            } else if (currentNode->destination_id == BU13B) {//Para arriba
                 pthread_mutex_lock(&check_mutex_moe);
-                if(moe_direction==0 || moe_direction==-1){
+                if (moe_direction == 0 || moe_direction == -1) {
                     pthread_mutex_unlock(&check_mutex_moe);
                     pthread_mutex_lock(&mutex_moe);
                     moe_direction = 1;
                     printf("\033[0;31m%s\033[0m\n", "Moe change direction to: North");
                     edit_semaphore(2, SEMAPHOREU);
-                    
+
                     pthread_mutex_lock(&check_mutex_moe);
-                    moe_cars+=1;
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
 
-                }else{
-                    moe_cars+=1;
+                } else {
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
                 }
 
@@ -951,20 +929,19 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
             }
 
             //Bloqueo de salida
-             if(currentNode->destination_id == B018B || currentNode->destination_id == BU18B){// Para abajo
+            if (currentNode->destination_id == B018B || currentNode->destination_id == BU18B) {// Para abajo
                 pthread_mutex_lock(&check_mutex_moe);
-                moe_cars-=1;
-                if (moe_cars==0){
+                moe_cars -= 1;
+                if (moe_cars == 0) {
                     pthread_mutex_unlock(&mutex_moe);
                 }
                 pthread_mutex_unlock(&check_mutex_moe);
-             } 
+            }
 
-             //Fin de puente central
-
+            //Fin de puente central
             lock_priority_semaphore(priority_value, currentStreet);
 
-            if(beforeStreet != NULL){
+            if (beforeStreet != NULL) {
                 unlock_priority_semaphore(priority_value, beforeStreet);
             }
 
@@ -979,7 +956,7 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
 
             //Duerma el tiempo que necesite para pasar la calle
             usleep((vehicle->speed * 1000000) / highway_multiplier(currentNode->destination_id));
-            
+
 
             if (vehicle->current_route->first_node->next_node == NULL) {
                 startDestination = vehicle->current_route->first_node->destination_id;
@@ -987,9 +964,9 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
 
             pop(vehicle->current_route);
         }
-        sleep(3);
         nextDestination++;
         if (vehicle->destinations[nextDestination] != -1) {
+            sleep(3);
             vehicle->current_route = create_route_aux(startDestination, vehicle->destinations[nextDestination]);
         } else {
             break;
@@ -999,19 +976,17 @@ void handle_normal_vehicle(Vehicle *vehicle, int priority_value) {
     unlock_priority_semaphore(priority_value, currentStreet);
 }
 
-
-StreetDir best_dirc(StreetDir currentDir_p,  StreetDir previousDir_p,  StreetDir previousprevious_p){
-    if (currentDir_p == previousDir_p){
+StreetDir best_dirc(StreetDir currentDir_p, StreetDir previousDir_p, StreetDir previousprevious_p) {
+    if (currentDir_p == previousDir_p) {
         return currentDir_p;
-    } else if (previousDir_p == previousprevious_p){
+    } else if (previousDir_p == previousprevious_p) {
         return previousDir_p;
-    }else if (currentDir_p == previousprevious_p){
+    } else if (currentDir_p == previousprevious_p) {
         return currentDir_p;
-    }else{
+    } else {
         return currentDir_p;
     }
 }
-
 
 void handle_bus(Vehicle *vehicle) {
     priority_semaphore *currentStreet = NULL;
@@ -1034,72 +1009,67 @@ void handle_bus(Vehicle *vehicle) {
     float useX;
     float useY;
 
-    
+
     // TODO MECANISMO PARA DETENER EL BUS
     while (get_actual_variable(vehicle->vehicleType)) {
         while (vehicle->current_route->first_node != NULL && get_actual_variable(vehicle->vehicleType)) {
             currentNode = vehicle->current_route->first_node;
-            
             previouspreviousStreet = previousStreet;
             previousStreet = currentStreet;
-
             currentStreet = lookup(map->map, currentNode->destination_id);
-
 
             //Incio de Larry y Joe
             //Larry
-            if(currentNode->destination_id == N018P){ // Larry u
+            if (currentNode->destination_id == N018P) { // Larry u
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitu +=1;
+                larry_cars_waitu += 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            } else if (currentNode->destination_id == G012P){ // Larry d
+            } else if (currentNode->destination_id == G012P) { // Larry d
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitd +=1;
+                larry_cars_waitd += 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            } else if (currentNode->destination_id == BU02B){// Larry u get
+            } else if (currentNode->destination_id == BU02B) {// Larry u get
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitu -=1;
+                larry_cars_waitu -= 1;
                 pthread_mutex_unlock(&mutex_larry_con);
 
-            }else if (currentNode->destination_id == B002B){// Larry d get
+            } else if (currentNode->destination_id == B002B) {// Larry d get
                 pthread_mutex_lock(&mutex_larry_con);
-                larry_cars_waitd -=1;
+                larry_cars_waitd -= 1;
                 pthread_mutex_unlock(&mutex_larry_con);
             }
 
-
             //Joe
-            if(currentNode->destination_id == R018P){ // Joe u
+            if (currentNode->destination_id == R018P) { // Joe u
 
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitu +=1;
+                joe_cars_waitu += 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            } else if (currentNode->destination_id == K012P){ // Joe d
+            } else if (currentNode->destination_id == K012P) { // Joe d
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitd +=1;
+                joe_cars_waitd += 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            } else if (currentNode->destination_id == BU26B){// Joe u get
+            } else if (currentNode->destination_id == BU26B) {// Joe u get
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitu -=1;
+                joe_cars_waitu -= 1;
                 pthread_mutex_unlock(&mutex_joe_con);
 
-            }else if (currentNode->destination_id == B026B){// Joe d get
+            } else if (currentNode->destination_id == B026B) {// Joe d get
                 pthread_mutex_lock(&mutex_joe_con);
-                joe_cars_waitd -=1;
+                joe_cars_waitd -= 1;
                 pthread_mutex_unlock(&mutex_joe_con);
             }
 
             //Fin de Larry y Joe
-
             //Inicio de puente central
             //Bloqueo de llegada
-            if(currentNode->destination_id == B013B){ // Para abajo
+            if (currentNode->destination_id == B013B) { // Para abajo
                 pthread_mutex_lock(&check_mutex_moe);
-                if(moe_direction==0 || moe_direction==1){
+                if (moe_direction == 0 || moe_direction == 1) {
                     pthread_mutex_unlock(&check_mutex_moe);
                     pthread_mutex_lock(&mutex_moe);
                     moe_direction = -1;
@@ -1107,31 +1077,29 @@ void handle_bus(Vehicle *vehicle) {
                     edit_semaphore(2, SEMAPHORED);
 
                     pthread_mutex_lock(&check_mutex_moe);
-                    moe_cars+=1;
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
 
-                }else{
-                    moe_cars+=1;
+                } else {
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
                 }
 
-                
-
-            }else if (currentNode->destination_id == BU13B){//Para arriba
+            } else if (currentNode->destination_id == BU13B) {//Para arriba
                 pthread_mutex_lock(&check_mutex_moe);
-                if(moe_direction==0 || moe_direction==-1){
+                if (moe_direction == 0 || moe_direction == -1) {
                     pthread_mutex_unlock(&check_mutex_moe);
                     pthread_mutex_lock(&mutex_moe);
                     moe_direction = 1;
                     printf("\033[0;31m%s\033[0m\n", "Moe change direction to: North");
                     edit_semaphore(2, SEMAPHOREU);
-                    
+
                     pthread_mutex_lock(&check_mutex_moe);
-                    moe_cars+=1;
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
 
-                }else{
-                    moe_cars+=1;
+                } else {
+                    moe_cars += 1;
                     pthread_mutex_unlock(&check_mutex_moe);
                 }
 
@@ -1139,21 +1107,18 @@ void handle_bus(Vehicle *vehicle) {
             }
 
             //Bloqueo de salida
-             if(currentNode->destination_id == B018B || currentNode->destination_id == BU18B){// Para abajo
+            if (currentNode->destination_id == B018B || currentNode->destination_id == BU18B) {// Para abajo
                 pthread_mutex_lock(&check_mutex_moe);
-                moe_cars-=1;
-                if (moe_cars==0){
+                moe_cars -= 1;
+                if (moe_cars == 0) {
                     pthread_mutex_unlock(&mutex_moe);
                 }
                 pthread_mutex_unlock(&check_mutex_moe);
-             } 
-             //Fin de puente central
-
-
-
+            }
+            //Fin de puente central
 
             lock_priority_semaphore(5, currentStreet);
-            
+
             if (previouspreviousStreet != NULL) {
                 unlock_priority_semaphore(0, previouspreviousStreet);
             }
@@ -1170,7 +1135,7 @@ void handle_bus(Vehicle *vehicle) {
             currentX = streetInfo->x;
             currentY = streetInfo->y;
 
-            if(previousStreet == NULL){
+            if (previousStreet == NULL) {
                 previousprevious = currentDir;
                 previousDir = currentDir;
 
@@ -1178,22 +1143,23 @@ void handle_bus(Vehicle *vehicle) {
                 previousY = currentY;
             }
             ///
-            if(vehicle->destinations[currentDestination] == currentNode->destination_id){
+            if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
                 useX = currentX;
                 useY = currentY;
 
-            }else if(best_dirc(currentDir,previousDir, previousprevious) == SOUTH_DIR || best_dirc(currentDir,previousDir, previousprevious) == EAST_DIR ){
+            } else if (best_dirc(currentDir, previousDir, previousprevious) == SOUTH_DIR ||
+                       best_dirc(currentDir, previousDir, previousprevious) == EAST_DIR) {
                 useX = previousX;
                 useY = previousY;
-            }else{
+            } else {
                 useX = currentX;
                 useY = currentY;
             }
 
             edit_object_with_node(
                     vehicle->ui_info,
-                    from_vehicle_type(vehicle->vehicleType, best_dirc(currentDir,previousDir, previousprevious)),
-                    useX, 
+                    from_vehicle_type(vehicle->vehicleType, best_dirc(currentDir, previousDir, previousprevious)),
+                    useX,
                     useY,
                     get_stop_id(
                             vehicle->destinations[currentDestination],
@@ -1204,7 +1170,7 @@ void handle_bus(Vehicle *vehicle) {
             //Si llegue a una parada duermo 5 segundos
             if (vehicle->destinations[currentDestination] == currentNode->destination_id) {
                 previouspreviousStreet = NULL;
-                
+
                 if (previousStreet != NULL) {
                     unlock_priority_semaphore(0, previousStreet);
                     previousStreet = NULL;
@@ -1228,8 +1194,8 @@ void handle_bus(Vehicle *vehicle) {
     unlock_priority_semaphore(5, currentStreet);
     if (previousStreet != NULL) {
         unlock_priority_semaphore(0, previousStreet);
-    } 
-    
+    }
+
 
     GtkWidget *active_w = GTK_WIDGET(gtk_builder_get_object(builder, get_active_button(vehicle->vehicleType)));
     gtk_widget_set_sensitive(active_w, true);

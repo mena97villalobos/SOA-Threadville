@@ -6,15 +6,10 @@
 #include <stdbool.h>
 #include <sys/mman.h>
 #include <interface.h>
-#include <errno.h>
-#include <stdbool.h>
 
 extern pthread_mutex_t mutex_KMN;
 
-double elapsed_seconds(clock_t begin) {
-    clock_t end = clock();
-    return (double) (end - begin) / CLOCKS_PER_SEC;
-}
+extern ThreadvilleMap *map;
 
 pthread_cond_t *get_conditional_mutex(BridgesType type) {
     extern pthread_cond_t *cond_larry;
@@ -56,50 +51,44 @@ pthread_mutex_t *get_bridge_mutex(BridgesType type) {
     }
 }
 
-void error_pthread_cond_timedwait(const int timed_wait_rv) {
-    fprintf(stderr, "Conditional timed wait, failed.\n");
-    switch (timed_wait_rv) {
-        case ETIMEDOUT:
-            fprintf(stderr, "The time specified by abstime to pthread_cond_timedwait() has passed.\n");
-            break;
-        case EINVAL:
-            fprintf(stderr, "The value specified by abstime, cond or mutex is invalid.\n");
-            break;
-        case EPERM:
-            fprintf(stderr, "The mutex was not owned by the current thread at the time of the call.\n");
-            break;
-        default:
-            break;
+void lock_bridge_semaphores(int starting_id, int ending_id) {
+    for (int i = starting_id; i <= ending_id; i++) {
+        priority_semaphore *current = lookup(map->map, i);
+        if (current != NULL) {
+            lock_priority_semaphore(0, current);
+        }
     }
 }
 
+void unlock_bridge_semaphores(int starting_id, int ending_id) {
+    for (int i = ending_id; i >= starting_id; i--) {
+        priority_semaphore *current = lookup(map->map, i);
+        if (current != NULL) {
+            unlock_priority_semaphore(0, current);
+        }
+    }
+}
 
-bool can_chance(BridgesType type, bool direction){
-
+bool can_chance(BridgesType type, bool direction) {
     extern int larry_cars_waitu;
     extern int joe_cars_waitu;
     extern int larry_cars_waitd;
     extern int joe_cars_waitd;
 
-    // printf("%d\n", larry_cars_waitu);
-    // printf("%d\n", joe_cars_waitu);
-    // printf("%d\n", larry_cars_waitd);
-    // printf("%d\n", joe_cars_waitd);
-
-    if(type == LARRY && !direction && larry_cars_waitu>0){
+    if (type == LARRY && !direction && larry_cars_waitu > 0) {
         return true;
-    }else if(type == LARRY && direction && larry_cars_waitd>0){
+    } else if (type == LARRY && direction && larry_cars_waitd > 0) {
         return true;
-    }else if(type == JOE && !direction && joe_cars_waitu>0){
+    } else if (type == JOE && !direction && joe_cars_waitu > 0) {
         return true;
-    }else if(type == JOE && direction && joe_cars_waitd>0){
+    } else if (type == JOE && direction && joe_cars_waitd > 0) {
         return true;
     }
 
     return false;
 }
 
-int get_k(){
+int get_k() {
     extern int K;
     int k_result;
 
@@ -109,7 +98,7 @@ int get_k(){
     return k_result;
 }
 
-int get_m(){
+int get_m() {
     extern int M;
     int m_result;
 
@@ -119,7 +108,7 @@ int get_m(){
     return m_result;
 }
 
-int get_n(){
+int get_n() {
     extern int N;
     int n_result;
 
@@ -140,18 +129,18 @@ void *handleLarryJoe(void *arg) {
     pthread_cond_t *cond = get_conditional_mutex(information->type);
     pthread_mutex_t *mutex = get_bridge_mutex(information->type);
     priority_semaphore *currentSemaphore;
-    priority_semaphore *oppositeSemaphore;
+    int *oppositeSemaphore;
     images_enum bridge_image;
     // Keep count of the number of cars that has pass
     int local_counter = 0;
     // South direction
     if (information->direction) {
-        oppositeSemaphore = information->north_side;
-        currentSemaphore = information->south_side;
+        oppositeSemaphore = information->north_side_range;
+        currentSemaphore = lookup(map->map, information->south_side_range[0]);
         bridge_image = SEMAPHOREU;
     } else {
-        oppositeSemaphore = information->south_side;
-        currentSemaphore = information->north_side;
+        oppositeSemaphore = information->south_side_range;
+        currentSemaphore = lookup(map->map, information->north_side_range[0]);
         bridge_image = SEMAPHORED;
     }
     while (1) {
@@ -164,39 +153,36 @@ void *handleLarryJoe(void *arg) {
             pthread_cond_wait(&cond[information->direction], mutex);
         }
 
-        lock_priority_semaphore(0, oppositeSemaphore);
+        lock_bridge_semaphores(oppositeSemaphore[0], oppositeSemaphore[1]);
         edit_semaphore(information->type, bridge_image);
         pthread_mutex_lock(&currentSemaphore->mutex);
 
         while (local_counter < k_local) {
             timespec_get(&time, TIME_UTC);
             time.tv_sec += 5;
-            
-            // pthread_cond_wait(&currentSemaphore->mutex_condition, &currentSemaphore->mutex);
+
             const int res = pthread_cond_timedwait(&currentSemaphore->mutex_condition, &currentSemaphore->mutex,
                                                    &time);
             if (res) {
-                if(can_chance(information->type ,information->direction) == true){
+                if (can_chance(information->type, information->direction) == true) {
                     break;
                 }
-            }else{
+            } else {
                 local_counter++;
             }
-            //printf("Semaforo liberado: %s\n", information->direction ? "South" : "North");
         }
-        if(information->type == LARRY){
+        if (information->type == LARRY) {
             printf("\033[0;31mLarry change direction to: %s\033[0m\n", information->direction ? "South" : "North");
-        }else{
+        } else {
             printf("\033[0;31mJoe change direction to: %s\033[0m\n", information->direction ? "South" : "North");
         }
-
-
         fflush(stdout);
+
         *information->nextDirection = !*information->nextDirection;
         local_counter = 0;
 
         pthread_mutex_unlock(&currentSemaphore->mutex);
-        unlock_priority_semaphore(0, oppositeSemaphore);
+        unlock_bridge_semaphores(oppositeSemaphore[0], oppositeSemaphore[1]);
 
         // weak up next thread
         pthread_cond_signal(&cond[*information->nextDirection]);
@@ -212,35 +198,27 @@ void *handleCurlyShemp(void *arg) {
     CurlyShempInformation *information = (CurlyShempInformation *) arg;
     pthread_cond_t *cond = get_conditional_mutex(information->type);
     pthread_mutex_t *mutex = get_bridge_mutex(information->type);
-    priority_semaphore *prioritySemaphore;
+    int *prioritySemaphore;
     images_enum bridge_image;
     int *seconds;
     // South direction
     if (information->direction) {
-        prioritySemaphore = information->north_side;
+        prioritySemaphore = information->north_side_range;
         bridge_image = SEMAPHOREU;
-        seconds = &M_local;
     } else {
-        prioritySemaphore = information->south_side;
+        prioritySemaphore = information->south_side_range;
         bridge_image = SEMAPHORED;
-        seconds = &N_local;
     }
     while (1) {
         //Update values in real time
         M_local = get_m();
         N_local = get_n();
         if (information->direction) {
-            prioritySemaphore = information->north_side;
-            bridge_image = SEMAPHOREU;
             seconds = &M_local;
         } else {
-            prioritySemaphore = information->south_side;
-            bridge_image = SEMAPHORED;
             seconds = &N_local;
         }
         //Fin de update
-
-
 
         pthread_mutex_lock(mutex);
         // See which side of the bridge should be available
@@ -249,10 +227,15 @@ void *handleCurlyShemp(void *arg) {
             pthread_cond_wait(&cond[information->direction], mutex);
         }
 
-        lock_priority_semaphore(0, prioritySemaphore);
+        lock_bridge_semaphores(prioritySemaphore[0], prioritySemaphore[1]);
         edit_semaphore(information->type, bridge_image);
         sleep(*seconds);
-        unlock_priority_semaphore(0, prioritySemaphore);
+        unlock_bridge_semaphores(prioritySemaphore[0], prioritySemaphore[1]);
+        if (information->type == CURLY) {
+            printf("\033[0;31mCurly change direction to: %s\033[0m\n", information->direction ? "South" : "North");
+        } else {
+            printf("\033[0;31mShemp change direction to: %s\033[0m\n", information->direction ? "South" : "North");
+        }
         *information->nextDirection = !*information->nextDirection;
 
         // weak up next thread
@@ -263,26 +246,42 @@ void *handleCurlyShemp(void *arg) {
 
 CurlyShempInformation *createCurlyShempInfo(
         bool direction, BridgesType type, bool *nextDirection,
-        priority_semaphore *north_side, priority_semaphore *south_side
+        int start_north_id, int end_north_id,
+        int start_south_id, int end_south_id
 ) {
     CurlyShempInformation *info = malloc(sizeof(CurlyShempInformation));
+    int *north_ids = calloc(2, sizeof(int));
+    north_ids[0] = start_north_id;
+    north_ids[1] = end_north_id;
+    int *south_ids = calloc(2, sizeof(int));
+    south_ids[0] = start_south_id;
+    south_ids[1] = end_south_id;
+
     info->direction = direction;
     info->nextDirection = nextDirection;
     info->type = type;
-    info->north_side = north_side;
-    info->south_side = south_side;
+    info->north_side_range = north_ids;
+    info->south_side_range = south_ids;
     return info;
 }
 
 LarryJoeInformation *createLarryJoeInfo(
         bool direction, BridgesType type, bool *nextDirection,
-        priority_semaphore *north_side, priority_semaphore *south_side
+        int start_north_id, int end_north_id,
+        int start_south_id, int end_south_id
 ) {
     LarryJoeInformation *info = malloc(sizeof(LarryJoeInformation));
+    int *north_ids = calloc(2, sizeof(int));
+    north_ids[0] = start_north_id;
+    north_ids[1] = end_north_id;
+    int *south_ids = calloc(2, sizeof(int));
+    south_ids[0] = start_south_id;
+    south_ids[1] = end_south_id;
+
     info->direction = direction;
     info->nextDirection = nextDirection;
     info->type = type;
-    info->north_side = north_side;
-    info->south_side = south_side;
+    info->north_side_range = north_ids;
+    info->south_side_range = south_ids;
     return info;
 }
