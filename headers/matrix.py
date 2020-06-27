@@ -833,13 +833,15 @@ G.add_edge(858, 979, w=6)
 
 # +++++++++++++++++Conexion de rotondas
 # Y
-G.add_edge(175, 655, w=6)
-G.add_edge(36, 175, w=6)
-G.add_edge(72, 175, w=6)
+G.add_edge(175, 655, w=6)  # Y1 - G13
+G.add_edge(36, 655, w=6)  # H1 - G13
+G.add_edge(36, 175, w=6)  # H1 - Y1
+G.add_edge(72, 175, w=6)  # H2 - Y1
 
-G.add_edge(768, 176, w=6)
-G.add_edge(176, 73, w=6)
-G.add_edge(176, 109, w=6)
+G.add_edge(768, 176, w=6)  # M18 - Y2
+G.add_edge(176, 73, w=6)  # Y2 - H3
+G.add_edge(768, 109, w=6)  # M18 - H4
+G.add_edge(176, 109, w=6)  # Y2 - H4
 
 # Y001R = 175,
 # Y002R = 176,
@@ -850,13 +852,15 @@ G.add_edge(176, 109, w=6)
 
 # Z
 
-G.add_edge(744, 181, w=6)
-G.add_edge(181, 1, w=6)
-G.add_edge(181, 37, w=6)
+G.add_edge(744, 181, w=6)  # L12 - Z1
+G.add_edge(744, 1, w=6)  # L12 - H1
+G.add_edge(181, 1, w=6)  # Z1 - H1
+G.add_edge(181, 37, w=6)  # Z1 - H2
 
-G.add_edge(108, 182, w=6)
-G.add_edge(144, 182, w=6)
-G.add_edge(182, 841, w=6)
+G.add_edge(108, 182, w=6)  # H3 - Z2
+G.add_edge(144, 182, w=6)  # H4 - Z2
+G.add_edge(144, 841, w=6)  # H4 - R
+G.add_edge(182, 841, w=6)  # Z2 - R
 
 # Z001R = 181,
 # Z002R = 182,
@@ -1384,11 +1388,11 @@ G.add_edge(823, 344, w=6)
 G.add_edge(345, 828, w=6)
 G.add_edge(827, 345, w=6)
     # Q003S = 345,
-G.add_edge(346, 601, w=6)
-G.add_edge(600, 346, w=6)
+G.add_edge(346, 600, w=6)
+G.add_edge(599, 346, w=6)
     # Q004S = 346,
-G.add_edge(347, 595, w=6)
-G.add_edge(596, 347, w=6)
+G.add_edge(347, 596, w=6)
+G.add_edge(595, 347, w=6)
     # Q005S = 347,
 G.add_edge(348, 837, w=6)
 G.add_edge(836, 348, w=6)
